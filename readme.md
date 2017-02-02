@@ -43,6 +43,6 @@ After checking out jkjung-avt.github.io repository onto my local PC for the firs
 
 In addition, I have integrated Disqus onto my blog by referencing [Brendan A R Sechter's Development Blog](http://sgeos.github.io/jekyll/disqus/2016/02/14/adding-disqus-to-a-jekyll-blog.html). I've also integrated Google Analytics to track website traffic. My Disqus URL and shortname settings are located in [_include/disqus.html](https://github.com/jkjung-avt/jkjung-avt.github.io/blob/master/_includes/disqus.html), while my Google Analytics tracking code in [_include/analytics.html](https://github.com/jkjung-avt/jkjung-avt.github.io/blob/master/_includes/analytics.html).
 
-==JK Jung==
+**JK Jung**
 [jkjung13@gmail.com](jkjung13@gmail.com)
 
