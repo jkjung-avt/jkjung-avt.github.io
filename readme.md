@@ -45,5 +45,5 @@ In addition, I have integrated Disqus onto my blog by referencing [Brendan A R S
 
 **JK Jung**
 
-[jkjung13@gmail.com](jkjung13@gmail.com)
+<jkjung13@gmail.com>
 
