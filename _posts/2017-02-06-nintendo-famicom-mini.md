@@ -20,7 +20,7 @@ I live in Taiwan, so it's easier for me to purchase Japan's version of Nintendo 
 
 Official web site: [https://www.nintendo.co.jp/clv/](https://www.nintendo.co.jp/clv/)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/364Fc9K_ydI" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3GQ02nXQQiM" frameborder="0" allowfullscreen></iframe>
 
 It was actually quite difficult to purchase this Nintendo Famicom Mini console, which was out of stock all the time. I finally managed to get one a few days ago.
 
