@@ -1,8 +1,8 @@
 ---
 layout: post
 comments: true
-title: "Nintendo Famicom Mini!"
-excerpt: "The Nintendo Famicom Mini, Japan's Version Of The NES Classic Edition."
+title: "Nintendo Famicom Mini"
+excerpt: "Nintendo Famicom Mini, Japan's version of the NES Classic Edition."
 date: 2017-02-06
 category: "nintendo"
 tags: nintendo
