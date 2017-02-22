@@ -22,4 +22,4 @@ The test script could be run from the project root directory. On Jetson TX1, it 
 
 I made a small circuit with a transistor and a LED, similar to what's described in [JetsonHacks' article](http://www.jetsonhacks.com/2015/12/29/gpio-interfacing-nvidia-jetson-tx1/) (the 'Jetson TX1 GPIO LED Interface' diagram), to test 'gpio38'. It worked as expected.
 
-!['gpio38' toggles a LED](/assets/2017-02-16-gpio-in-toch7/test_gpio38.gif)
+!['gpio38' toggles a LED](/assets/2017-02-16-gpio-in-torch7/test_gpio38.gif)
