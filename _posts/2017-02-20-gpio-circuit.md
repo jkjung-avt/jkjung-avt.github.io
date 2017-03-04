@@ -22,7 +22,19 @@ In order to tap onto the joystick, I did some soldering work.
 
 ![joystick jump-wires](/assets/2017-02-20-gpio-circuit/joystick.jpg)
 
-And this is how it looks like after I hooked up all 6 buttons I needed for the ['Galaga'](https://jkjung-avt.github.io/galaga/) game: Left, Right, Up, Down, A (Fire), and 'Start' button (to be able to restart the game).
+Here I'm documenting the connections between Nintendo Famicom Mini joystick buttons and TX1 GPIO pins. By the way, the choice of GPIO pins were arbitrary and mainly due to easiness for me to do the jump-wiring and soldering.
+
+| Joystick Button | Pin # on Jump-wired Header | Pin # on TX1 J21 | GPIO #  |
+|:---------------:|:--------------------------:|:----------------:|:-------:|
+| A (Fire)        | 1                          | 13               | gpio38  | 
+| Right           | 3                          | 16               | gpio37  | 
+| Up              | 5                          | 18               | gpio184 | 
+| Down            | 7                          | 29               | gpio219 | 
+| Left            | 9                          | 32               | gpio36  | 
+| Start           | 11                         | 33               | gpio63  | 
+| GND             | 13                         | 39               | --      | 
+
+And this is how it looks like after I hooked up all 6 buttons I needed for the ['Galaga'](https://jkjung-avt.github.io/galaga/) game: A (Fire), Right, Up, Down, Left and 'Start' (to be able to restart the game).
 
 ![tx1 and nintendo](/assets/2017-02-20-gpio-circuit/tx1-and-nintendo.jpg)
 
