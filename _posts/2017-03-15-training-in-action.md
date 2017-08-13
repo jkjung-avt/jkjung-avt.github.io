@@ -12,6 +12,8 @@ All my hard work in the past few weeks has led to this moment. I'm finally able 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/j-JKPok_1os" frameborder="0" allowfullscreen></iframe>
 
+(For a quick recap of what AI/RL/DQN agent I was building, you can refer to this earlier post of mine: [DQN (RL Agent) on TX1 for Nintendo Famicom Mini](https://jkjung-avt.github.io/dqn-tx1-for-nintendo/).)
+
 This final step of integrating my 'gamenv' module with DeepMind's DQN did not complete without some twists though. Here's how I did it.
 
 * I copied all DQN code from my [DeepMind-Atari-Deep-Q-Learner](https://github.com/jkjung-avt/DeepMind-Atari-Deep-Q-Learner) repository into [dqn-tx1-for-nintendo](https://github.com/jkjung-avt/dqn-tx1-for-nintendo). Note that I have [applied cuDNN on this DQN code](https://jkjung-avt.github.io/dqn-cudnn/) so that its training efficiency is at least 50% better than the original DeepMind implementation (i.e. training time reduced by 1/3).
