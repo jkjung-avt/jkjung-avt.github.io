@@ -22,6 +22,7 @@ The original source code provided along with this tutorial seemed for python2 on
 * I added () to all print functions, which is required for python3.
 * In `code/create_lmdb.py`, map_size of lmdb.open() needed to be reduced.
 * Also in `code/create_lmdb.py`, I added encode('ascii') in in_txn.put(). This is also required for python3.
+* In `code/make_predictions_?.py`, specifically open the input/mean.binaryproto file as binary ('b'). Otherwise I'd get 'utf-8' decoding error when running the code.
 
 You can get a copy of the modified code from my GitHub repository: [https://github.com/jkjung-avt/deeplearning-cats-dogs-tutorial](https://github.com/jkjung-avt/deeplearning-cats-dogs-tutorial).
 
