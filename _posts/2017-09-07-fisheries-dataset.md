@@ -47,4 +47,4 @@ I've put quite a few comments in the Python Notebook code already. But here are 
 
 ![Scatter plot of bounding box sizes](/assets/2017-09-07-fisheries-dataset/fisheries_bbox_scatter.png)
 
-Check out how I trained the DetectNet with this data by reading the 2nd part of this post: [Training a Fish Detector with NVIDIA DetectNet (Part 2/2)](https://jkjung-avt.github.io/detectnet-training/).
+Check out how I trained a DetectNet model with this data by reading the 2nd part of this post: [Training a Fish Detector with NVIDIA DetectNet (Part 2/2)](https://jkjung-avt.github.io/detectnet-training/).
