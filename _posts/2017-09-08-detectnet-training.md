@@ -59,7 +59,7 @@ $ ./detectnet-camera \
           -output_bbox bboxes
 ```
 
-So there I had it: a real-time fish detector on Jetson TX2, which is capable of processing 7.6 frames per second...
+So there I had it: a real-time fish detector on Jetson TX2, which is capable of processing 1280x720 images at 7.6 frames per second...
 
 ![Fish detector on Jetson TX2](/assets/2017-09-08-detectnet-training/jetson-fisheries.png)
 
