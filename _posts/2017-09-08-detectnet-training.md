@@ -46,3 +46,20 @@ Here is an example for which the model made a correct prediction.
 And here is an example for which the model had clearly missed a fish.
 
 ![Incorrect Prediction](/assets/2017-09-08-detectnet-training/prediction-ng.png)
+
+Finally, I tried to deploy the fish detector onto Jetson TX2. I downloaded the final (epoch #300) network snapshot from DIGITS, and copied the files onto Jetson TX2. I had to manually remove the last Python layer in the `deploy.protxt`. I also modified `detectnet-camera/detectnet-camera.cpp` to use my Logitech C920 USB camera (/dev/video1) as video input. Then I ran the jetson-inference demo code by:
+
+```shell
+$ cd ~/project/jetson-inference/build/aarch64/bin
+$ ./detectnet-camera \
+          -model /home/nvidia/project/jetson-inference/data/networks/DetectNet-Fisheries/snapshot_iter_88200.caffemodel \
+          -prototxt /home/nvidia/project/jetson-inference/data/networks/DetectNet-Fisheries/deploy.protxt \
+          -input_blob data \
+          -output_cvg coverage \
+          -output_bbox bboxes
+```
+
+So there I had it: a real-time fish detector on Jetson TX2, which is capable of processing 7.6 frames per second...
+
+![Fish detector on Jetson TX2](/assets/2017-09-08-detectnet-training/jetson-fisheries.png)
+
