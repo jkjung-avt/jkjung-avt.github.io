@@ -2,17 +2,17 @@
 layout: post
 comments: true
 title: "How to Capture and Display Camera Video with Python on Jetson TX2"
-excerpt: "In this post I share how to use python code (with OpenCV) to capture and display camera video on Jetson TX2, inclulding IP CAM, USB webcam and the Jetson onboard camera. The sample code should work on Jetson TX1 as well."
+excerpt: "In this post I share how to use python code (with OpenCV) to capture and display camera video on Jetson TX2, including IP CAM, USB webcam and the Jetson onboard camera. This sample code should work on Jetson TX1 as well."
 date: 2017-10-19
 category: "opencv"
 tags: opencv
 ---
 
-In this post I share how to use python code (with OpenCV) to capture and display camera video on Jetson TX2, inclulding IP CAM, USB webcam and the Jetson onboard camera. The sample code should work on Jetson TX1 as well.
+In this post I share how to use python code (with OpenCV) to capture and display camera video on Jetson TX2, including IP CAM, USB webcam and the Jetson onboard camera. This sample code should work on Jetson TX1 as well.
 
 Prerequisite:
 
-* OpenCV with **GStreamer** and **python** support needs to be built and installed on the Jetson TX2. I use OpenCV-3.3.0 and python3. You can refer to my earlier post for how to build and install OpenCV with python support: [How to Install OpenCV (3.3.0) on Jetson TX2](https://jkjung-avt.github.io/opencv3-on-tx2/).
+* OpenCV with **GStreamer** and **python** support needs to be built and installed on the Jetson TX2. I use opencv-3.3.0 and python3. You can refer to my earlier post for how to build and install OpenCV with python support: [How to Install OpenCV (3.3.0) on Jetson TX2](https://jkjung-avt.github.io/opencv3-on-tx2/).
 * If you'd like to test with an IP CAM, you need to have it set up and know its RTSP URI, e.g. rtsp://admin:XXXXX@192.168.1.64:554.
 * Hook up a USB webcam (I was using Logitech C920) if you'd like to test with it. The USB webcam would usually be instantiated as /dev/video1, since the Jetson onboard camera has occupied /dev/video0.
 
@@ -44,7 +44,7 @@ $ python3 tegra-cam.py --rtsp --uri rtsp://admin:XXXXXX@192.168.1.64:554
 
 Discussions:
 
-The crux of this `tegra-cam.py` lies in the GStreamer pipelines I use to call `cv.VideoCapture()`. In my experience, using **nvvidconv** to do image scaling and to convert color format to BGRx (note that OpenCV requires *BGR* as the final output) produces better results in terms of frame rate.
+The crux of this `tegra-cam.py` script lies in the GStreamer pipelines I use to call `cv.VideoCapture()`. In my experience, using **nvvidconv** to do image scaling and to convert color format to BGRx (note that OpenCV requires *BGR* as the final output) produces better results in terms of frame rate.
 
 ```python
 def open_cam_rtsp(uri, width, height):
