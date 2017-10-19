@@ -64,4 +64,8 @@ def open_cam_onboard(width, height):
     return cv2.VideoCapture(gst_str, cv2.CAP_GSTREAMER)
 ```
 
+Here's a screenshot of my Jetson TX2 running `tegra-cam.py` with a live IP CAM video feed. (I also hooked up a Faster R-CNN model to do human head detection and draw bounding boxes on the captured images here, but the main video capture/display code was the same.)
+
+![Screenshot of tegra-cam.py on Jetson TX2](/assets/2017-10-19-tx2-camera-with-python/tegra-cam.png)
+
 If you like this post or have any questions, feel free to leave a comment below.
