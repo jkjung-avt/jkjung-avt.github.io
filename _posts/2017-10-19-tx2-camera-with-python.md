@@ -52,20 +52,27 @@ Discussions:
 The crux of this `tegra-cam.py` script lies in the GStreamer pipelines I use to call `cv.VideoCapture()`. In my experience, using **nvvidconv** to do image scaling and to convert color format to BGRx (note that OpenCV requires *BGR* as the final output) produces better results in terms of frame rate.
 
 ```python
-def open_cam_rtsp(uri, width, height):
-    gst_str = "rtspsrc location={} latency=50 ! rtph264depay ! h264parse ! omxh264dec ! nvvidconv ! video/x-raw, width=(int){}, height=(int){}, format=(string)BGRx ! videoconvert ! appsink".format(uri, width, height)
+def open_cam_rtsp(uri, width, height, latency):
+    gst_str = ("rtspsrc location={} latency={} ! rtph264depay ! h264parse ! omxh264dec ! "
+               "nvvidconv ! video/x-raw, width=(int){}, height=(int){}, format=(string)BGRx ! "
+               "videoconvert ! appsink").format(uri, latency, width, height)
     return cv2.VideoCapture(gst_str, cv2.CAP_GSTREAMER)
 
 def open_cam_usb(dev, width, height):
     # We want to set width and height here, otherwise we could just do:
     #     return cv2.VideoCapture(dev)
-    gst_str = "v4l2src device=/dev/video{} ! video/x-raw, width=(int){}, height=(int){}, format=(string)RGB ! videoconvert ! appsink".format(dev, width, height)
+    gst_str = ("v4l2src device=/dev/video{} ! "
+               "video/x-raw, width=(int){}, height=(int){}, format=(string)RGB ! "
+               "videoconvert ! appsink").format(dev, width, height)
     return cv2.VideoCapture(gst_str, cv2.CAP_GSTREAMER)
 
 def open_cam_onboard(width, height):
     # On versions of L4T previous to L4T 28.1, flip-method=2
     # Use Jetson onboard camera
-    gst_str = "nvcamerasrc ! video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080, format=(string)I420, framerate=(fraction)30/1 ! nvvidconv ! video/x-raw, width=(int){}, height=(int){}, format=(string)BGRx ! videoconvert ! appsink".format(width, height)
+    gst_str = ("nvcamerasrc ! "
+               "video/x-raw(memory:NVMM), width=(int)2592, height=(int)1458, format=(string)I420, framerate=(fraction)30/1 ! "
+               "nvvidconv ! video/x-raw, width=(int){}, height=(int){}, format=(string)BGRx ! "
+               "videoconvert ! appsink").format(width, height)
     return cv2.VideoCapture(gst_str, cv2.CAP_GSTREAMER)
 ```
 
