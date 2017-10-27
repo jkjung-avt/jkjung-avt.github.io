@@ -8,6 +8,8 @@ category: "opencv"
 tags: opencv
 ---
 
+Quick link: [tegra-cam.py](https://gist.github.com/jkjung-avt/86b60a7723b97da19f7bfa3cb7d2690e)
+
 In this post I share how to use python code (with OpenCV) to capture and display camera video on Jetson TX2, including IP CAM, USB webcam and the Jetson onboard camera. This sample code should work on Jetson TX1 as well.
 
 Prerequisite:
