@@ -82,5 +82,7 @@ $ python3 ./tegra-cam-caffe.py --usb --vid 1 --crop \
                                --output softmax
 ```
 
+By the way, in case you'd like to run the code with a Caffe model trained for grayscale image inputs (e.g. LeNet), you'll have to modify the python code to convert the input camera images to grayscale before feeding them to the Caffe transformer for processing. This could be done by, say, `gray = cv2.cvtColor(img_crop, cv2.COLOR_BGR2GRAY)` and then `net.blobs["data"].data[...] = transformer.preprocess("data", gray)`.
+
 I have not done much testing of this code with various cameras or Caffe models. Feel free to let me know if you find any issue with the code, and I'll look into it as soon as I can.
 
