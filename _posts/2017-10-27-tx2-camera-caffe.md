@@ -55,7 +55,14 @@ $ python3 tegra-cam-caffe.py --prototxt XXX.prototxt \
                              --mean UUU.binaryproto
 ```
 
+I tested the code with a USB camera and a picture of pineapple. And the default `bvlc_reference_caffenet` said it was 100% sure (probability ~ 1.0) the image was a pineapple!
+
+![A pineapple picture shown to tegra-cam-caffe.py](/assets/2017-10-27-tx2-camera-caffe/pineapple.png)
+
 To-do:
 
 1. Add a screenshot.
 2. Show how to use a Caffe model trained with NVIDIA DIGITS.
+
+I have not done much testing of this code with various cameras or Caffe models. Feel free to let me know if you find any issue with the code, and I'll look into it as soon as I can.
+
