@@ -82,4 +82,4 @@ Here's a screenshot of my Jetson TX2 running `tegra-cam.py` with a live IP CAM v
 
 ![Screenshot of tegra-cam.py on Jetson TX2](/assets/2017-10-19-tx2-camera-with-python/tegra-cam.png)
 
-If you like this post or have any questions, feel free to leave a comment below.
+If you like this post or have any questions, feel free to leave a comment below. Otherwise be sure to also check out my next post [How to Capture Camera Video and Do Caffe Inferencing with Python on Jetson TX2](https://jkjung-avt.github.io/tx2-camera-caffe/), in which I demonstrate how to feed live camera images into a Caffe pipeline for real-time inferencing.
