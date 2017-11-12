@@ -40,13 +40,25 @@ How to run the Tegra camera Caffe sample code:
 $ python3 tegra-cam-caffe.py --help
 ```
 
-* To do Caffe image classification with the default `bvlc_reference_caffenet` model on USB webcam `/dev/video1`.
+* To do Caffe image classification with the default `bvlc_reference_caffenet` model using the Jetson onboard camera (default behavior of the python program).
 
 ```shell
-$ python3 tegra-cam-caffe.py --usb --vid 1
+$ python3 tegra-cam-caffe.py
 ```
 
-* To do image classification with a different Caffe model on the onboard camera.
+* To use USB webcam `/dev/video1` instead, while setting video resolution to 1280x720.
+
+```shell
+$ python3 tegra-cam-caffe.py --usb --vid 1 --width 1280 --height 720
+```
+
+* Or, to use an IP CAM.
+
+```shell
+$ python3 tegra-cam-caffe.py --rtsp --uri rtsp://admin:XXXXXX@192.168.1.64:554
+```
+
+* To do image classification with a different Caffe model using the onboard camera.
 
 ```shell
 $ python3 tegra-cam-caffe.py --prototxt XXX.prototxt \
