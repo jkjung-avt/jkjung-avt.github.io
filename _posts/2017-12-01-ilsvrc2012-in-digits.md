@@ -25,7 +25,7 @@ Recently I had the chance/need to re-train some Caffe CNN models with the ImageN
   For example, I have a directory named `/data/digits-jobs` which was mounted on one of the SSD drives on my deep learning PC. And I ran NVIDIA DIGITS with the following command:
 
   ```shell
-  $ nvidia-docker run --name digits -p 5000:5000 -p 6006:6006 -v /deta/digits-jobs:/jobs -v ~/dataset:/dataset nvidia/digits:latest
+  $ nvidia-docker run --name digits -p 5000:5000 -p 6006:6006 -v /data/digits-jobs:/jobs -v ~/dataset:/dataset nvidia/digits:latest
   ```
 
 # How to Create the Image Classification Dataset in DIGITS
