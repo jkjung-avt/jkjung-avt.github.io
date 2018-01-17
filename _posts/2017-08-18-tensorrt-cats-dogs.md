@@ -29,7 +29,7 @@ I also modified `jetson-inference/imagenet-camera/imagenet-camera.cpp` by defini
 
 After I verified the jetson-inference code was running OK on my Jetson TX2, I tried to feed my previously trained [deeplearning-cats-dogs-tutorial](https://jkjung-avt.github.io/caffe-tutorial-on-tx2/) AlexNet model into TensorRT for testing. For that, I also needed to create a classes.txt which specifies the name of class 0 as 'cat' and class 1 as 'dog'. A copy of my trained model could be found below:
 
-* caffe_model_2_iter_40000.caffemodel
+* [caffe_model_2_iter_40000.caffemodel](https://drive.google.com/file/d/1X3x1hs-OZ1XNggpjx1tfIk0jSkX5Gb6Y/view?usp=sharing)
 * [caffenet_deploy_2.prototxt](/assets/2017-08-18-tensorrt-cats-dogs/caffenet_deploy_2.prototxt)
 * [classes.txt](/assets/2017-08-18-tensorrt-cats-dogs/classes.txt)
 
