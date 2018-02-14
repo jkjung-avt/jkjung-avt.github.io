@@ -17,10 +17,11 @@ Prerequisite:
 * OpenCV with **GStreamer** and **python** support needs to be built and installed on the Jetson TX2. I use opencv-3.4.0 and python3. You can refer to my earlier post for how to build and install OpenCV with python support: [How to Install OpenCV (3.4.0) on Jetson TX2](https://jkjung-avt.github.io/opencv3-on-tx2/).
 * If you'd like to test with an IP CAM, you need to have it set up and know its RTSP URI, e.g. rtsp://admin:XXXXX@192.168.1.64:554.
 * Hook up a USB webcam (I was using Logitech C920) if you'd like to test with it. The USB webcam would usually be instantiated as /dev/video1, since the Jetson onboard camera has occupied /dev/video0.
-* Install `gstreamer1.0-plugins-bad` which includes the `h264parse` element. This is required for decoding H.264 RTSP stream from IP CAM.
+* Install gstreamer1.0-plugins-bad-xxx which include the `h264parse` element. This is required for decoding H.264 RTSP stream from IP CAM.
 
 ```shell
-$ sudo apt-get install gstreamer1.0-plugins-bad
+$ sudo apt-get install gstreamer1.0-plugins-bad-faad \
+                       gstreamer1.0-plugins-bad-videoparsers
 ```
 
 Reference:
