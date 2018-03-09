@@ -112,7 +112,7 @@ In addition to 'opencv', 'leptonica' and 'tesseract' are also required for 'open
    SET(OPENALPR_MINOR_VERSION "3")
   ```
 
-  I also needed to make some midifications to `src/daemon.cpp`, otherwise compilation of that source file would fail. Again I put a copy of my modified `src/daemon.cpp` [here](/assets/2018-03-09-openalpr-on-tx2/daemon.cpp), for reference.
+  I also needed to make some modification to `src/daemon.cpp`, otherwise compilation of that source file would fail. Again I put a copy of my modified `src/daemon.cpp` [here](/assets/2018-03-09-openalpr-on-tx2/daemon.cpp), for reference. Check out [this StackOverflow thread](https://stackoverflow.com/questions/32688568/an-error-undefined-reference-to-log4cplusloggeroperator-log4cpluslogger) for more information about this modification.
 
   ```
   --- a/src/daemon.cpp
