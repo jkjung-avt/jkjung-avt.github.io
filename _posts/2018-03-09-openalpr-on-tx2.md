@@ -74,8 +74,8 @@ In addition to 'opencv', 'leptonica' and 'tesseract' are also required for 'open
   $ cd ~/Downloads/
   $ wget https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.traineddata
   $ wget https://github.com/tesseract-ocr/tessdata/raw/3.04.00/chi_tra.traineddata
-  $ sudo cp eng.traineddata /use/local/share/tessdata/
-  $ sudo cp chi_tra.traineddata /use/local/share/tessdata/
+  $ sudo cp eng.traineddata /usr/local/share/tessdata/
+  $ sudo cp chi_tra.traineddata /usr/local/share/tessdata/
   ```
 
   Following tesseract's documentation I put the following into my `~/.bashrc`. Log out and log in again to let the `TESSDATA_PREFIX` environment variable take effect.
@@ -90,7 +90,7 @@ In addition to 'opencv', 'leptonica' and 'tesseract' are also required for 'open
 
   ```shell
   $ sudo apt-get install curl libcurl4-openssl-dev
-  $ sudo apt-get install liblog4cplus-1.1-9
+  $ sudo apt-get install liblog4cplus-dev
   $ cd ~/src
   $ git clone https://github.com/openalpr/openalpr.git
   $ cd openalpr
