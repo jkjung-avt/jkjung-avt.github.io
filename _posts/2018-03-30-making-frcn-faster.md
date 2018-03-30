@@ -1,0 +1,64 @@
+---
+layout: post
+comments: true
+title: "Making Faster R-CNN Faster!"
+excerpt: "A while ago I wrote a post about how to set up and run Faster RCNN on Jetson TX2. In this post I demonstrate how to use a faster CNN feature extractor to speed up Faster RCNN while maintaining its object detection accuracy (mAP). More specifically, I replaced VGG16 layers with GoogLeNet in Faster RCNN and was able to reduce model inference time roughly by half."
+date: 2018-03-30
+category: "frcn"
+tags: frcn rcnn
+---
+
+In my previous post ["Faster R-CNN on Jetson TX2"](https://jkjung-avt.github.io/faster-rcnn/), I wrote about how to set up and run Faster RCNN on Jetson TX2, as well as to use it for real-time object detection with a live camera video feed. While Faster RCNN exhibited good object detection accuracy, it didn't run fast enough on Jetson TX2. I got only ~1 fps (0.91~0.95 second per image) when running the pre-trained (VGG16 based) pascal_voc model.
+
+To speed up Faster RCNN on a Jetson TX2, a recommended approach by NVIDIA is using [TensorRT](https://developer.nvidia.com/tensorrt). In fact, NVIDIA already provided a [sample code](http://docs.nvidia.com/deeplearning/sdk/tensorrt-developer-guide/index.html#fasterrcnn_sample) illustrating how to implement a Faster RCNN model with TensorRT. But anyway, I tried a different route and the result was OK. I replaced the slower VGG16 feature extrator with GoogLeNet layers in Faster RCNN, and was indeed able to boost its inference speed by a significant margin.
+
+# About how Faster RCNN works
+
+In addition to [the original paper](https://arxiv.org/abs/1506.01497), I'd also recommend reading [this presentation file](https://www.dropbox.com/s/xtr4yd4i5e0vw8g/iccv15_tutorial_training_rbg.pdf?dl=0) for understanding how Faster RCNN works.
+
+![Faster RCNN block diagram](/assets/2018-03-30-making-frcn-faster/FRCN_architecture.png)
+
+In a nutshell, the Faster RCNN network consists of 3 parts:
+
+* 'CNN' feature extractor, which is used to turn the input image into a condensed feature map
+* Region proposal network, which is used to generate Region Of Interests (ROIs)
+* 'Classifier' network, which classifies (ROI-pooled) ROIs as either objects or backgrounds and generates the detection ouputs, i.e. bounding boxes and class probabilities/scores
+
+# About swapping CNN feature extraction layers of Faster RCNN
+
+In the original Faster RCNN implementation, VGG16 (and ZF Net) is used as the CNN feature extractor. As I've [checked previously](https://jkjung-avt.github.io/caffe-time/), GoogLeNet, with similar cllaissification accuracy as VGG16, runs much faster on Jetson TX2. So I wanted to replace VGG16 layers with GoogLeNet in Faster RCNN, to improve its speed.
+
+The way I implemented this is straightforward. I took [bvlc_googlenet](https://github.com/BVLC/caffe/blob/master/models/bvlc_googlenet/deploy.prototxt) and split the neural network into 2 parts. I used all layers before (inclusive) `inception_4e/output` as the 'CNN feature extractor', and I used the rest (mainly inception_5x) layers as the 'Classifier' network. The resulting `test.prototxt` could be found [here](https://github.com/jkjung-avt/py-faster-rcnn/blob/master/models/pascal_voc/GoogLeNet/faster_rcnn_end2end/test.prototxt).
+
+# Running the modified Faster RCNN on Jetson TX2
+
+1. Follow my ["Faster R-CNN on Jetson TX2"](https://jkjung-avt.github.io/faster-rcnn/) post and make sure [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn) runs OK on the target Jetson TX2.
+
+2. Assuming `py-faster-rcnn` has been installed at `/home/nvidia/project/py-faster-rcnn`, do the following.
+
+   ```shell
+   $ cd /home/nvidia/project/py-faster-rcnn
+   $ cd tools
+   $ wget https://raw.githubusercontent.com/jkjung-avt/py-faster-rcnn/master/tools/demo_camera.py
+   $ cd ..
+   $ mkdir -p models/pascal_voc/GoogLeNet/faster_rcnn_end2end/
+   $ cd models/pascal_voc/GoogLeNet/faster_rcnn_end2end/
+   # wget https://raw.githubusercontent.com/jkjung-avt/py-faster-rcnn/master/models/pascal_voc/GoogLeNet/faster_rcnn_end2end/test.prototxt
+   ```
+
+   In addition, download this [voc2007_googlenet_iter_70000.caffemodel]() file and put it into the `models/pascal_voc/GoogLeNet/faster_rcnn_end2end/` directory as well.
+
+3. Run the GoogLeNet Faster RCNN model with the demo script. Note the script uses Jetson onboard camera by default. Specify the `--usb` or `--rtsp` command line options if a USB webcam or an IP CAM is used instead.
+
+   ```shell
+   $ cd /home/nvidia/project/py-faster-rcnn
+   $ python2 tools/demo_camera.py \
+             --prototxt models/pascal_voc/GoogLeNet/faster_rcnn_end2end/test.prototxt \
+             --model models/pascal_voc/GoogLeNet/faster_rcnn_end2end/voc2007_googlenet_iter_70000.caffemodel
+   ```
+
+   When testing the above on my Jetson TX2, I was able to get **~2 fps (0.48s per image)** throughput. That was **roughly 2 times the speed of the original VGG16 based Faster RCNN!**
+
+# Training the GoogLeNet Faster RCNN model
+
+To be updated
