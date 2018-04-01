@@ -8,11 +8,13 @@ category: "frcn"
 tags: frcn rcnn
 ---
 
+**2018-03-30 update:** I've written a subsequent post about how to build a Faster RCNN model which runs twice as fast as the original VGG16 based model: [Making Faster R-CNN Faster!](https://jkjung-avt.github.io/making-frcn-faster/)
+
 In my opinion [Faster R-CNN](https://arxiv.org/abs/1506.01497) is the ancestor of all modern CNN based object detection algorithms. It is not as fast as those later-developed models like YOLO and Single Shot Multibox Detector (SSD), but it's probably still [the most accurate among those variants](https://arxiv.org/abs/1611.10012).
 
 I started using Faster R-CNN on Jetson TX2 quite a while ago, and have since developed good understanding about it. In this post I'm sharing how to install Faster R-CNN, as well as how to do real-time object detection with a pre-trained Faster R-CNN model on JTX2.
 
-Prerequisite:
+# Prerequisite:
 
 Note that the [py-faster-rcnn code](https://github.com/rbgirshick/py-faster-rcnn) only works with **python2** so the descriptions below are all towards **python2**.
 
@@ -20,12 +22,12 @@ Note that the [py-faster-rcnn code](https://github.com/rbgirshick/py-faster-rcnn
 * Install all dependencies required for Caffe. You can refer to my [How to Install Caffe and PyCaffe on Jetson TX2](https://jkjung-avt.github.io/caffe-on-tx2/) post for details. Just **replace all `pip3` with `pip2`, and `pyhton3` with `pyhton2`**.
 * Prepare a camera for the demo. This could be either JTX2 onboard camera, USB webcam or IP CAM. You can refer to my earlier post: [How to Capture and Display Camera Video with Python on Jetson TX2](https://jkjung-avt.github.io/tx2-camera-with-python/)
 
-Reference: 
+# Reference: 
 
 * rbgirshick's 'py-faster-rcnn' on GitHub: [https://github.com/rbgirshick/py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn)
 * [Caffe failed with py-faster-rcnn demo.py on TX1](https://devtalk.nvidia.com/default/topic/974063/jetson-tx1/caffe-failed-with-py-faster-rcnn-demo-py-on-tx1/post/5010194/#5010194)
 
-Installation Steps:
+# Steps-by-stap:
 
 1. Check out the code from GitHub. Note that in addition to py-faster-rcnn's caffe we'd also need a copy of BVLC caffe since we need to copy the latest cudnn code from it.
 
@@ -81,7 +83,7 @@ Installation Steps:
    $ make
    ```
 
-Here, installation of Faster R-CNN is complete. We would download the pre-trained Faster R-CNN object detector model, as well as the `demo_camera.py` script. Note the pre-trained model was trained with [Pascal VOC 2007 dataset](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) and could detect 20 classes of objects. finally we run the demo script and check the result.
+Here, installation of Faster R-CNN is complete. We would download the pre-trained Faster R-CNN object detector model, as well as the `demo_camera.py` script. Note the pre-trained model was trained with [Pascal VOC 2007 dataset](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) and could detect 20 classes of objects. Finally we could run the demo script and check the result.
 
    ```shell
    $ cd ~/project/py-faster-rcnn
