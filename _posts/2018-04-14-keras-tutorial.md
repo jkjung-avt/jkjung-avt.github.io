@@ -3,7 +3,7 @@ layout: post
 comments: true
 title: "Keras Cats Dogs Tutorial"
 excerpt: "In this post I demonstrated how to train a very powerful Keras image classifier with just a few lines of Python code. The code could be adapted to handle other image classification tasks very easily."
-date: 2018-04-15
+date: 2018-04-14
 category: "keras"
 tags: keras
 ---
@@ -113,7 +113,7 @@ In my own case, I usd `tensorflow-gpu (1.7.0)` and the Keras package within. Ref
        0.000  cats
    ```
 
-   ![dog.12499.jpg](/assets/2018-04-15-keras-tutorial/dog.12499.jpg)
+   ![dog.12499.jpg](/assets/2018-04-14-keras-tutorial/dog.12499.jpg)
 
 # Discussion
 
