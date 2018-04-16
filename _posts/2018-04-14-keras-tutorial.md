@@ -98,6 +98,7 @@ In my own case, I usd `tensorflow-gpu (1.7.0)` and the Keras package within. Ref
    Epoch 2/20
    250/250 [==============================] - 35s 140ms/step - loss: 0.1790 - acc: 0.9290 - val_loss: 0.0513 - val_acc: 0.9850
    ......
+   Epoch 20/20
    250/250 [==============================] - 35s 140ms/step - loss: 0.0192 - acc: 0.9940 - val_loss: 0.0317 - val_acc: 0.9900
    ```
 
