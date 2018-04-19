@@ -118,11 +118,11 @@ In my own case, I usd `tensorflow-gpu (1.7.0)` and the Keras package within. Ref
 
 # Discussion
 
-The Keras Blog example used a pre-trained VGG16 model and reached ~94% validation accuracy on the same dataset. I think my code was able to achieve much better accuracy because:
+The Keras Blog example used a pre-trained VGG16 model and reached ~94% validation accuracy on the same dataset. I think my code was able to achieve much better accuracy (99%) because:
 
 * I used a stronger pre-trained model, **ResNet50**.
-* I trained the classifier with **larger images** (224x224, instead of 150x150) images.
-* I did pretty heavy **data augmentation** on the training images. For this, I took advantage of Keras' ImageDataGenerator's built-in image augmentation functionalities, including random rotation, shift in the x and y directions, shearing, zooming, adding noise (channel shift), and horizontal flipping, etc.
+* I trained the classifier with **larger images** (224x224, instead of 150x150).
+* I did pretty heavy **data augmentation** on the training images. For this, I took advantage of Keras' ImageDataGenerator's built-in image augmentation functionalities, including random rotation, randaom shift in both x and y directions, shearing, zooming, adding noise (channel shift), and horizontal flipping, etc.
 
 ```python
     train_datagen = ImageDataGenerator(preprocessing_function=preprocess_input,
