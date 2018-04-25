@@ -32,7 +32,7 @@ I think the source code is easy to understand. The `cv2.VideoWriter()` is create
 ```python
 def get_video_writer(fname, fps, width, height):
     gst_str = ("appsrc ! videoconvert ! omxh264enc ! mpegtsmux ! "
-               "filesink location={}.ts").format(fname)
+               "filesink location={}.ts ").format(fname)
     return cv2.VideoWriter(gst_str, cv2.CAP_GSTREAMER, 0, fps, (width, height))
 ```
 
