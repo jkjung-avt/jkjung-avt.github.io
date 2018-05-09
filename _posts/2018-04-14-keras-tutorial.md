@@ -84,7 +84,7 @@ In my own case, I usd `tensorflow-gpu (1.7.0)` and the Keras package within. Ref
    Run the following command. Note that I was getting over 98% accuracy on the validation set with only the 1st epoch of training. And after 20 epochs I got a classifier with **99% validation accuracy**. That was significantly better than the Keras Blog example.
 
    ```
-   $ python3 train_rest50.py
+   $ python3 train_resnett50.py
    ......
    Found 2000 images belonging to 2 classes.
    Found 800 images belonging to 2 classes.
@@ -107,7 +107,7 @@ In my own case, I usd `tensorflow-gpu (1.7.0)` and the Keras package within. Ref
    The trained model should have been saved as `model-resnet50-final.h5` in the previous step. Here I picked a picture from the original dataset for testing. And the model predicted this picture being a dog (with 1.000 probability), which was good~
 
    ```
-   $ python3 predict /data/catsdogs/train/dog.12499.jpg
+   $ python3 predict_resnet50.py /data/catsdogs/train/dog.12499.jpg
    ......
    /data/catsdogs/train/dog.12499.jpg
        1.000  dogs
