@@ -62,7 +62,8 @@ So I referenced [soumith's imagenet-multiGPU.torch](https://github.com/soumith/i
   $ mkdir val
   $ cd val
   $ tar xvf ~/Downloads/ILSVRC2012_img_val.tar
-  $ wget https://gist.githubusercontent.com/jkjung-avt/88a66508278759972d47e33cd31757f1/raw/a4c89ad3d5222562baa300a211e90743ee6a4e3d/valprep.sh
+  $ wget
+https://raw.githubusercontent.com/jkjung-avt/jkjung-avt.github.io/master/assets/2017-12-01-ilsvrc2012-in-digits/valprep.sh
   $ bash ./valprep.sh
   ```
 
