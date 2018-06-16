@@ -10,11 +10,13 @@ tags: opencv caffe
 
 Quick link: [tegra-cam-caffe.py]( https://gist.github.com/jkjung-avt/d408aaabebb5b0041c318f4518bd918f)
 
+**2018-06-14 update:** I've extended the TX2 camera caffe inferencing code with a (better) multi-threaded design. Check out this newer post for details: [Multi-threaded Camera Caffe Inferencing](https://jkjung-avt.github.io/camera-caffe-threaded/).
+
 Last week I shared a python script which could be used to capture and display live video from camera (IP, USB or onboard) on Jetson TX2. Here I extend that script and show how you can run Caffe image classification (inferencing) on the captured camera images, all done in python code. This `tegra-cam-caffe.py` sample should be good for quickly verifying your newly trained Caffe image classification models, for prototyping, or for building Caffe demo programs with live camera input.
 
 I mainly tested the script with python3 on Jetson TX2. But I think the code also works with python2, as well as on Jetson TX1.
 
-Prerequisite:
+## Prerequisite:
 
 * Refer to my previous post ["How to Capture and Display Camera Video with Python on Jetson TX2"](https://jkjung-avt.github.io/tx2-camera-with-python/) and make sure `tegra-cam.py` runs OK on your Jetson TX2.
 * Build Caffe on your Jetson TX2. You can use either [BVLC Caffe](https://github.com/BVLC/caffe), [NVIDIA Caffe](https://github.com/NVIDIA/caffe) or other flavors of Caffe of your preference, while referring to my earlier post about how to build the code: [How to Install Caffe and PyCaffe on Jetson TX2](https://jkjung-avt.github.io/caffe-on-tx2/).
@@ -26,12 +28,12 @@ $ python3 ./scripts/download_model_binary.py ./models/bvlc_reference_caffenet
 $ ./data/ilsvrc12/get_ilsvrc_aux.sh
 ```
 
-Reference:
+## Reference:
 
 * How to classify images with Caffe's python API: [https://github.com/BVLC/caffe/blob/master/examples/00-classification.ipynb](https://github.com/BVLC/caffe/blob/master/examples/00-classification.ipynb)
 * How to calculate mean pixel values for mean subtraction: [https://devtalk.nvidia.com/default/topic/1023944/loading-custom-models-on-jetson-tx2/#5209641](https://devtalk.nvidia.com/default/topic/1023944/loading-custom-models-on-jetson-tx2/#5209641)
 
-How to run the Tegra camera Caffe sample code:
+## How to run the Tegra camera Caffe sample code:
 
 * Download the `tegra-cam-caffe.py` source code from my GitHubGist: [https://gist.github.com/jkjung-avt/d408aaabebb5b0041c318f4518bd918f](https://gist.github.com/jkjung-avt/d408aaabebb5b0041c318f4518bd918f)
 * To dump help messages.
@@ -97,4 +99,3 @@ $ python3 ./tegra-cam-caffe.py --usb --vid 1 --crop \
 By the way, in case you'd like to run the code with a Caffe model trained for grayscale image inputs (e.g. LeNet), you'll have to modify the python code to convert the input camera images to grayscale before feeding them to the Caffe transformer for processing. This could be done by, say, `gray = cv2.cvtColor(img_crop, cv2.COLOR_BGR2GRAY)` and then `net.blobs["data"].data[...] = transformer.preprocess("data", gray)`.
 
 I have not done much testing of this code with various cameras or Caffe models. Feel free to let me know if you find any issue with the code, and I'll look into it as soon as I can.
-
