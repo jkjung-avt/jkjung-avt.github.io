@@ -31,7 +31,7 @@ I ended up choosing to use the Keras YOLOv3, [qqwweee/keras-yolo3](https://githu
 # My Approach to The Problem
 
 * Developed the script, [`openimgs_annotation.py`](https://github.com/jkjung-avt/keras-yolo3/blob/master/openimgs_annotation.py), to convert Open Images annotations into YOLOv3 format.
-* Used Learning Rate Finder (LRFinder) to search for best learning rates for the model. I set learning rates to cycle between 1e-9 and 3e-3, after plotting LRFinder output as below.
+* Used Learning Rate Finder (LRFinder) to search for best learning rates for the model. I set learning rates to cycle between 1e-9 and 3e-4, after plotting LRFinder output as below.
 
   ![LRFinder Loss Curve](/assets/2018-09-01-kaggle-open-images/lr_finder_loss.png)
 * Used Cyclic Learning Rate (CLR) as an attempt to train the best possible weights for the model. Here's how my learning rate schedule looked like:
