@@ -42,44 +42,44 @@ The steps are:
 * The object detection models all come from [TensorFlow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection).  Based on NVIDIA's code, this script could download the pretrained model snapshot (provided by Google) and optimize it with TensorRT (when `--build` option is specified).  The TensorRT optimized model/graph would be automatically saved as a protobuf file in one of the `./data/*` directories.  So the `--build` action only needs to be done once for each model to be used.  Later invocations of the script could load the optimized graph directly and thus saves execution time.
 * Here is the help message of the script.
 
-```
-$ python3 camera_tf_trt.py --help
-usage: camera_tf_trt.py [-h] [--file] [--image] [--filename FILENAME] [--rtsp]
-                        [--uri RTSP_URI] [--latency RTSP_LATENCY] [--usb]
-                        [--vid VIDEO_DEV] [--width IMAGE_WIDTH]
-                        [--height IMAGE_HEIGHT] [--model MODEL] [--build]
-                        [--tensorboard] [--labelmap LABELMAP_FILE]
-                        [--num-classes NUM_CLASSES] [--confidence CONF_TH]
-
-This script captures and displays live camera video, and does real-time object detection with TF-TRT model on Jetson TX2/TX1
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --file                use a video file as input (remember to also set
-                        --filename)
-  --image               use an image file as input (remember to also set
-                        --filename)
-  --filename FILENAME   video file name, e.g. test.mp4
-  --rtsp                use IP CAM (remember to also set --uri)
-  --uri RTSP_URI        RTSP URI, e.g. rtsp://192.168.1.64:554
-  --latency RTSP_LATENCY
-                        latency in ms for RTSP [200]
-  --usb                 use USB webcam (remember to also set --vid)
-  --vid VIDEO_DEV       device # of USB webcam (/dev/video?) [1]
-  --width IMAGE_WIDTH   image width [1280]
-  --height IMAGE_HEIGHT
-                        image height [720]
-  --model MODEL         tf-trt object detecion model [ssd_inception_v2_coco]
-  --build               re-build TRT pb file (instead of usingthe previously
-                        built version)
-  --tensorboard         write optimized graph summary to TensorBoard
-  --labelmap LABELMAP_FILE
-                        [third_party/models/research/object_detection/data/msc
-                        oco_label_map.pbtxt]
-  --num-classes NUM_CLASSES
-                        number of object classes [90]
-  --confidence CONF_TH  confidence threshold [0.3]
-```
+  ```
+  $ python3 camera_tf_trt.py --help
+  usage: camera_tf_trt.py [-h] [--file] [--image] [--filename FILENAME] [--rtsp]
+                          [--uri RTSP_URI] [--latency RTSP_LATENCY] [--usb]
+                          [--vid VIDEO_DEV] [--width IMAGE_WIDTH]
+                          [--height IMAGE_HEIGHT] [--model MODEL] [--build]
+                          [--tensorboard] [--labelmap LABELMAP_FILE]
+                          [--num-classes NUM_CLASSES] [--confidence CONF_TH]
+  
+  This script captures and displays live camera video, and does real-time object detection with TF-TRT model on Jetson TX2/TX1
+  
+  optional arguments:
+    -h, --help            show this help message and exit
+    --file                use a video file as input (remember to also set
+                          --filename)
+    --image               use an image file as input (remember to also set
+                          --filename)
+    --filename FILENAME   video file name, e.g. test.mp4
+    --rtsp                use IP CAM (remember to also set --uri)
+    --uri RTSP_URI        RTSP URI, e.g. rtsp://192.168.1.64:554
+    --latency RTSP_LATENCY
+                          latency in ms for RTSP [200]
+    --usb                 use USB webcam (remember to also set --vid)
+    --vid VIDEO_DEV       device # of USB webcam (/dev/video?) [1]
+    --width IMAGE_WIDTH   image width [1280]
+    --height IMAGE_HEIGHT
+                          image height [720]
+    --model MODEL         tf-trt object detecion model [ssd_inception_v2_coco]
+    --build               re-build TRT pb file (instead of usingthe previously
+                          built version)
+    --tensorboard         write optimized graph summary to TensorBoard
+    --labelmap LABELMAP_FILE
+                          [third_party/models/research/object_detection/data/msc
+                          oco_label_map.pbtxt]
+    --num-classes NUM_CLASSES
+                          number of object classes [90]
+    --confidence CONF_TH  confidence threshold [0.3]
+  ```
 
 # Examples of using the camera_tf_trt.py script
 
