@@ -30,9 +30,9 @@ Refer to my GitHub repository (forked and modified from NVIDIA's repository), an
 
 The steps are:
 
-1. Flash Jetson TX2 with JetPack-3.3 (TensorRT 4.0 GA included).
+1. Flash Jetson TX2 with JetPack-3.3 (TensorRT 4.0 GA included). **See #3 below.**
 2. Install OpenCV 3.4.x.
-3. Install TensorFlow 1.10.0.
+3. Install TensorFlow 1.10.0. **Based on my testing, JetPack-3.2 with pre-built tensorflow 1.8.0 wheel worked pretty well (as advertised by NVIDIA). I'm currently conducting more testing to see which version of tensorflow would work best for JetPack-3.3.**
 4. Clone the code from my GitHub repo.
 5. Run the installation script.
 
@@ -95,7 +95,7 @@ Example #2: verify the optimized 'ssd_mobilenet_v1_coco' model with NVIDIA's ori
 $ python3 camera_tf_trt.py --image --filename examples/detection/data/huskies.jpg --model ssd_mobilenet_v1_coco
 ```
 
-![MobileNet V1 SSD detection result on huskies.jpg]( https://raw.githubusercontent.com/jkjung-avt/tf_trt_models/master/examples/detection/data/huskies.jpg)
+![MobileNet V1 SSD detection result on huskies.jpg](https://raw.githubusercontent.com/jkjung-avt/tf_trt_models/master/data/huskies_detected.png)
 
 Example #3: build TensorRT optimized 'ssd_inception_v2_coco' model and run real-time object detection with Jetson onboard camera.
 
