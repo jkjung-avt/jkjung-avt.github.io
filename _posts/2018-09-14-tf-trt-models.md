@@ -30,9 +30,9 @@ Refer to my GitHub repository (forked and modified from NVIDIA's repository), an
 
 The steps are:
 
-1. Flash Jetson TX2 with JetPack-3.3 (TensorRT 4.0 GA included). **See #3 below.**
+1. Flash Jetson TX2 with JetPack-3.2.1 (TensorRT 3.0 GA included) or JetPack-3.3 (TensorRT 4.0 GA).
 2. Install OpenCV 3.4.x.
-3. Install TensorFlow 1.10.0. **Based on my testing, JetPack-3.2 with pre-built tensorflow 1.8.0 wheel worked pretty well (as advertised by NVIDIA). I'm currently conducting more testing to see which version of tensorflow would work best for JetPack-3.3.**
+3. Install **TensorFlow 1.8.0**.  Use **[this pip wheel](https://nvidia.app.box.com/v/TF180-Py35-wTRT)** for **JetPack-3.2.1**, or **[this pip wheel](https://drive.google.com/open?id=1bAUNe26fKgGXuJiZYs1eT2ig8SCj2gW-)** for **JetPack-3.3**.  Refer to the 'Observattions' section below for more information about tensorflow version related issue.
 4. Clone the code from my GitHub repo.
 5. Run the installation script.
 
@@ -111,11 +111,23 @@ $ python3 camera_tf_trt.py --file --filename examples/detection/data/huskies.jpg
 
 # Observations
 
-Since I myself am not very familiar with TensorFlow and am still learning.  I'm not completely sure my current implementation of `camera_tf_trt.py` is correct or not.
+* I first tested tf_trt_models code with tensorflow-1.10.x and tensorflow-1.9.0 pip wheel files provided by NVIDIA.  That did not work too well.  There were several problems.  First, loading SSD models and optimizing the models with TensorRT ran very slowly (>10 minutes).  Secondly, tensorflow kept reporting errors like the following ones.
 
-* Documentation in NVIDIA's original repository asks the user to install tensorflow-1.8.0.  And I was using tensorflow-1.10.0 for all my testing.  I'm not sure if this would result in significant difference in performance of the TensorRT optimized model or not.
-* I ran both 'ssd_inception_v2_coco' and 'ssd_mobilenet_v1_coco' on my Jetson TX2.  They did not run as fast as what NVIDIA has published on their repo.
-* The process of building TensorRT optimized model and loading saved TensorRT model from protobuf takes **very long** (> 10 minutes).  I'm not sure whether it's normal.  I need to dig into it.
+  ```
+  ... E tensorflow/contrib/tensorrt/log/trt_logger.cc:38] DefaultLogger Parameter check failed at: ../builder/Network.cpp::addInput::364, condition: isValidDims(dims)
+  ```
+
+  or
+
+  ```
+  ... E tensorflow/contrib/tensorrt/log/trt_logger.cc:38] DefaultLogger cudnnFusedConvActLayer.cpp (64) - Cuda Error in createFilterTextureFused: 11
+  ```
+
+* Documentation in NVIDIA's original repository did ask users to install tensorflow-1.8.0.  When I switched to tensorflow-1.8.0, all the problem above were gone!  Since NVIDIA only officially provided tensorflow-1.8.0 pip wheel files for JetPack-3.2.1 (TensorRT 3.0 GA), I ended up compiling tensorflow-1.8.0 against JetPack-3.3 (TensorRT 4.0 GA) by myself.  I've shared the pip wheel file in the 'How to set up Jetson TX2 environment' section above.
+
+* When deploying 'ssd_inception_v2_coco' and 'ssd_mobilenet_v1_coco', it's highly desirable to **set `score_threshold` to 0.3 (or other sensible values) in the config file** ([reference](https://devtalk.nvidia.com/default/topic/1037019/jetson-tx2/tensorflow-object-detection-and-image-classification-accelerated-for-nvidia-jetson/post/5281630/#5281630)).  By doing that, the compuatations in NonMaximumSuppression were reduced a lot and the model ran much faster.  Testing with tensorflow-1.8.0 on my Jetson TX2, after I set the `score_threshold` to 0.3, the models indeed ran as fast as what NVIDIA has published!
+
+* 'ssd_mobilnet_v2_coco' could not be tested since the model config file and its checkpoint file do not match.  I'd post an update if I find a way to fix it.
 
 Otherwise I plan to test out more pretrained object detection models (including, say, Faster R-CNN ones) from [TensorFlow detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md).  Hopefully, I will be able to share more experience on that soon.
 
