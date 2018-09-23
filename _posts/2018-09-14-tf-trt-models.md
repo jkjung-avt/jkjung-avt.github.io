@@ -86,13 +86,17 @@ The steps are:
 Example #1: build TensorRT optimized 'ssd_mobilenet_v1_coco' model and run real-time object detection with USB webcam.
 
 ```
-$ python3 camera_tf_trt.py --usb --model ssd_mobilenet_v1_coco --build
+$ python3 camera_tf_trt.py --usb \
+                           --model ssd_mobilenet_v1_coco \
+                           --build
 ```
 
 Example #2: verify the optimized 'ssd_mobilenet_v1_coco' model with NVIDIA's original 'huskies.jpg' picture. 
 
 ```
-$ python3 camera_tf_trt.py --image --filename examples/detection/data/huskies.jpg --model ssd_mobilenet_v1_coco
+$ python3 camera_tf_trt.py --image \
+                           --filename examples/detection/data/huskies.jpg \
+                           --model ssd_mobilenet_v1_coco
 ```
 
 ![MobileNet V1 SSD detection result on huskies.jpg](https://raw.githubusercontent.com/jkjung-avt/tf_trt_models/master/data/huskies_detected.png)
@@ -100,13 +104,16 @@ $ python3 camera_tf_trt.py --image --filename examples/detection/data/huskies.jp
 Example #3: build TensorRT optimized 'ssd_inception_v2_coco' model and run real-time object detection with Jetson onboard camera.
 
 ```
-$ python3 camera_tf_trt.py --model ssd_inception_v2_coco --build
+$ python3 camera_tf_trt.py --model ssd_inception_v2_coco \
+                           --build
 ```
 
 Example #4: test the optimized 'ssd_inception_v2_coco' model with a mp4 video file.
 
 ```
-$ python3 camera_tf_trt.py --file --filename examples/detection/data/huskies.jpg --model ssd_inception_v2_coco
+$ python3 camera_tf_trt.py --file \
+                           --filename test_video.mp4 \
+                           --model ssd_inception_v2_coco
 ```
 
 # Observations
