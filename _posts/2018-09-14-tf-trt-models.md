@@ -32,7 +32,7 @@ The steps are:
 
 1. Flash Jetson TX2 with JetPack-3.2.1 (TensorRT 3.0 GA included) or JetPack-3.3 (TensorRT 4.0 GA).
 2. Install OpenCV 3.4.x.
-3. Install **TensorFlow 1.8.0**.  Use **[this pip wheel](https://nvidia.app.box.com/v/TF180-Py35-wTRT)** for **JetPack-3.2.1**, or **[this pip wheel](https://drive.google.com/open?id=1bAUNe26fKgGXuJiZYs1eT2ig8SCj2gW-)** for **JetPack-3.3**.  Refer to the 'Observattions' section below for more information about tensorflow version related issue.
+3. Install **TensorFlow 1.8.0**.  Use **[this pip wheel](https://nvidia.app.box.com/v/TF180-Py35-wTRT)** for **JetPack-3.2.1**, or **[this pip wheel](https://drive.google.com/open?id=1bAUNe26fKgGXuJiZYs1eT2ig8SCj2gW-)** for **JetPack-3.3**.  Refer to the 'Observations' section below for more information about tensorflow version related issue.
 4. Clone the code from my GitHub repo.
 5. Run the installation script.
 
@@ -125,7 +125,7 @@ $ python3 camera_tf_trt.py --file --filename examples/detection/data/huskies.jpg
 
 * Documentation in NVIDIA's original repository did ask users to install tensorflow-1.8.0.  When I switched to tensorflow-1.8.0, all the problem above were gone!  Since NVIDIA only officially provided tensorflow-1.8.0 pip wheel files for JetPack-3.2.1 (TensorRT 3.0 GA), I ended up compiling tensorflow-1.8.0 against JetPack-3.3 (TensorRT 4.0 GA) by myself.  I've shared the pip wheel file in the 'How to set up Jetson TX2 environment' section above.
 
-* When deploying 'ssd_inception_v2_coco' and 'ssd_mobilenet_v1_coco', it's highly desirable to **set `score_threshold` to 0.3 (or other sensible values) in the config file** ([reference](https://devtalk.nvidia.com/default/topic/1037019/jetson-tx2/tensorflow-object-detection-and-image-classification-accelerated-for-nvidia-jetson/post/5281630/#5281630)).  By doing that, the compuatations in NonMaximumSuppression were reduced a lot and the model ran much faster.  Testing with tensorflow-1.8.0 on my Jetson TX2, after I set the `score_threshold` to 0.3, the models indeed ran as fast as what NVIDIA has published!
+* When deploying 'ssd_inception_v2_coco' and 'ssd_mobilenet_v1_coco', it's highly desirable to **set `score_threshold` to 0.3 (or other sensible values) in the config file** ([reference](https://devtalk.nvidia.com/default/topic/1037019/jetson-tx2/tensorflow-object-detection-and-image-classification-accelerated-for-nvidia-jetson/post/5281630/#5281630)).  By doing that, the computations in NonMaximumSuppression were reduced a lot and the model ran much faster.  Testing with tensorflow-1.8.0 on my Jetson TX2, after I set the `score_threshold` to 0.3, the models indeed ran as fast as what NVIDIA has published!
 
 * 'ssd_mobilnet_v2_coco' could not be tested since the model config file and its checkpoint file do not match.  I'd post an update if I find a way to fix it.
 
