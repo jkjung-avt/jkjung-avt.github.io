@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title: "Training a Hand Detector with TensorFlow Object Detection API"
-excerpt: "This is a tutorial on how to train a 'hand detector' with TensorFlow object detection API."
+excerpt: "This is a tutorial on how to train a 'hand detector' with TensorFlow Object Detection API.  All code used in this tutorial are open-sourced on GitHub.  Just follow ths steps in this tutorial, and you should be able to train your own hand detector model in less than half a day."
 date: 2018-09-23
 category: "tensorflow"
 tags: tensorflow
@@ -82,7 +82,7 @@ The high mAP result could be verified if you use TensorBoard to check the output
 
 # Final words
 
-I made every effort to develop the code and this tutorial, so that it could be very easy to follow.  It should be straightforward to adapt this tutorial/code to other object detection models and other datasets.
+I made every effort in coding and writing this tutorial, so that it could be very easy to follow.  It should be straightforward to adapt this tutorial/code to other object detection models and other datasets.
 
 After all, I really spent a lot of time reading/writing code and developing this tutorial.  If you find it useful, please help to share it with more people who might be interested.  Meanwhile, I do appreciate people giving me stars on GitHub.  That motivates me to write more posts/sharing.
 
