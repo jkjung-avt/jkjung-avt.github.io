@@ -51,7 +51,9 @@ I will use my `configs/ssd_mobilenet_v1_egohands.config` as example.  When confi
 
 5. In the `train_config -> optimizer -> ...`, set `decay_steps` and `decay_factor` to proper values.  Note that learning rate and its decaying schedule is a very important hyper-parameter for training.  You could reference my settings and try to find what works best for your training sessions.  You could also try other optimizers if you want.  TensorFlow Object Detection API supports 'momentum_optimizer' and 'adam_optimizer', in addition to 'rms_prop_optimizer' ([reference](https://github.com/tensorflow/models/blob/master/research/object_detection/protos/optimizer.proto)).
 
-6. (Optional) You might also try to add some data augmentation ([reference](https://stackoverflow.com/questions/44906317/what-are-possible-values-for-data-augmentation-options-in-the-tensorflow-object)) in the config file.  This could be especially useful if you have a relatively small dataset.
+6. If you encounter 'Out of Memory (OOM)' issue or if your training process gets killed suddenly, you should try to lower your training batch size.  The `train_config -> batch_size` is set to `24` in my tutorial.  You could try '16', '8', '4', '2' or even '1'.  In general, larger batch size tends to work better (converging faster, and resulting in more accurate models).  So if you have a powerful GPU with more memory at disposal, you could on the other hand try to increase batch size.  You'll need to re-calculate `num_steps` and `decay_steps` (in #4 and #5 above) if you adjust batch size.
+
+7. (Optional) You might also try to add some data augmentation ([reference](https://stackoverflow.com/questions/44906317/what-are-possible-values-for-data-augmentation-options-in-the-tensorflow-object)) in the config file.  This could be especially useful if you have a relatively small dataset.
 
 # Training and Evaluating
 
