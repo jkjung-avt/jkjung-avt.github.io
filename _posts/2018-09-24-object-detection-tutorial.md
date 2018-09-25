@@ -43,17 +43,19 @@ I will use my `configs/ssd_mobilenet_v1_egohands.config` as example.  When confi
 
 1. Set `num_classes`, as stated above.
 
-2. Set the paths to your TFRecord files.
+2. Set the paths to your TFRecord and label map files.  This includes 2 instances of `input_path` and 2 of `label_map_path`.
 
-3. In `eval_config` section, set `num_examples` to the number of images in your validation set.
+3. Make sure `train_config -> fine_tune_checkpoint` points to the correct path (the pretrained coco model checkpoint).
 
-4. In `train_config` section, set `num_steps` (number of iterations) to a proper value.  As a rule of thumb, we usually want to train the model for at least, say, 10~20 epochs.  For large models trained from scratch, people usually train it for 200 epochs.  In the egohands example, I set this number to 20,000.  This corresponds to (20,000 * 24 / 4,300) = 111 epochs.  The 24 is batch size.
+4. In `eval_config` section, set `num_examples` to the number of images in your validation set.
 
-5. In the `train_config -> optimizer -> ...`, set `decay_steps` and `decay_factor` to proper values.  Note that learning rate and its decaying schedule is a very important hyper-parameter for training.  You could reference my settings and try to find what works best for your training sessions.  You could also try other optimizers if you want.  TensorFlow Object Detection API supports 'momentum_optimizer' and 'adam_optimizer', in addition to 'rms_prop_optimizer' ([reference](https://github.com/tensorflow/models/blob/master/research/object_detection/protos/optimizer.proto)).
+5. In `train_config` section, set `num_steps` (total number of training iterations) to a proper value.  Note you need to set the same value to `NUM_TRAIN_STEPS` in `train.sh` as well.  As a rule of thumb, we usually want to train the model for at least, say, 10~20 epochs.  For large models trained from scratch, people usually train it for 200 epochs.  In the egohands example, I set this number to 20,000, which corresponds to (20,000 * 24 / 4,300) = 111 epochs.  The 24 is batch size.
 
-6. If you encounter 'Out of Memory (OOM)' issue or if your training process gets killed suddenly, you should try to lower your training batch size.  The `train_config -> batch_size` is set to `24` in my tutorial.  You could try '16', '8', '4', '2' or even '1'.  In general, larger batch size tends to work better (converging faster, and resulting in more accurate models).  So if you have a powerful GPU with more memory at disposal, you could on the other hand try to increase batch size.  You'll need to re-calculate `num_steps` and `decay_steps` (in #4 and #5 above) if you adjust batch size.
+6. In the `train_config -> optimizer -> ...`, set `decay_steps` and `decay_factor` to proper values.  Note that learning rate and its decaying schedule is a very important hyper-parameter for training.  You could reference my settings and try to find what works best for your training sessions.  You could also try other optimizers if you want.  TensorFlow Object Detection API supports 'momentum_optimizer' and 'adam_optimizer', in addition to 'rms_prop_optimizer' ([reference](https://github.com/tensorflow/models/blob/master/research/object_detection/protos/optimizer.proto)).
 
-7. (Optional) You might also try to add some data augmentation ([reference](https://stackoverflow.com/questions/44906317/what-are-possible-values-for-data-augmentation-options-in-the-tensorflow-object)) in the config file.  This could be especially useful if you have a relatively small dataset.
+7. If you encounter 'Out of Memory (OOM)' issue or if your training process gets killed suddenly, you should try to lower your training batch size.  The `train_config -> batch_size` is set to `24` in my tutorial.  You could try '16', '8', '4', '2' or even '1'.  In general, larger batch size tends to work better (converging faster, and resulting in more accurate models).  So if you have a powerful GPU with more memory at disposal, you could on the other hand try to increase batch size.  You'll need to re-calculate `num_steps` and `decay_steps` (in #4 and #5 above) if you adjust batch size.
+
+8. (Optional) You might also try to add some data augmentation ([reference](https://stackoverflow.com/questions/44906317/what-are-possible-values-for-data-augmentation-options-in-the-tensorflow-object)) in the config file.  This could be especially useful if you have a relatively small dataset.
 
 # Training and Evaluating
 
