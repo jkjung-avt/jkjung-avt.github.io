@@ -22,17 +22,26 @@ I wanted to build on it and show how to do better.
 
 * Have Keras with TensorFlow banckend installed on your deep learning PC or server.
 
-In my own case, I usd `tensorflow-gpu (1.7.0)` and the Keras package within. Reference: [Installing TensorFlow on Ubuntu](https://www.tensorflow.org/install/install_linux)
+In my own case, I usd the Keras package built-in in `tensorflow-gpu`. And I've tested tensorflow verions 1.7.0, 1.8.0, 1.9.0 and 1.10.0. They all work OK. Reference: [Installing TensorFlow on Ubuntu](https://www.tensorflow.org/install/install_linux)
 
 # Step-by-step
 
-1. Prepare train/validation data
-
-   * Download `train.zip` from the [Kaggle Dogs vs. Cats page](https://www.kaggle.com/c/dogs-vs-cats/data)
-   * Following the (Keras Blog) example above, we would be working on a much reduced dataset with only 1,000 pictures of cats and 1,000 of dogs. In addition, we would take some additional 400 pictures of cats and 400 of dogs as the validation set.
+1. Download the code from my GitHub repository
 
    ```
-   $ cd /data
+   $ cd ~/project
+   $ git clone https://github.com/jkjung-avt/keras-cats-dogs-tutorial.git
+   $ cd keras-cats-dogs-tutorial
+   ```
+
+2. Prepare train/validation data
+
+   Download `train.zip` from the [Kaggle Dogs vs. Cats page](https://www.kaggle.com/c/dogs-vs-cats/data). You'd probably need to register a Kaggle account to do that.
+
+   Following the (Keras Blog) example above, we would be working on a much reduced dataset with only 1,000 pictures of cats and 1,000 of dogs. In addition, we would take some additional 400 pictures of cats and 400 of dogs as the validation set.
+
+   ```shell
+   $ cd ~/project/keras-cats-dogs-tutorial
    $ mkdir catsdogs
    $ cd catsdogs
    $ unzip ~/Downloads/train.zip
@@ -47,36 +56,28 @@ In my own case, I usd `tensorflow-gpu (1.7.0)` and the Keras package within. Ref
    $ cp dog.1[0-3]??.jpg ../sample/valid/dogs/
    ```
 
-   After the steps above we ended up with the folllwing, which is how Keras' [ImageDataGenerator.flow_from_directory()](https://keras.io/preprocessing/image/) expects data to be organized.
+   After the steps above we ended up with the folllwing in the `sample` directory, which is how Keras' [ImageDataGenerator.flow_from_directory()](https://keras.io/preprocessing/image/) expects data to be organized.
 
    ```
-   /data/catsdogs/sample/
-       train/
-           cats/
-               cat.0.jpg
-               ...
-               cat.999.jpg
-           dogs/
-               dog.0.jpg
-               ...
-               dog.999.jpg
-       valid/
-           cats/
-               cat.1000.jpg
-               ...
-               cat.1399.jpg
-           dogs/
-               dog.1000.jpg
-               ...
-               dog.1399.jpg
-   ```
-
-2. Download the code from my GitHub repository
-
-   ```
-   $ cd ~/project
-   $ git clone https://github.com/jkjung-avt/keras-cats-dogs-tutorial.git
-   $ cd keras-cats-dogs-tutorial
+   ./catsdogs/sample/
+              ├── train/
+              │   ├── cats/
+              │   │   ├── cat.0.jpg
+              │   │   │   ...
+              │   │   └── cat.999.jpg
+              │   └── dogs/
+              │       ├── dog.0.jpg
+              │       │   ...
+              │       └── dog.999.jpg
+              └── valid/
+                  ├── cats/
+                  │   ├── cat.1000.jpg
+                  │   │   ...
+                  │   └── cat.1399.jpg
+                  └── dogs/
+                      ├── dog.1000.jpg
+                      │   ...
+                      └── dog.1399.jpg
    ```
 
 3. Train a ResNet50 based classifier on the dataset
