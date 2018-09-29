@@ -10,7 +10,7 @@ tags: keras
 
 Quick link to my GitHub code: [https://github.com/jkjung-avt/keras-cats-dogs-tutorial](https://github.com/jkjung-avt/keras-cats-dogs-tutorial)
 
-Recently I started to learn [Keras](https://keras.io/). Overall I found Keras did live up up to its fame. It is quite user friendly and easy to learn, while also being extensible for handling more recent and advanced deep learning tasks.
+Recently I started to learn [Keras](https://keras.io/). Overall I found Keras did live up to its fame. It is quite user-friendly and easy to learn, while also being extensible for handling more recent and advanced deep learning tasks.
 
 While there are many good examples online to get you started tackling image classification tasks using Keras, most of them are lacking in terms of how to take advantage of Keras' built-in image augmentation functionalities to achieve best classification accuracy. Nonetheless, the following article on 'The Keras Blog' serves as a good starting point in that direction.
 
@@ -22,7 +22,7 @@ I wanted to build on it and show how to do better.
 
 * Have Keras with TensorFlow banckend installed on your deep learning PC or server.
 
-In my own case, I usd the Keras package built-in in `tensorflow-gpu`. And I've tested tensorflow verions 1.7.0, 1.8.0, 1.9.0 and 1.10.0. They all work OK. Reference: [Installing TensorFlow on Ubuntu](https://www.tensorflow.org/install/install_linux)
+In my own case, I used the Keras package built-in in `tensorflow-gpu`. And I've tested tensorflow verions 1.7.0, 1.8.0, 1.9.0 and 1.10.0. They all work OK. Reference: [Installing TensorFlow on Ubuntu](https://www.tensorflow.org/install/install_linux)
 
 # Step-by-step
 
@@ -56,7 +56,7 @@ In my own case, I usd the Keras package built-in in `tensorflow-gpu`. And I've t
    $ cp dog.1[0-3]??.jpg ../sample/valid/dogs/
    ```
 
-   After the steps above we ended up with the folllwing in the `sample` directory, which is how Keras' [ImageDataGenerator.flow_from_directory()](https://keras.io/preprocessing/image/) expects data to be organized.
+   After the steps above we ended up with the following in the `sample` directory, which is how Keras' [ImageDataGenerator.flow_from_directory()](https://keras.io/preprocessing/image/) expects data to be organized.
 
    ```
    ./catsdogs/sample/
