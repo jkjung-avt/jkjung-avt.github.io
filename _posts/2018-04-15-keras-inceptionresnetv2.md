@@ -52,9 +52,9 @@ net = InceptionResNetV2(include_top=False,
 ......
 ```
 
-The resulting full script could be found [here](https://github.com/jkjung-avt/keras-cats-dogs-tutorial/blob/master/train_inceptionresnetv2.py)
+The resulting full script could be found [here](https://github.com/jkjung-avt/keras-cats-dogs-tutorial/blob/master/train_inceptionresnetv2.py).
 
-I ran the `train_inceptionresnetv2.py` script with the same reduced dataset (1,000 cats + 1,000 dogs), and with the same data augmentations. At the end of 20 epochs I got a classifier with **validation accuracy at 98.12%**. While this result was not as good as ResNet50, I thought it could be reasonable. The task of distinguishing cats from dogs is probably not challenging enough for these modern CNN models. The pre-trained CNN models learns this task very quickly and basically stops improving after just a couple of epochs. And thus the more advanced InceptionResNetV2 doesn't do better than ResNet50 on this task.
+I ran the `train_inceptionresnetv2.py` script with the same reduced dataset (1,000 cats + 1,000 dogs), and with the same data augmentations. At the end of 20 epochs I got a classifier with **validation accuracy at 98.12%**. While this result was not as good as ResNet50, I thought it could be reasonable. The task of distinguishing cats from dogs is probably not challenging enough for these modern CNN models. The pre-trained CNN model learns this task very quickly and basically stops improving after just a couple of epochs. And thus the more advanced InceptionResNetV2 doesn't do better than ResNet50 on this task.
 
 ```shell
 $ python3 train_inceptionresnetv2.py
