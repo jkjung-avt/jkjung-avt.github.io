@@ -10,7 +10,7 @@ tags: tensorflow
 
 Quick link: [jkjung-avt/hand-detection-tutorial](https://github.com/jkjung-avt/hand-detection-tutorial)
 
-Following up on my previous post, [Training a Hand Detector with TensorFlow Object Detection API](https://jkjung-avt.github.io/hand-detection-tutorial/), I'd like to discuss how to adapt the code and train models which could detect other kind of objects.  First, make sure you have followed the above-mentioned tutorial, got the training environment set up properly, and were able to train the hand detector (SSD model) successfully.  And read on.
+Following up on my previous post, [Training a Hand Detector with TensorFlow Object Detection API](https://jkjung-avt.github.io/hand-detection-tutorial/), I'd like to discuss how to adapt the code and train models which could detect other kinds of objects.  First, make sure you have followed the above-mentioned tutorial, got the training environment set up properly, and were able to train the hand detector (SSD model) successfully.  And read on.
 
 # Preparing the training data
 
@@ -36,13 +36,13 @@ Regarding class names, there are a few other modifications needed when you train
 
 * You need to specify the number of classes correctly in the model config file.  Take a look at `configs/ssd_mobilenet_v1_egohands.config`.  The `model -> ssd -> num_classes` should be set to, say, 2 if you have 2 classes ('car' and 'pedestrian') to be detected.
 
-In addition, check how many labeled image files you have in your own dataset.  In `create_tfrecords.sh` I set `--validation_set_size` to `500` so that 500 of the images in egohands dataset would go to the validation set, while the remaining (4,800 - 500 = 4,300) to the training set.  We would generally allocate 10~20% of all images to the validation set.  But if you have a large amount of training images to work with, you might just reserve a fixed number (say 10,000) for validation and thus increase the precentage of images in the training set.
+In addition, check how many labeled image files you have in your own dataset.  In `create_tfrecords.sh` I set `--validation_set_size` to `500` so that 500 of the images in egohands dataset would go to the validation set, while the remaining (4,800 - 500 = 4,300) to the training set.  We would generally allocate 10~20% of all images to the validation set.  But if you have a large amount of training images to work with, you might just reserve a fixed number (say 10,000) for validation and thus increase the percentage of images in the training set.
 
 In `create_kitti_tf_record.py` I randomly shuffled the images each time before splitting the train/val sets.  If you don't like that behavior, you could remove [that line of code](https://github.com/jkjung-avt/hand-detection-tutorial/blob/master/create_kitti_tf_record.py#L113), or set a fixed random seed so that you get a fixed split every time.
 
 # Configuring your own object detection model
 
-In my hand detection tutorial, I've included quite a few model config files for reference.  You could refer to [TensorFlow detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) to gain an idea about relative speed/accuracy performance of the models.  Pick a model for your object detection task.  I'll use 'ssd_mobilenet_v1_egohands' as example below.
+In my hand detection tutorial, I've included quite a few model config files for reference.  You could refer to [TensorFlow detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) to gain an idea about relative speed/accuracy performance of the models.  Pick a model for your object detection task.  I'll use 'ssd_mobilenet_v1_egohands' as an example below.
 
 ```
 ssd_mobilenet_v1_egohands.config
@@ -61,7 +61,7 @@ The official documentation about how to do configure your detection model could 
 * [Quick Start: Distributed Training on the Oxford-IIIT Pets Dataset on Google Cloud](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_pets.md)
 * [Configuring the Object Detection Training Pipeline](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/configuring_jobs.md)
 
-Taking my `configs/ssd_mobilenet_v1_egohands.config` as example and trying to configure the model for your own dataset, you'll need to pay attention to the following.
+Taking my `configs/ssd_mobilenet_v1_egohands.config` as an example and trying to configure the model for your own dataset, you'll need to pay attention to the following.
 
 1. Set `num_classes`, as stated above.
 
