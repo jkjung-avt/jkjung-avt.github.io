@@ -41,7 +41,7 @@ $ cp ~/project/hand-detection-tutorial/ssd_mobilenet_v1_egohands/model.ckpt-2000
 
 When inferencing the model with `camera_tf_trt.py`, you'd need to specify the label map file and set number of classes to 1.  Refer to the commands below for details.
 
-Example #1: build TensorRT optimized 'ssd_mobilenet_v1_egohands' model and test with a still image.  I took a picture of my sons' hands along with his newly assembled LEGO car for testing.  The result looked good.  `camera_tf_trt-py` ran at ~24.5 fps in this case.
+Example #1: build TensorRT optimized 'ssd_mobilenet_v1_egohands' model and test with a still image.  I took a picture of my son's hands along with his newly assembled LEGO car for testing.  The result looked good.  `camera_tf_trt.py` ran at ~24.5 fps in this case.
 
 ```
 $ python3 camera_tf_trt.py --image \
