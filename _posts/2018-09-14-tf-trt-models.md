@@ -8,6 +8,8 @@ category: "tensorrt"
 tags: tensorrt tensorflow
 ---
 
+**2019-01-03 update:** I've updated the master branch of my forked [tf_trt_models](https://github.com/jkjung-avt/tf_trt_models) to match the latest code in NVIDIA's original repository.  And I've been testing it with tensorflow-1.12.0 on Jetson AGX Xavier lately.  The new code should mostly work on Jetson TX2 still.  If you want to access my previous code which was verified against tensorflow-1.8.0 on JTX2, you could check out my [tf-1.8](https://github.com/jkjung-avt/tf_trt_models/tree/tf-1.8) branch instead.
+
 Quick link: [jkjung-avt/tf_trt_models](https://github.com/jkjung-avt/tf_trt_models)
 
 I forked the code from [NVIDIA-Jetson/tf_trt_models](https://github.com/NVIDIA-Jetson/tf_trt_models) and developed a `camera_tf_trt.py` script which could do real-time object detection with TensorRT optimized models.
