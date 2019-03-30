@@ -63,7 +63,7 @@ Anyway, I managed to build and verify TensorFlow 1.8.0 on my Jetson TX2 flashed 
 
    ```
    $ cd ~/Downloads
-   $ wget https://github.com/tensorflow/tensorflow/archive/v1.8.0.tar.gzi -O tensorflow-1.8.0.tar.gz
+   $ wget https://github.com/tensorflow/tensorflow/archive/v1.8.0.tar.gz -O tensorflow-1.8.0.tar.gz
    $ cd ~/src
    $ tar xzvf ~/Downloads/tensorflow-1.8.0.tar.gz
    ``` 
