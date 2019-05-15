@@ -59,7 +59,7 @@ However, there are a couple of things I'd fix before moving on:
 
    At the next log-in, the environment variables should have been set up properly.
 
-2. Since memory (4GB) on the Jetson Nano is rather limited, I'd create and mount a swap file on the system.  I referenced [Create a Linux swap file](https://support.rackspace.com/how-to/create-a-linux-swap-file/) for that.  And I made a 8GB swap file on my Jetson Nano DevKit.  (You could adjust the size based on your own use cases.)
+2. Since memory (4GB) on the Jetson Nano is rather limited, I'd create and mount a swap file on the system.  I referenced [Create a Linux swap file](https://support.rackspace.com/how-to/create-a-linux-swap-file/) for that.  And I made a 8GB swap file on my Jetson Nano DevKit.  (You could adjust the swap file size based on your own needs.)
 
    ```shell
    $ sudo fallocate -l 8G /mnt/8GB.swap
@@ -73,4 +73,4 @@ However, there are a couple of things I'd fix before moving on:
    /mnt/8GB.swap  none  swap  sw 0  0
    ```
 
-   I think the swap space is necessary for my applications since I'd build/install OpenCV, Caffe, and TensorFlow on the platform.  Anyway, I'd leave those for later posts and end here for now.
+   I think the swap space is quite necessary for my applications since I'd build/install OpenCV, Caffe, and TensorFlow on the platform.  Excessive amount of memory would be required for building those packages.
