@@ -28,7 +28,7 @@ My primary use cases for Jetson Nano (and Jetsonn TX2):
 
 # Basic Set-up of Jetson Nano
 
-The Jetson Nano DevKit does not come with any eMMC (storage space).  The package does not include a power adapter either.  So you'll have to prepare a microSD card and a power adapter, as well as a set of keyboard/mouse/monitor, by yourself.  Refer to [Getting Started With Jetson Nano Developer Kit](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit) about how to download the image (zip file) and write it to the microSD card.
+The Jetson Nano DevKit does not come with any eMMC (storage space).  The package does not include a power adapter either.  So you'll have to prepare a microSD card and a power adapter, as well as a set of keyboard/mouse/monitor, by yourself.  Refer to [Getting Started With Jetson Nano Developer Kit](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit) about how to download the image (zip file) and write it to the microSD card.  Note: I found that I ran out of SD card space quickly when I used a 32GB microSD card.  So I suggest to use a microSD card of at least **64GB** in size.
 
 As of the time of this writing, the official image file for Jetson Nano is "jetson-nano-sd-r32.1-2019-03-18.zip".
 
