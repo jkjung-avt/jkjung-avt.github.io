@@ -28,6 +28,10 @@ I tried to explain my considerations about picking the version of OpenCV and its
    * [Double free issue of protobuf (due to protobuf code in opencv)](https://github.com/BVLC/caffe/issues/5282) would cause caffe to crash.
    * [TF-TRT (TensorFlow) might require a newer version of protobuf to work well.](https://devtalk.nvidia.com/default/topic/1046492/tensorrt/extremely-long-time-to-load-trt-optimized-frozen-tf-graphs/)  If I build opencv-3.4.6 with dependencies on the older version (3.0.0) of protobuf in Ubuntu 18.04, I'd likely run into trouble when trying to upgrade protobuf libraries later on.
 
+# Prerequisite
+
+Please go through the steps I described in [Setting up Jetson Nano: The Basics](https://jkjung-avt.github.io/setting-up-nano/).  I'd strongly suggest you to set up a swap file on the Jetson Nano DevKit since its memory is quite limited.
+
 # Building and Installing opencv-3.4.6
 
 Installing opencv-3.4.6 on Jetson Nano using my script is extremely simple.  I'd like to highlight a few things first:
@@ -91,7 +95,7 @@ $ wget https://gist.githubusercontent.com/jkjung-avt/86b60a7723b97da19f7bfa3cb7d
 $ python3 tegra-cam.py --usb --vid 0 --width 1280 --height 720
 ```
 
-And voila, I could see my Jetson Nano DevKit in the webcam image.
+And voila, the Jason Nano DevKit in action, running with the freshly built and installed opencv-3.4.6, and shot from the webcam.
 
 ![Jetson Nano in Action](/assets/2019-05-15-opencv-on-nano/nano_in_action.png)
 
