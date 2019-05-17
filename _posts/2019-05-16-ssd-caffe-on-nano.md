@@ -23,6 +23,8 @@ In this post, I'm documenting how I install and test SSD caffe on my Jetson Nano
 
 Please make sure you have opencv-3.x properly installed on the Jetson Nano DevKit.  For example, you could follow my [Installing OpenCV 3.4.6 on Jetson Nano](https://jkjung-avt.github.io/opencv-on-nano/) post and have opencv-3.4.6 installed by just executing a script I developed.  (Note that SSD caffe cannot be compiled against opencv-4.x.)
 
+In addition, as stated in my opencv-3.4.6 post, you should set up a swap file on the Jetson Nano to avoid out-of-memory issues during the build process.
+
 # Building and Installing SSD Caffe
 
 The script for building SSD caffe is in my GitHub 'jetson_nano' repository.  You could clone it from GitHub.
