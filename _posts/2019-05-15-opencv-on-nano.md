@@ -70,7 +70,7 @@ $ cd ${HOME}/project
 $ git clone https://github.com/jkjung-avt/jetson_nano.git
 ```
 
-I'd suggest to set Jetson Nano to Max-N mode (maximum performance mode) so the building process could be as short as possible.
+Then make sure Jetson Nano is in 10W (maximum) performance mode so the building process could finish as soon as possible.
 
 ```shell
 $ sudo nvpmodel -m 0
