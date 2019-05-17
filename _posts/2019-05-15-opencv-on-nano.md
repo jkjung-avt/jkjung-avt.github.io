@@ -77,14 +77,14 @@ $ sudo nvpmodel -m 0
 $ sudo jetson_clocks
 ```
 
-Then just execute the `install_opencv-3.4.6.sh` script.
+Then just execute the `install_opencv-3.4.6.sh` script.  Note the script would download and unzip opencv-3.4.6 source files into `${HOME}/src/opencv-3.4.6`, and build the code from there.
 
 ```
 $ cd ${HOME}/project/jetson_nano
 $ ./install_opencv-3.4.6.sh
 ```
 
-The building and installing process would take a couple of hours.  When done, you should see both python3 and python2 reporting the correct version number for 'cv2' module: 3.4.6.
+The building and installing process would take a couple of hours.  When done, you should see both python3 and python2 reporting the correct version number of 'cv2' module: `3.4.6`.
 
 # Testing opencv-3.4.6 with tegra-cam.py
 
