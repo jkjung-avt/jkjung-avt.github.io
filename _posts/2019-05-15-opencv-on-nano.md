@@ -30,19 +30,19 @@ I tried to explain my considerations about picking the version of OpenCV and its
 
 # Prerequisite
 
-Please go through the steps I described in [Setting up Jetson Nano: The Basics](https://jkjung-avt.github.io/setting-up-nano/).  I'd strongly suggest you to set up a swap file on the Jetson Nano DevKit since its memory is quite limited.
+Please go through the steps I described in [Setting up Jetson Nano: The Basics](https://jkjung-avt.github.io/setting-up-nano/).  I'd strongly suggest you to **set up a swap file** on the Jetson Nano DevKit since its memory is quite limited.
 
 # Building and Installing opencv-3.4.6
 
-Installing opencv-3.4.6 on Jetson Nano using my script is extremely simple.  I'd like to highlight a few things first:
+Installing opencv-3.4.6 on Jetson Nano using my script is straightforward.  But I'd like to highlight a few things first:
 
-* If you'd like to remove previously built and installed OpenCV libraries, just search all files with names containing 'opencv' or 'cv2' and delete all of them.  You can do such a search by the following command.
+* If you'd like to remove previously built and installed OpenCV libraries, just search all files with names containing 'opencv' or 'cv2' and delete all of them.  You can do such a search by using the `find` command.
 
   ```shell
   $ find /usr/local -name "*opencv*" -o "*cv2*"
   ```
 
-* If you'd like to modify some configuration and rebuild opencv-3.4.6, it's recommended to remove the whole `build` directory and then redo the `cmake`.  For example,
+* If you'd like to modify some configurations and rebuild opencv-3.4.6, it's recommended to remove the whole `build` directory and then redo the `cmake`.  For example,
 
   ```shell
   $ cd ${HOME}/src/opencv-3.4.6
@@ -59,7 +59,7 @@ Installing opencv-3.4.6 on Jetson Nano using my script is extremely simple.  I'd
   - Jetson TX2: `CUDA_ARCH_BIN="6.2"`
   - Jetson AGX Xavier: `CUDA_ARCH_BIN="7.2"`
 
-* During execution of the `install_opencv-3.4.6.sh` script, the sudo username/password would likely time out a few times.  You'll have to re-enter your password every time when prompted.  If this is an issue for you and you don't have security related concerns, you could [use visudo to set a longer timeout (or even no timeout) for sudo sessions](https://lifehacker.com/make-sudo-sessions-last-longer-in-linux-1221545774).
+* During execution of the `install_opencv-3.4.6.sh` script, the sudo username/password would likely time out a few times.  You'll have to re-enter your password every time when prompted.  If this is an issue for you and you don't have security related concerns, you could [use visudo to set a longer `timestamp_timeout` value (or set the value to `-1` for no timeout at all) for sudo sessions](https://lifehacker.com/make-sudo-sessions-last-longer-in-linux-1221545774).
 
 OK.  Here is the part about executing the script and building/installing opencv-3.4.6.
 
