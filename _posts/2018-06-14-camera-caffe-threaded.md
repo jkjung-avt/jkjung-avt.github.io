@@ -8,6 +8,8 @@ category: "opencv"
 tags: opencv caffe
 ---
 
+**2019-05-16 update:** I just added the [Installing and Testing SSD Caffe on Jetson Nano](https://jkjung-avt.github.io/ssd-caffe-on-nano/) post.  If you are testing SSD/caffe on a Jetson Nano, or on a Jetson TX2 / AGX Xavier with JetPack-4.2, do check out the new post.
+
 Quick link: [tegra-cam-caffe-threaded.py](https://gist.github.com/jkjung-avt/d408aaabebb5b0041c318f4518bd918f)
 
 A while ago, I wrote the post [Capture Camera Video and Do Caffe Inferencing with Python on Jetson TX2](https://jkjung-avt.github.io/tx2-camera-caffe/). I was subsequently [asked](https://jkjung-avt.github.io/tx2-camera-caffe/#comment-3933868200) whether I could post another example code to do camera capturing and caffe inferencing in 2 different threads. I did spend some time and develop an python script accordingly. As usual, I shared the code on my Gist repository (refer to the "quick link" above).
