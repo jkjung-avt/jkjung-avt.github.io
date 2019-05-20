@@ -54,7 +54,7 @@ Installing opencv-3.4.6 on Jetson Nano using my script is straightforward.  But 
   $ sudo make install
   ```
 
-* The `install_opencv-3.4.6.sh` script should work for Jetson TX2 or Jetson AGX Xavier (with JetPack-4.2) too.  Just remember to set 'CUDA_ARCH_BIN' (in the `cmake` command in the script) to the right value for the platform.
+* The `install_opencv-3.4.6.sh` script should work for **Jetson TX2** or **Jetson AGX Xavier** (with JetPack-4.2) too.  Just remember to **set 'CUDA_ARCH_BIN'** (in the `cmake` command in the script) to the right value for the platform.
 
   - Jetson TX2: `CUDA_ARCH_BIN="6.2"`
   - Jetson AGX Xavier: `CUDA_ARCH_BIN="7.2"`
