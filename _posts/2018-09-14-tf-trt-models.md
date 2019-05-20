@@ -4,9 +4,11 @@ comments: true
 title: "TensorFlow/TensorRT Models on Jetson TX2"
 excerpt: "NVIDIA released tf_trt_models sample code for both image classification and object detection a while ago.  I tested it and developed a real-time object detection script using TensorRT optimized TensorFlow models based on NVIDIA's code.  I'd like to share the demo script here."
 date: 2018-09-14
-category: "tensorrt"
-tags: tensorrt tensorflow
+category: "tx2"
+tags: tx2 tensorrt tensorflow
 ---
+
+**2019-05-20 update:** I just added the [Running TensorRT Optimized GoogLeNet on Jetson Nano](https://jkjung-avt.github.io/tensorrt-googlenet/) post.  It demonstrates how to use mostly python code to optimize a caffe model and run inferencing with TensorRT.  Although it's not for TensorFlow, I think it still serves as a great reference for people wanting to run TensorRT optimized models on the Jetson platforms.
 
 **2019-01-03 update:** I've updated the master branch of my forked [tf_trt_models](https://github.com/jkjung-avt/tf_trt_models) to match the latest code in NVIDIA's original repository.  And I've been testing it with tensorflow-1.12.0 on Jetson AGX Xavier lately.  The new code should mostly work on Jetson TX2 still.  If you want to access my previous code which was verified against tensorflow-1.8.0 on JTX2, you could check out my [tf-1.8](https://github.com/jkjung-avt/tf_trt_models/tree/tf-1.8) branch instead.
 

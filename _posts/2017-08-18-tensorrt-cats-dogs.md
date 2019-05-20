@@ -4,9 +4,11 @@ comments: true
 title: "Trying out TensorRT on Jetson TX2"
 excerpt: "As I was learning how to use TensorRT to achieve best inference performance on Jetson TX2, I used my previously trained cats-dogs Caffe model for experiment. The result was good, as expected."
 date: 2017-08-18
-category: "tensorrt"
-tags: tensorrt caffe
+category: "tx2"
+tags: tx2 tensorrt caffe
 ---
+
+**2019-05-20 update:** I just added the [Running TensorRT Optimized GoogLeNet on Jetson Nano](https://jkjung-avt.github.io/tensorrt-googlenet/) post.  It demonstrates how to use mostly python code to optimize a caffe model and run inferencing with TensorRT.
 
 NVIDIA provides a high-performance deep learning inference library named [TensorRT](https://developer.nvidia.com/tensorrt). It could be used to speed up deep learning inference (measured as frames per second) on Jetson TX2, comparing to say the origial caffe+cudnn, by a few times. At the time of this writing, TensorRT-2.1.2 is available for Jetson TX2, and is automatically installed with JetPack-3.1. Meanwhile, a latest version of the TensorRT documentation could be found at: [http://docs.nvidia.com/deeplearning/sdk/tensorrt-user-guide/index.html](http://docs.nvidia.com/deeplearning/sdk/tensorrt-user-guide/index.html)
 
