@@ -42,6 +42,8 @@ Installing opencv-3.4.6 on Jetson Nano using my script is straightforward.  But 
   $ find /usr/local -name "*opencv*" -o "*cv2*"
   ```
 
+  This is usually **not** necessary though.  When you re-build opencv and do `sudo make install`, the old files would just be replaced by the newly installed files and things would just work as expected.
+
 * If you'd like to modify some configurations and rebuild opencv-3.4.6, it's recommended to remove the whole `build` directory and then redo the `cmake`.  For example,
 
   ```shell
