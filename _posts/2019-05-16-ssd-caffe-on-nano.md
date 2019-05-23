@@ -45,6 +45,8 @@ $ sudo jetson_clocks
 
 Then execute the `install_ssd-caffe.sh` script.  Note the script would clone [SSD caffe](https://github.com/weiliu89/caffe/tree/ssd) source files into `${HOME}/project/ssd-caffe`, and build the code from there.
 
+During execution of the script, some of the steps (for example, installation of certain python3 modules) might take very long.  If sudo timeout is an issue for you, you could consider using `visudo` to set a longer `timestamp_timeout` value.  (Refer to my post [Installing OpenCV 3.4.6 on Jetson Nano](https://jkjung-avt.github.io/opencv-on-nano/) if needed.)
+
 ```
 $ cd ${HOME}/project/jetson_nano
 $ ./install_ssd-caffe.sh
