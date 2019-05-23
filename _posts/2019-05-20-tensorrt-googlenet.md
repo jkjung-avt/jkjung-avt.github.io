@@ -64,6 +64,15 @@ $ {HOME}/project/ssd-caffe/build/tools/caffe time --gpu 0 --model ${HOME}/projec
    | Inception V4 (299x299) |  PyTorch    |   NVIDIA   | 11 FPS |
    | GoogLeNet    (224x224) |  Caffe      |   JK Jung  | 60 FPS |
 
+6. I also tested this TensorRT GoogLeNet code on Jetson TX2.  Again, I tested inferencing using either caffe or TensorRT.  Comparing the TensorRT result on Jetson TX2 (140 FPS), Jetson Nano (60 FPS) did pretty OK in this case...
+
+   | Platform                 |  Inference with  |  Infer Time |  FPS  |
+   | :----------------------- | :--------------: | :---------: | :---: |
+   | Jetson TX2, JetPack-3.3  |  Caffe           |   27.7 ms   |   36  |
+   |                          |  TensorRT        |      7 ms   |  140  |
+   | Jetson Nano, JetPack-4.2 |  Caffe           |   52.0 ms   |   19  |
+   |                          |  TensorRT        |     16 ms   |   60  |
+
 # Closing Words
 
 I used to find NVIDIA's documentations and sample code for TensorRT not very easy to follow.  I was also a little bit frustrated that NVIDIA did not make TensoRT's Python API available for the Jetson platforms.  With this Cython approach, I am now able to harness the good CNN inferencing performance of the Jetson's.
