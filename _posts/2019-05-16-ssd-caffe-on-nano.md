@@ -54,6 +54,12 @@ $ ./install_ssd-caffe.sh
 
 The building process would take quite a while.  When it is done, you should see python3 reporting the version number of 'caffe' module: `1.0.0-rc3`.
 
+If you'd like to be able to `import caffe` within python3, you need to add caffe's python module path into python3's module search path.  For example, you could set the `PYTHONPATH` environment variable as follows.  (Or maybe put this line into your `~/.bashrc` so that it's done every time you log in.)
+
+```shell
+$ export PYTHONPATH=${HOME}/project/ssd-caffe/python
+```
+
 # First Benchmarking of Performance Against Jetson TX2
 
 As you might have noticed, I've put a `caffe time --gpu 0 --model ./models/bvlc_alexnet/deploy.prototxt` command towards the end of the installation script.  That serves as a simple test which gives us confidence the built `caffe` binary works properly.  In addition, we could compare the numbers against Jetson TX2.
