@@ -28,6 +28,8 @@ I tried to explain my considerations about picking the version of OpenCV and its
    * [Double free issue of protobuf (due to protobuf code in opencv)](https://github.com/BVLC/caffe/issues/5282) would cause caffe to crash.
    * [TF-TRT (TensorFlow) might require a newer version of protobuf to work well.](https://devtalk.nvidia.com/default/topic/1046492/tensorrt/extremely-long-time-to-load-trt-optimized-frozen-tf-graphs/)  If I build opencv-3.4.6 with dependencies on the older version (3.0.0) of protobuf in Ubuntu 18.04, I'd likely run into trouble when trying to upgrade protobuf libraries later on.
 
+4. I configured (`cmake`) my opencv-3.4.6 with `-D ENABLE_FAST_MATH=ON -D CUDA_FAST_MATH=ON` in the script.  With this, I'm actually trading floating-point computation precision for speed ([reference](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)).  That is, I don't care if opencv functions return images with pixel values offset by a few decimal points from the correct values.  I care more about fast computation or higher frame rate (FPS).  In case floating-point computation precision matters to your application, you should consider removing those FAST_MATH definitions in the `cmake` command.
+
 # Prerequisite
 
 Please go through the steps I described in [Setting up Jetson Nano: The Basics](https://jkjung-avt.github.io/setting-up-nano/).  I'd strongly suggest you to **set up a swap file** on the Jetson Nano DevKit since its memory is quite limited.
@@ -88,6 +90,8 @@ $ ./install_opencv-3.4.6.sh
 
 The building and installing process would take a couple of hours.  When done, you should see both python3 and python2 reporting the correct version number of 'cv2' module: `3.4.6`.
 
+Thanks to [mdegans](https://devtalk.nvidia.com/default/topic/1049972/jetson-nano/opencv-cuda-python-with-jetson-nano/post/5342206/#5342206), who pointed out there are built-in tests in opencv which we could use to verify the library we built on Jetson Nano.  I ran the test and [reviewed all failure cases](https://devtalk.nvidia.com/default/topic/1049972/jetson-nano/opencv-cuda-python-with-jetson-nano/post/5342609/#5342609).  Overall I think the opencv-3.4.6 library I built on Jetson Nano with the script is good.
+
 # Testing opencv-3.4.6 with tegra-cam.py
 
 I'd use my [tegra-cam.py](https://jkjung-avt.github.io/tx2-camera-with-python/) script to test my opencv-3.4.6 build.  Note that I use a USB webcam for the testing.  Just plug the USB webcam into one of the USB ports on Jetson Nano and:  (Adjust image width/height for the camera you're using if necessary)
@@ -100,4 +104,3 @@ $ python3 tegra-cam.py --usb --vid 0 --width 1280 --height 720
 And voila, the Jason Nano DevKit in action, running with the freshly built and installed opencv-3.4.6, and shot from the webcam.
 
 ![Jetson Nano in Action](/assets/2019-05-15-opencv-on-nano/nano_in_action.png)
-
