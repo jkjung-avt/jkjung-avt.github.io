@@ -134,6 +134,8 @@ $ python3 camera_tf_trt.py --file \
   ... E tensorflow/contrib/tensorrt/log/trt_logger.cc:38] DefaultLogger cudnnFusedConvActLayer.cpp (64) - Cuda Error in createFilterTextureFused: 11
   ```
 
+  **2019-05-24 update:**  Thanks to Dariusz, who provided his finding in Disqus below, I now have a solution to "extremely long model loading time problem" for the newer versions of tensorflow.  Please refer to my new blog post [TensorFlow/TensorRT (TF-TRT) Revisted](https://jkjung-avt.github.io/tf-trt-revisited/) for details.
+
 * Documentation in NVIDIA's original repository did ask users to install tensorflow-1.8.0.  When I switched to tensorflow-1.8.0, all the problems mentioned above were gone!  Since NVIDIA only officially provided tensorflow-1.8.0 pip wheel files for JetPack-3.2.1 (TensorRT 3.0 GA), I ended up [compiling tensorflow-1.8.0](https://jkjung-avt.github.io/build-tensorflow-1.8.0/) against JetPack-3.3 (TensorRT 4.0 GA) by myself.  I've shared the pip wheel file in the 'How to set up Jetson TX2 environment' section above.
 
 * When deploying 'ssd_inception_v2_coco' and 'ssd_mobilenet_v1_coco', it's highly desirable to **set `score_threshold` to 0.3 (or other sensible values) in the config file** ([reference](https://devtalk.nvidia.com/default/topic/1037019/jetson-tx2/tensorflow-object-detection-and-image-classification-accelerated-for-nvidia-jetson/post/5281630/#5281630)).  By doing that, the computations in NonMaximumSuppression were reduced a lot and the model ran much faster.  Testing with tensorflow-1.8.0 on my Jetson TX2, after I set the `score_threshold` to 0.3, the models indeed ran as fast as what NVIDIA has published!
