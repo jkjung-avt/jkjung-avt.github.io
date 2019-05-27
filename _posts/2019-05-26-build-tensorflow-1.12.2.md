@@ -24,6 +24,8 @@ I wrote a script for building and installing tensorflow-1.12.2 on Jetson Nano.  
 
 Setting up a swap file on Jetson Nano is essential, otherwise the tensorflow building process would likely fail due to out-of-memory.  You could refer to my [Setting up Jetson Nano: The Basics](https://jkjung-avt.github.io/setting-up-nano/) post for how to do that.
 
+I'm assuming that "pip3" is already properly installed on the Jetson Nano.  If you've followed my [Installing OpenCV 3.4.6 on Jetson Nano](https://jkjung-avt.github.io/opencv-on-nano/) and built/installed opencv-3.4.6 on the Jetson Nano, then you're good.  Otherwise, you could install pip3 on the system by doing either `wget https://bootstrap.pypa.io/get-pip.py; sudo python3 get-pip.py` or `sudo apt-get install -y python3-pip`.
+
 In case you are building/installing tensorflow on Jetson TX2 or another Jetson platform, it's still a good idea to use some swap.  In addition, you could adjust the `--local_resources` setting (since more RAM is available) in the installation script.
 
 # Step-by-Step

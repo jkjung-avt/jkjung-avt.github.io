@@ -8,6 +8,8 @@ category: "tensorflow"
 tags: tensorrt tensorflow
 ---
 
+**2019-05-26 update:** I wrote a script for building and installing tensorflow-1.12.2 on the Jetson's.  Please refer to my new blog post: [Building TensorFlow 1.12.2 on Jetson Nano](https://jkjung-avt.github.io/build-tensorflow-1.12.2/).
+
 I was testing TensorFlow/TensorRT (TF-TRT) models on Jetson TX2 and found the pre-built 1.9.0, 1.10.0, and 1.10.1 wheels provided by NVIDIA did not work too well (Reference: [TensorFlow/TensorRT Models on Jetson TX2](https://jkjung-avt.github.io/tf-trt-models/)).  My main TX2 sofwtare development environment was based on JetPack-3.3 (TensorRT 4.0 GA), and I didn't find a pre-built TensorFlow 1.8.0 pip wheel for it.  Thus, I decided to build TensorFlow 1.8.0 by myself.
 
 Although there were already quite a few guides on the internet about how to build TensorFlow on Jetson TX2, I still found it tricky to actualy build one for a recent release.  One obstacle was the versioning inter-dependency between bazel and TensorFlow.  The other nifty details lied in the `configure` and `bazel build` commands.
