@@ -78,7 +78,17 @@ In case you are building/installing tensorflow on Jetson TX2 or another Jetson p
    $ sudo python3 setup.py install --cpp_implementation
    ```
 
-7. Test.  (To be updated...)
+7. Test tensorflow-1.12.2 with 'tf_cnn_benchmarks.py'.  ([Reference](https://devtalk.nvidia.com/default/topic/1048776/jetson-nano/official-tensorflow-for-jetson-nano-/post/5335763/#5335763))
+
+   ```shell
+   $ cd ${HOME}/project
+   $ git clone https://github.com/tensorflow/benchmarks.git
+   $ cd benchmarks
+   $ git checkout cnn_tf_v1.12_compatible
+   $ python3 scripts/tf_cnn_benchmarks/tf_cnn_benchmarks.py --data_format=NHWC --device=gpu
+   ```
+
+   Just for reference, I got 'total images/sec: 1203.95' when I did the test on my Jetson Nano DevKit.
 
 # Additional notes
 
