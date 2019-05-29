@@ -76,7 +76,7 @@ Here are some additional notes about the problem and the solution.
 5. If your python3 protobuf module gets overwritten by another version by accident (for example, if you do `sudo pip3 install -U protobuf` unintentionally), you could install the "3.6.0 cpp implementation" back by doing `setup.py install` in the `protobuf-3.6.0` source directory again.
 
    ```shell
-   $ cd ${HOME}/src/protobuf-3.6.0
+   $ cd ${HOME}/src/protobuf-3.6.0/python
    $ sudo python3 setup.py install --cpp_implementation
    ```
 
