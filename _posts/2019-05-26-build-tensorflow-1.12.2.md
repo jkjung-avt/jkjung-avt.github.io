@@ -64,9 +64,21 @@ In case you are building/installing tensorflow on Jetson TX2 or another Jetson p
    $ ./install_tensorflow-1.12.2.sh
    ```
 
-   Note this script would take a very long time (>8 hours) to run.  Since bulding tensorflow requires a lot resources (memory & disk I/O), it is suggested all other applications (such as the web browser) and tasks terminated while tensorflow is being built.
+   Note this script would take a very long time (>12 hours) to run.  Since bulding tensorflow requires a lot resources (memory & disk I/O), it is suggested all other applications (such as the web browser) and tasks terminated while tensorflow is being built.
 
-6. Test.  (To be updated...)
+   During the bazel build process, the Jetson Nano system might appear locked-up from time to time.  Even worse, Ubuntu "System Program Problem Detected" message would pop up.  I checked the errors with `journalctl`.  They all appeared to be "page allocation stalls for XXX ms" or "watchdog timeout".  Anyway, the tensorflow-1.12.2 pip3 package would finally be built.  Based on my rough testing, it worked OK.
+
+   I plan to experiment different settings (--local_resources, etc.) and try  to find a better way to build the code.  I shall update the script and this blog post when I find a better setting.
+
+6. The 'pip3 install tensorflow' process would likely update python3 'protobuf' module to the latest version (which we do not want).  Assuming you've followed step 3 above and compiled/installed protobuf-3.6.0, you need to uninstall the newer version and re-install version 3.6.0 (cpp_implementation) of python 'protobuf' module again.
+
+   ```shell
+   $ sudo pip3 uninstall -y protobuf
+   $ cd ${HOME}/src/protobuf-3.6.0/python
+   $ sudo python3 setup.py install --cpp_implementation
+   ```
+
+7. Test.  (To be updated...)
 
 # Additional notes
 
