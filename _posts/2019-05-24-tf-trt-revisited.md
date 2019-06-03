@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "TensorFlow/TensorRT (TF-TRT) Revisted"
+title: "TensorFlow/TensorRT (TF-TRT) Revisited"
 excerpt: "I have a solution to the 'extremely long model loading time problem' of TF-TRT now!"
 date: 2019-05-24
 category: "tx2"
