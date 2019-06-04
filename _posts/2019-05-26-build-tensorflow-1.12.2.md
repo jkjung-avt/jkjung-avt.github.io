@@ -66,9 +66,7 @@ In case you are building/installing tensorflow on Jetson TX2 or another Jetson p
 
    Note this script would take a very long time (>12 hours) to run.  Since bulding tensorflow requires a lot resources (memory & disk I/O), it is suggested all other applications (such as the web browser) and tasks terminated while tensorflow is being built.
 
-   During the bazel build process, the Jetson Nano system might appear locked-up from time to time.  Even worse, Ubuntu "System Program Problem Detected" message would pop up.  I checked the errors with `journalctl`.  They all appeared to be "page allocation stalls for XXX ms" or "watchdog timeout".  Anyway, the tensorflow-1.12.2 pip3 package would finally be built.  Based on my rough testing, it worked OK.
-
-   I plan to experiment different settings (--local_resources, etc.) and try  to find a better way to build the code.  I shall update the script and this blog post when I find a better setting.
+   During the bazel build process, the Jetson Nano system might appear locked-up from time to time.  Even worse, Ubuntu "System Program Problem Detected" message would pop up.  I checked the errors with `journalctl`.  They all appeared to be "XXX timeout" events.  Anyway, the tensorflow-1.12.2 pip3 package would finally be built.  Based on my testing, it worked OK.
 
 6. The 'pip3 install tensorflow' process would likely update python3 'protobuf' module to the latest version (which we do not want).  Assuming you've followed step 3 above and compiled/installed protobuf-3.6.1, you need to uninstall the newer version and re-install version 3.6.1 (cpp_implementation) of python 'protobuf' module again.
 
@@ -98,10 +96,13 @@ In case you are building/installing tensorflow on Jetson TX2 or another Jetson p
 
 * I chose bazel version "0.15.2" for tensorflow-1.12.2 based on tensorflow's official documentation: [Tested build configurations](https://www.tensorflow.org/install/source#tested_build_configurations).
 
-* In case you encounter problem (e.g. out-of-memory or bazel crashing) when running the `install_tensorflow-1.12.2.sh`, you could try to set `--local_resources` ([reference](https://docs.bazel.build/versions/master/user-manual.html)) to lower values.  For example, replace `2560.0` with `2048.0` (MB of RAM used by bazel for building code).
+* In case you encounter problem (e.g. out-of-memory or bazel crashing) when running the `install_tensorflow-1.12.2.sh`, you could try to set `--local_resources` ([reference](https://docs.bazel.build/versions/master/user-manual.html)) to lower values.  For example, replace `2048.0` with `1536.0` (MB of RAM used by bazel for building code).
 
 * In the `install_tensorflow-1.12.2.sh` script, I enabled GPU, CUDNN and TENSORRT settings, while disabling most of the other features in tensorflow.  This is for reducing size of the compiled tensorflow binary and only enabling functionalities I do use.  You could refer to the environment variable settings (starting from the line `PYTHON_BIN_PATH`) in the script for details.  In case one of those disabled features matters to you, you could turn it on by just setting the environment variable to 1 (instead of 0).
 
-* In the `install_tensorflow-1.12.2.sh` script, I set `TF_CUDA_COMPUTE_CAPABILITIES` to `5.3,6.2,7.2`.  That covers all of Jetson Nano, TX1, TX2 and AGX Xavier.
+* In the `install_tensorflow-1.12.2.sh` script, I set `TF_CUDA_COMPUTE_CAPABILITIES` to either `5.3`, `6.2`, or `7.2`, depending on whether the script is invoked on a Jetson Nano, TX1, TX2 or AGX Xavier.  In case you'd like to build 1 tensorflow module which works on all Jetson platforms, you could hard code `TF_CUDA_COMPUTE_CAPABILITIES` setting to `5.3,6.2,7.2`.
 
-* In case you are not using JetPack-4.2 (for example, if you are on JetPack-3.3), you likely only need to adjust the following environment variables in the script for it to work: `TF_CUDA_VERSION`, `TF_TENSORRT_VERSION`.
+* If you are not using JetPack-4.2, you'd likely only need to adjust the following environment variables in the script: `TF_CUDA_VERSION`, `TF_TENSORRT_VERSION`.  For example,
+
+   - JetPack-3.3: `TF_CUDA_VERSION=9.0`, `TF_TENSORRT_VERSION=4`
+   - JetPack-3.2: `TF_CUDA_VERSION=9.0`, `TF_TENSORRT_VERSION=3`
