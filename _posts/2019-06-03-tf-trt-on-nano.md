@@ -45,16 +45,17 @@ I'm only highlighting the major steps here.  Please refer to my earlier posts as
 
 2. Set `MEASURE_MODEL_TIME = True` in the source code: [utils/od_utils.py](https://github.com/jkjung-avt/tf_trt_models/blob/master/utils/od_utils.py#L15)
 
-3. Copy over the trained 'egohands' models.  For example, I copied the tensorflow model checkpoint files from my training PC to Jetson Nano.
+3. Copy over the trained 'egohands' models.  For example, I copied the tensorflow model checkpoint files from my training PC to Jetson Nano.  (Replace account name and IP address with your own settings.)
 
    ```shell
-   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/ssd_mobilenet_v1_egohands/model.ckpt.20000.* data/ssd_mobilenet_v1_egohands/ 
-   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/ssdinception_v2_egohands/model.ckpt.20000.* data/ssd_inception_v2_egohands/ 
-   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/ssd_mobilenet_v2_egohands/model.ckpt.20000.* data/ssd_mobilenet_v2_egohands/ 
-   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/ssdlite_mobilenet_v2_egohands/model.ckpt.20000.* data/ssdlite_mobilenet_v2_egohands/ 
-   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/rfcn_resnet101_egohands/model.ckpt.20000.* data/rfcn_resnet101_egohands/ 
-   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/faster_rcnn_resnet50_egohands/model.ckpt.20000.* data/faster_rcnn_resnet50_egohands/ 
-   ### faster_rcnn_resnet101_egohands and faster_rcnn_inception_v2_egohands omitted
+   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/ssd_mobilenet_v1_egohands/model.ckpt-20000.* data/ssd_mobilenet_v1_egohands/ 
+   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/ssdinception_v2_egohands/model.ckpt-20000.* data/ssd_inception_v2_egohands/ 
+   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/ssd_mobilenet_v2_egohands/model.ckpt-20000.* data/ssd_mobilenet_v2_egohands/ 
+   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/ssdlite_mobilenet_v2_egohands/model.ckpt-20000.* data/ssdlite_mobilenet_v2_egohands/ 
+   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/rfcn_resnet101_egohands/model.ckpt-50000.* data/rfcn_resnet101_egohands/ 
+   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/faster_rcnn_resnet50_egohands/model.ckpt-50000.* data/faster_rcnn_resnet50_egohands/ 
+   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/faster_rcnn_resnet101_egohands/model.ckpt-50000.* data/faster_rcnn_resnet101_egohands/ 
+   $ scp jkjung@10.1.2.3:/home/jkjung/project/hand-detection-tutorial/faster_rcnn_inception_v2_egohands/model.ckpt-50000.* data/faster_rcnn_inception_v2_egohands/ 
    ```
 
 4. Set Jetson Nano to 10W mode before testing.
