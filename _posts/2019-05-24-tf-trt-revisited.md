@@ -9,7 +9,7 @@ tags: tx2 tensorrt tensorflow
 ---
 
 Quick links:
-1. [install_protobuf-3.6.0.sh](https://github.com/jkjung-avt/jetson_nano/blob/master/install_protobuf-3.6.0.sh)
+1. [install_protobuf-3.6.1.sh](https://github.com/jkjung-avt/jetson_nano/blob/master/install_protobuf-3.6.1.sh)
 2. [jkjung-avt/tf_trt_models](https://github.com/jkjung-avt/tf_trt_models)
 
 When I first tried out TensorRT integration in TensorFlow (TF-TRT) a few months ago, I encountered this "extremely long model loading time problem" with tensorflow versions 1.9, 1.10, 1.11 and 1.12.  This problem has since been reported multiple times on NVIDIA Developer Forum: for example, [here](https://devtalk.nvidia.com/default/topic/1037019/jetson-tx2/tensorflow-object-detection-and-image-classification-accelerated-for-nvidia-jetson/post/5281960/#5281960), [here](https://devtalk.nvidia.com/default/topic/1046492/tensorrt/extremely-long-time-to-load-trt-optimized-frozen-tf-graphs/), and [here](https://devtalk.nvidia.com/default/topic/1051546/optimizing-tf-trt-load-time/).  As a result, I was forced to use an older version of tensorflow which could suffer from incompatibility with models trained with newer version of tensorflow...
@@ -26,16 +26,16 @@ Thanks to [Dariusz](https://jkjung-avt.github.io/tf-trt-models/#comment-42901714
 
 Please check out the reference links above for more details about the problem and how a solution was found.  In short, I think root cause of the problem is: *the default 'python implementation' of python3 'protobuf' module runs too slowly on the Jetson platforms*.  And the solution is simply to *replace it with 'cpp implementaion' of that same module*.
 
-For that, I've written a script to automate all steps needed to update python3 'protobuf' module on your Jetson device (TX2 or else).  Just download and run the script.  Note that I picked version '3.6.0' of protobuf, because that's [the matching version](https://github.com/tensorflow/tensorflow/blob/r1.12/tensorflow/workspace.bzl#L383) in tensorflow-1.12 source code.  (Excuse me for putting this script in my 'jetson_nano' repository.  It does work for Jetson TX2.  It should work on other Jetson platforms too.)
+For that, I've written a script to automate all steps needed to update python3 'protobuf' module on your Jetson device (TX2 or else).  Just download and run the script.  Note that I picked version '3.6.1' of protobuf, because 3.6.x is [the matching version](https://github.com/tensorflow/tensorflow/blob/r1.12/tensorflow/workspace.bzl#L383) in tensorflow-1.12 source code.  (Excuse me for putting this script in my 'jetson_nano' repository.  It does work for Jetson TX2.  It should work on other Jetson platforms too.)
 
-Note the script would download and unzip protobuf-3.6.0 into `${HOME}/src/` directory.
+Note the script would download and unzip protobuf-3.6.1 into `${HOME}/src/` directory.
 
 ```shell
-$ wget https://raw.githubusercontent.com/jkjung-avt/jetson_nano/master/install_protobuf-3.6.0.sh
-$ ./install_protobuf-3.6.0.sh
+$ wget https://raw.githubusercontent.com/jkjung-avt/jetson_nano/master/install_protobuf-3.6.1.sh
+$ ./install_protobuf-3.6.1.sh
 ```
 
-The script would take a while to finish.  When done, you could do `pip3 show protobuf` to verify its version number is `3.6.0`.
+The script would take a while to finish.  When done, you could do `pip3 show protobuf` to verify its version number is `3.6.1`.
 
 Then, you could use either my [jkjung-avt/tf_trt_models](https://github.com/jkjung-avt/tf_trt_models) repository or NVIDIA's original tf_trt_models code to verify the result.  Refer to [my earlier post](https://jkjung-avt.github.io/tf-trt-models/) for details.
 
@@ -67,16 +67,16 @@ Here are some additional notes about the problem and the solution.
 
 1. Again, my guess about root cause of the problem is "inefficiency of python implementation of the protobuf module".  With the python code, it just takes very long to deserialize the trt pb file.  My solution is to use "C++ implementation (with Cython wrapper)" of the python3 protobuf module.
 
-2. Ubuntu Linux does provide pre-built libprotobuf as apt packages.  But they are rather old versions ('2.6.1' in Ubuntu 16.04 or '3.0.0' in Ubuntu 18.04).  You could verify the apt-installed libprotobuf by `apt --installed list | grep libprotobuf` or `which protoc; protoc --version`.  I chose libprotobuf-3.6.0 for the sake of compatibility with tensorflow-1.12.x.
+2. Ubuntu Linux does provide pre-built libprotobuf as apt packages.  But they are rather old versions ('2.6.1' in Ubuntu 16.04 or '3.0.0' in Ubuntu 18.04).  You could verify the apt-installed libprotobuf by `apt --installed list | grep libprotobuf` or `which protoc; protoc --version`.  I chose libprotobuf-3.6.1 for the sake of compatibility with tensorflow-1.12.x.
 
-3. Some other important apt packages in Ubuntu have dependencies on libprotobuf (the older version which gets installed by `sudo apt-get install`).  It is not easy to remove them all.  My approach is to keep the older libprotobuf apt package installed on the system, while installing the newly built libprotobuf-3.6.0 into `/use/local/lib`.  This way, the new libprotobuf would take precedence over the apt one when I build new code.  And I would not break dependencies for the other apt stuffs either.  (*I haven't encountered any problem so far with this approach.  But do be mindful that this might cause problems for things related to libprotobuf...*)
+3. Some other important apt packages in Ubuntu have dependencies on libprotobuf (the older version which gets installed by `sudo apt-get install`).  It is not easy to remove them all.  My approach is to keep the older libprotobuf apt package installed on the system, while installing the newly built libprotobuf-3.6.1 into `/use/local/lib`.  This way, the new libprotobuf would take precedence over the apt one when I build new code.  And I would not break dependencies for the other apt stuffs either.  (*I haven't encountered any problem so far with this approach.  But do be mindful that this might cause problems for things related to libprotobuf...*)
 
 4. Normally opencv libraries (when using the default GTK+ backend) would be linked to libprotobuf too.  That means opencv libraries might be broken if we switch version of libprotobuf.  Since I have [built my opencv-3.4.6 without dependencies on libprotobuf](https://jkjung-avt.github.io/opencv-on-nano/), I don't suffer from such a problem.
 
-5. If your python3 protobuf module gets overwritten by another version by accident (for example, if you do `sudo pip3 install -U protobuf` unintentionally), you could install the "3.6.0 cpp implementation" back by doing `setup.py install` in the `protobuf-3.6.0` source directory again.
+5. If your python3 protobuf module gets overwritten by another version by accident (for example, if you do `sudo pip3 install -U protobuf` unintentionally), you could install the "3.6.1 cpp implementation" back by doing `setup.py install` in the `protobuf-3.6.1` source directory again.
 
    ```shell
-   $ cd ${HOME}/src/protobuf-3.6.0/python
+   $ cd ${HOME}/src/protobuf-3.6.1/python
    $ sudo python3 setup.py install --cpp_implementation
    ```
 

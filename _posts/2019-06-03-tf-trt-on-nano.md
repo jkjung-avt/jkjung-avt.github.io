@@ -24,7 +24,7 @@ I tested TF-TRT object detection models on my Jetson Nano DevKit.  I also compar
 
 * Build and install opencv on the Jetson Nano.  Reference: [Installing OpenCV 3.4.6 on Jetson Nano](https://jkjung-avt.github.io/opencv-on-nano/)
 
-* **Important:** Install 'cpp_implementation of protobuf-3.6.0 for python3', so as to resolve the extremely long TF-TRT model loading time problem.  Reference: [TensorFlow/TensorRT (TF-TRT) Revisted](https://jkjung-avt.github.io/tf-trt-revisited/)
+* **Important:** Install 'cpp_implementation of protobuf-3.6.1 for python3', so as to resolve the extremely long TF-TRT model loading time problem.  Reference: [TensorFlow/TensorRT (TF-TRT) Revisted](https://jkjung-avt.github.io/tf-trt-revisited/)
 
 * Install a proper version of tensorflow.  I'm using tensorflow-1.12.2.  Reference: [Building TensorFlow 1.12.2 on Jetson Nano](https://jkjung-avt.github.io/build-tensorflow-1.12.2/)
 

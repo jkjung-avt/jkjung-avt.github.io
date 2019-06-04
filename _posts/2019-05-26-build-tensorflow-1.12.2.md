@@ -44,10 +44,10 @@ In case you are building/installing tensorflow on Jetson TX2 or another Jetson p
    $ cd jetson_nano
    ```
 
-3. (Optional, but highly recommended) Update libprotobuf (3.6.0).  [This solves the "extremely long model loading time problem" of TF-TRT](https://jkjung-avt.github.io/tf-trt-revisited/).
+3. (Optional, but highly recommended) Update libprotobuf (3.6.1).  [This solves the "extremely long model loading time problem" of TF-TRT](https://jkjung-avt.github.io/tf-trt-revisited/).
 
    ```shell
-   $ ./install_protobuf-3.6.0.sh
+   $ ./install_protobuf-3.6.1.sh
    ```
 
    This script takes 1 hour or so to finish on the Jetson Nano.
@@ -70,11 +70,11 @@ In case you are building/installing tensorflow on Jetson TX2 or another Jetson p
 
    I plan to experiment different settings (--local_resources, etc.) and try  to find a better way to build the code.  I shall update the script and this blog post when I find a better setting.
 
-6. The 'pip3 install tensorflow' process would likely update python3 'protobuf' module to the latest version (which we do not want).  Assuming you've followed step 3 above and compiled/installed protobuf-3.6.0, you need to uninstall the newer version and re-install version 3.6.0 (cpp_implementation) of python 'protobuf' module again.
+6. The 'pip3 install tensorflow' process would likely update python3 'protobuf' module to the latest version (which we do not want).  Assuming you've followed step 3 above and compiled/installed protobuf-3.6.1, you need to uninstall the newer version and re-install version 3.6.1 (cpp_implementation) of python 'protobuf' module again.
 
    ```shell
    $ sudo pip3 uninstall -y protobuf
-   $ cd ${HOME}/src/protobuf-3.6.0/python
+   $ cd ${HOME}/src/protobuf-3.6.1/python
    $ sudo python3 setup.py install --cpp_implementation
    ```
 
@@ -94,7 +94,7 @@ In case you are building/installing tensorflow on Jetson TX2 or another Jetson p
 
 * Thanks to [peterlee0127](https://github.com/peterlee0127/tensorflow-nvJetson) for publishing [tensorflow1.12.patch](https://github.com/peterlee0127/tensorflow-nvJetson/blob/master/patch/tensorflow1.12.patch).
 
-* I chose protobuf version "3.6.0" since that's [the matching version](https://github.com/tensorflow/tensorflow/blob/r1.12/tensorflow/workspace.bzl#L383) in tensorflow-1.12 source code.
+* I chose protobuf version "3.6.1" since 3.6.x is [the matching version](https://github.com/tensorflow/tensorflow/blob/r1.12/tensorflow/workspace.bzl#L383) in tensorflow-1.12 source code.
 
 * I chose bazel version "0.15.2" for tensorflow-1.12.2 based on tensorflow's official documentation: [Tested build configurations](https://www.tensorflow.org/install/source#tested_build_configurations).
 
