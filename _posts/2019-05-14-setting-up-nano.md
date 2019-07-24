@@ -30,7 +30,7 @@ My primary use cases for Jetson Nano (and Jetsonn TX2):
 
 The Jetson Nano DevKit does not come with any eMMC (storage space).  The package does not include a power adapter either.  So you'll have to prepare a microSD card and a power adapter, as well as a set of keyboard/mouse/monitor, by yourself.  Refer to [Getting Started With Jetson Nano Developer Kit](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit) about how to download the image (zip file) and write it to the microSD card.  Note: I found that I ran out of SD card space quickly when I used a 32GB microSD card.  So I suggest to use a microSD card of at least **64GB** in size.
 
-As of the time of this writing, the official image file for Jetson Nano is "jetson-nano-sd-r32.1-2019-03-18.zip".
+As of the time of this writing, the official image file for Jetson Nano is "jetson-nano-sd-r32.1-2019-03-18.zip".  (**EDIT**: I also tested the newer "jetson-nano-sd-r32.1.1-2019-05-31.zip" image and made sure all scripts in my [jkjung-avt/jetson_nano](https://github.com/jkjung-avt/jetson_nano) repository work OK.)
 
 I myself use a **DC (5V @ 4A) adapter** (note: not USB) to power the Jetson Nano.  According to the official [User Guide](https://developer.nvidia.com/embedded/dlc/jetson-nano-developer-kit-user-guide) (NVIDIA Developer account required), I need to put **a jumper on J48** to be able to power the Jetson Nano DevKit through the J25 power jack.  It took me quite a while to figure that out the first time around.  In addition, when working with the Jetson Nano DevKit, I noticed the board might not reboot properly if I power cycled it too quickly.  My suggestion is to completely **power down the board for at least 5 seconds**, before powering it up again.
 
