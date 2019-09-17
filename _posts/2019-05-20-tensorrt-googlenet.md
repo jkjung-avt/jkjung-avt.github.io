@@ -22,13 +22,13 @@ In this post, I'm demonstrating how I optimize the GoogLeNet (Inception-v1) caff
 
 # Running the Demo Code
 
-Please refer to README.md in my [jkjung-avt/tensorrt_demos](https://github.com/jkjung-avt/tensorrt_demos) repository for the steps to set up and run the `camera_trt_googlenet.py` program.  In short, you need to make sure you have TensorRT and OpenCV properly installed on the Jetson Nano, then you just clone the code from my GitHub repository and do a couple of `make`'s.
+Please refer to README.md in my [jkjung-avt/tensorrt_demos](https://github.com/jkjung-avt/tensorrt_demos) repository for the steps to set up and run the `trt_googlenet.py` program.  In short, you need to make sure you have TensorRT and OpenCV properly installed on the Jetson Nano, then you just clone the code from my GitHub repository and do a couple of `make`'s.
 
 When I tested it with a USB webcam (aiming at a picture shown on my Samsung tablet), I was able to see the picture classified correctly by the TensorRT GoogLeNet as: 1. 'golden retriever' (0.68), 2. 'Labrador retriever' (0.23), 3. 'Kavasz' (0.05).
 
 ```shell
 $ cd ${HOME}/project/tensorrt_demos
-$ python3 camera_trt_googlenet.py --usb --vid 0 --width 1280 --height 720
+$ python3 trt_googlenet.py --usb --vid 0 --width 1280 --height 720
 ```
 
 ![A golden retriever picture correctly classified by TensorRT GoogLeNet](https://raw.githubusercontent.com/jkjung-avt/tensorrt_demos/master/doc/golden_retriever.png)
@@ -48,7 +48,7 @@ $ {HOME}/project/ssd-caffe/build/tools/caffe time --gpu 0 --model ${HOME}/projec
 3. If you'd like to adapt my TensorRT GoogLeNet code to your own caffe classification model, you probably only need to make the following changes:
 
    * Make a copy of the `googlenet/` directory and rename it.  Replace the `deploy.prototxt` and `deploy.caffemodel` with your own model.  Also replace `synset_words.txt` so that the list of class names match your model.
-   * In `camera_trt_googlenet.py`, modify the following global variables:
+   * In `trt_googlenet.py`, modify the following global variables:
      - `DEPLOY_ENGINE`: name of the TensorRT engine file used for inferencing.
      - `ENGINE_SHAPE0`: shape of the input `data` blob; you need to modify it if your model is using a input tensor shape other than 3x224x224.
      - `ENGINE_SHAPE1`: shape of the output `prob` blob; you need to modify it ifoutput of your model is not 1,000 classes.
