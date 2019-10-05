@@ -70,3 +70,5 @@ I try to discuss the trickier parts of TensorRT MTCNN and some of my design deci
 5. For RNet and ONet, I need to decide a 'maximum batch size' when building the TensorRT engines.  If the value is set too large, the TensorRT engines might run too slowly.  But I cannot set a value which is too small, because it would limit the maximum number of faces the model could detect in the input image.  I end up using 256 and 64 as the max batch sizes for RNet and ONet respectively.  The values are hard-coded in both [create_engines.cpp](https://github.com/jkjung-avt/tensorrt_demos/blob/master/mtcnn/create_engines.cpp#L200) and [mtcnn.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/utils/mtcnn.py#L318).  As a result, my implementation would not be able to detect more than 64 faces in the input image.
 
 In addition to the above, there are still numerous details in the python code implementation of MTCNN.  I might talk about them in a later post...
+
+**Update:**  I've added a blog post about how I optimized the code and made TensorRT MTCNN run faster: [Optimizing TensorRT MTCNN](https://jkjung-avt.github.io/optimize-mtcnn/)

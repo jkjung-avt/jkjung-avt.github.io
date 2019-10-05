@@ -81,3 +81,7 @@ As always, I spent a lot of time developing this code.  I'm sharing it because I
 
 I plan to share some more TensorRT demo examples in my [jkjung-avt/tensorrt_demos](https://github.com/jkjung-avt/tensorrt_demos) repository later on.  So stay tuned...
 
+**Update:**  I've added 2 blog posts about TensorRT optimized MTCNN face detector.  Be sure to check them out.
+
+* [TensorRT MTCNN Face Detector](https://jkjung-avt.github.io/tensorrt-mtcnn/) 
+* [Optimizing TensorRT MTCNN](https://jkjung-avt.github.io/optimize-mtcnn/)
