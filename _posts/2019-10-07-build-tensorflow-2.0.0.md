@@ -28,10 +28,16 @@ Please refer to my previous TensorFlow 1.12.2 post.  The prerequisite is the sam
 1. Uninstall tensorboard and tensorflow if a previous version has been installed.
 
    ```shell
-   sudo pip3 uninstall -y tensorboard tensorflow
+   $ sudo pip3 uninstall -y tensorboard tensorflow
    ```
 
    It is also a good idea to clean up 'libprotobuf', the python 'protobuf' module and 'bazel' if you have installed some older versions previously.
+
+   ```shell
+   $ sudo rm /usr/local/lib/libproto*
+   $ sudo pip3 uninstall -y protobuf
+   $ sudo rm /usr/local/bin/bazel
+   ```
 
 2. Clone my 'jetson_nano' repository from GitHub, which contains all the scripts.
 
@@ -56,10 +62,10 @@ Please refer to my previous TensorFlow 1.12.2 post.  The prerequisite is the sam
    $ sudo pip3 install protobuf==3.8.0
    ```
 
-4. Install 'bazel' (0.24.1), the build tool for tensorflow.
+4. Install 'bazel' (0.26.1), the build tool for tensorflow.
 
    ```shell
-   $ ./install_bazel-0.24.1.sh
+   $ ./install_bazel-0.26.1.sh
    ```
    
 5. Build and install tensorflow-2.0.0 by executing the following script.  More specifically, this script would install requirements, download tensorflow-2.0.0 source, configure/build the code, build the pip3 wheel and install it on the system.
@@ -104,7 +110,7 @@ Please refer to my previous TensorFlow 1.12.2 post.  The prerequisite is the sam
 
 * I chose 'protobuf' version "3.8.0" since it is [the matching version](https://github.com/tensorflow/tensorflow/blob/r2.0/tensorflow/workspace.bzl#L420) in tensorflow-2.0 source code.
 
-* I chose 'bazel' version "0.24.1" for tensorflow-2.0.0 based on tensorflow's official documentation: [Tested build configurations](https://www.tensorflow.org/install/source#tested_build_configurations).
+* I chose 'bazel' version "0.26.1" for tensorflow-2.0.0 based on tensorflow's official documentation: [Tested build configurations](https://www.tensorflow.org/install/source#tested_build_configurations).
 
 * My previous notes about `--local_resources`, environment variable settings, `TF_CUDA_COMPUTE_CAPABILITIES` and `TF_TENSORRT_VERSION`, etc. still apply.  And I think my scripts would likely also work for Jetson TX1/TX2 and AGX Xavier.  Please refer to my TensorFlow 1.12.2 post for details.
 
