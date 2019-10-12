@@ -74,7 +74,7 @@ Please refer to my previous TensorFlow 1.12.2 post.  The prerequisite is the sam
    $ ./install_tensorflow-2.0.0.sh
    ```
 
-   Note this script would take a very long time (>12 hours) to run.  Since bulding tensorflow requires a lot resources (memory & disk I/O), it is suggested all other applications (such as the web browser) and tasks terminated while tensorflow is being built.
+   Note this script would take a very long time (~40 hours) to run.  Since bulding tensorflow requires a lot resources (memory & disk I/O), it is suggested all other applications (such as the web browser) and tasks terminated while tensorflow is being built.
 
    When the script finishes successfully, you'd see the following output:
 
