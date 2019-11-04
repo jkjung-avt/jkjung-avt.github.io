@@ -35,6 +35,7 @@ Please refer to my previous TensorFlow 1.12.2 post.  The prerequisite is the sam
 
    ```shell
    $ sudo rm /usr/local/lib/libproto*
+   $ sudo rm /usr/local/bin/protoc
    $ sudo pip3 uninstall -y protobuf
    $ sudo rm /usr/local/bin/bazel
    ```
