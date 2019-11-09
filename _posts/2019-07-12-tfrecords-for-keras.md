@@ -41,7 +41,7 @@ More specifically, I share the code I used to train Keras ImageNet (ILSVRC2012: 
 
    The script splits the training set (1,281,167 images) into 1,024 *shards*, and the validation set (50,000 images) into 128 *shards*.  When done, each *shard* file would contain roughly the same number of jpg files.  The image data in the shard files stays jpg encoded, otherwise the TFRecords files would take too much space.
 
-   Contents of the `${HOME}/ILSVRC2012/tfrecords/` directory:
+   When done, contents of my `${HOME}/data/ILSVRC2012/tfrecords/` directory are:
 
    ```
    train-00000-of-01024
@@ -56,7 +56,7 @@ More specifically, I share the code I used to train Keras ImageNet (ILSVRC2012: 
 
 # Reading TFRecords and creating randomly shuffled data while training
 
-   To be more precise, we would want to parallelize reading data from TFRecords files, randomize the data, and do data augmentation efficiently.  TensorFlow's [Data Input Pipeline Performance](https://www.tensorflow.org/guide/performance/datasets#input_pipeline_structure) documentation roughly describes how to do this.  However, I found the code samples in that document a little bit confusing.
+   To be more precise, we would want to parallelize the tasks of reading data from TFRecords files, randomizing the data, and data augmentation efficiently.  TensorFlow's [Data Input Pipeline Performance](https://www.tensorflow.org/guide/performance/datasets#input_pipeline_structure) documentation roughly describes how to do this.  However, I found the code samples in that document a little bit confusing.
 
    After some research, I found [mrry's suggestion on GitHub](https://github.com/tensorflow/tensorflow/issues/14857) most helpful of achieving what I'd like to do.  I ended up doing the following:
 
@@ -64,7 +64,7 @@ More specifically, I share the code I used to train Keras ImageNet (ILSVRC2012: 
    2. Next, `shuffle()` and `repeat()` the `shards` Dataset.  So `shards` would generate shard file names *in random order and indefinitely*.
    3. Feed and `interleave()` (randomize more) the `shards` Dataset into `tf.data.TFRecordsDataset`.  This results in a `TFRecordsDataset` which reads from shard files in random order.
    4. Shuffle the TFRecordsDataset so that the order of training images within a shard is randomized in each epoch.
-   5. Parse and deserialize the TFRecords, with 'prefetching'.  I set `num_parallel_calls` to 4 on my desktop.  You could adjust the value you want more parallel wrokers to do data generation.  And finally note that I implement jpg decoding and data augmentation in the deserialization function (`parse_fn_train`).
+   5. Parse and deserialize the TFRecords, with 'prefetching'.  I set `num_parallel_calls` to 4 on my desktop.  You could adjust the value you want more parallel wrokers to do data generation and augmentation.  And finally note that I implement jpg decoding and data augmentation in the deserialization function (`parse_fn_train`).
 
    You could find my full python code implementation [here](https://github.com/jkjung-avt/keras_imagenet/blob/master/utils/dataset.py#L119).
 
@@ -105,6 +105,6 @@ More specifically, I share the code I used to train Keras ImageNet (ILSVRC2012: 
 
 # Preliminary Results
 
-   To recap, I've explained how I use sharded TFRecords for efficient I/O on the disk, as well as how to use `tf.data.TFRecordDataset` to ingest training data when training the Keras CNN models.  I take advantage of tf.data's capabilities of processing data with multiple workers and shuffling/prefetching data on the fly.  Furthermore, I do online data augmentation when deserializing TFRecords.  This again takes advantage of multiple workers doing data fetching and processing in parallel.  I think I achieve very good data ingestion performance this way.
+   To recap, I've explained how I use sharded TFRecords for efficient I/O on the disk, as well as how to use `tf.data.TFRecordDataset` to ingest training data when training Keras CNN models.  I take advantage of tf.data's capabilities of processing data with multiple workers and shuffling/prefetching data on the fly.  Furthermore, I do online data augmentation when deserializing TFRecords.  This again takes advantage of multiple workers doing data fetching and processing in parallel.  I think I achieve very good data ingestion performance this way.
 
    I'm still in the process of training a Keras MobileNetv2 and a Keras ResNet50 models with the code.  I hope to share the results when the trainings are done.  Although I haven't done proper benchmarking, I'm pretty sure that using TFRecordsDataset (with 4 parallel data workers) speeds up the training quite a bit comparing to using original jpg files.
