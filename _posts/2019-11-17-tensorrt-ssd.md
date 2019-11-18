@@ -88,4 +88,6 @@ Same as my previous TensorRT demos, [GoogLeNet](https://jkjung-avt.github.io/ten
 
 3. When I tested the optimized 'ssd_mobilenet_v1_egohands' model with the 'Nonverbal Communication' YouTube video, the detection results did not look very accurate.  So I tested the same model with a few more images, including the previous photo of my son's hands.  Comparing the test results, the TensorRT optimized model seemed to perform similarly to the original tensorflow SSD model in this regard.  So I'm inclined to think that the bad result on the 'Nonverbal Communication' video was mostly due to *insufficient coverage of hands in different gestures and in different camera angles* of the original 'egohands' training dataset.  I might find time to do a more detailed study on 'how much accuracy (mAP) drop of the SSD model could be caused by the TensorRT's optimization (including FP16 approximation) process' later on.
 
-   ![JK son's hands detected by TensorRT optimized ssd_mobilenet_v1_egohands model]()
+   Here's a screenshot of UFF TensorRT optimized 'ssd_mobilenet_v1_egohands' model running on my Jetson Nano.  The detection result looked good.  And it ran at ~26 FPS, which is significantly faster than [TF-TRT](https://jkjung-avt.github.io/tf-trt-on-nano/)!
+
+   ![JK son's hands detected by TensorRT optimized ssd_mobilenet_v1_egohands model](/assets/2019-11-17-tensorrt-ssd/sons_hands.png)
