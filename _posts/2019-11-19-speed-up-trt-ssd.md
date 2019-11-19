@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Speeding up TensorRT UFF SSD"
+title: "Speeding Up TensorRT UFF SSD"
 excerpt: "I implemented video pipeline for the TensorRT UFF SSD demo program.  The resulting improvement on frames per second (FPS) is good."
 date: 2019-11-19
 category: "nano"
