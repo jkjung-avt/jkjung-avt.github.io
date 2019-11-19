@@ -91,3 +91,5 @@ Same as my previous TensorRT demos, [GoogLeNet](https://jkjung-avt.github.io/ten
    Here's a screenshot of UFF TensorRT optimized 'ssd_mobilenet_v1_egohands' model running on my Jetson Nano.  The detection result looked good.  And it ran at ~26 FPS, which is significantly faster than [TF-TRT](https://jkjung-avt.github.io/tf-trt-on-nano/)!
 
    ![JK son's hands detected by TensorRT optimized ssd_mobilenet_v1_egohands model](/assets/2019-11-17-tensorrt-ssd/sons_hands.png)
+
+Finally, I've written a new post about how I improved FPS performance of this TRT SSD demo by implementing video pipeline on it.  Be sure to take a look: [Speeding up TensorRT UFF SSD](https://jkjung-avt.github.io/speed-up-trt-ssd/
