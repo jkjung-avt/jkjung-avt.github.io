@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title: "Speeding up TensorRT UFF SSD"
-excerpt: "I implemented video pipelining for the TensorRT UFF SSD model demo program.  The resulting improvement on frames per second (FPS) is good."
+excerpt: "I implemented video pipeline for the TensorRT UFF SSD demo program.  The resulting improvement on frames per second (FPS) is good."
 date: 2019-11-19
 category: "nano"
 tags: jetson nano tensorrt
