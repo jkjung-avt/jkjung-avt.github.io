@@ -12,7 +12,7 @@ Quick link: [jkjung-avt/tensorrt_demos](https://github.com/jkjung-avt/tensorrt_d
 
 [![Hands detected](https://raw.githubusercontent.com/jkjung-avt/tensorrt_demos/master/doc/hands.png)](https://youtu.be/3ieN5BBdDF0)
 
-A few months ago, NVIDIA released this [AastaNV/TRT_object_detection](https://github.com/AastaNV/TRT_object_detection) sample code which presented some very compelling inference speed numbers for Single-Shot Multibox Detector (SSD) models.  (The following inference time numbers include memcpy and inference, but do not include image acquisition, pre-processing, post-processing and display.) 
+A few months ago, NVIDIA released this [AastaNV/TRT_object_detection](https://github.com/AastaNV/TRT_object_detection) sample code which presented some very compelling inference speed numbers for Single-Shot Multibox Detector (SSD) models.  (These inference time numbers include memcpy and inference, but do not include image acquisition, pre-processing, post-processing and display.) 
 
 |            Model             | Input Size | TRT Nano |
 |:-----------------------------|:----------:|:--------:|
