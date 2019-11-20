@@ -43,33 +43,35 @@ I already put 4 trained tensorflow SSD models in the `ssd/` directory: 'ssd_mobi
 
 # About 'build_engine.py'
 
-Applying TensorRT optimization onto trained tensorflow SSD models consists of 2 major steps.  The 1st major step is to convert the tensorflow model into a TensorRT 'engine'.  And the 2nd major step is to use the TensorRT 'engine' to do inferencing.  In this section, I'm going to discuss the conversion of TensorRT engine.
+Applying TensorRT optimization onto trained tensorflow SSD models consists of 2 major steps.  The 1st major step is to convert the tensorflow model into an optimized TensorRT 'engine'.  And the 2nd major step is to use the TensorRT 'engine' to do inferencing.  In this section, I'm going to discuss the conversion of TensorRT engine.
 
-In this trt_ssd demo, we start with a trained tensorflow SSD model in 'frozen inference graph (pb)' format.  We convert the pb file into UFF, an intermediate file format defined by TensorRT.  Then we let TensorRT run its optimization procedure and create the fastest 'engine' for the model on the target Jetson Nano/TX2 platform.
+In this trt_ssd demo, we start with trained tensorflow SSD models in 'frozen inference graph (pb)' format.  We convert the pb files into UFF, an intermediate file format defined by TensorRT.  Then we let TensorRT run its optimization procedure and create the fastest 'engine' for the model on the target Jetson Nano/TX2 platform.
 
-NVIDIA actually provides an executable program for converting a tensorflow pb file to uff: `/usr/lib/python3.?/dist-packages/uff/bin/convert_to_uff.py` on Jetson Nano/TX2.  For example, referring to [sampleUffSSD/README.md](https://github.com/NVIDIA/TensorRT/tree/release/6.0/samples/opensource/sampleUffSSD), you could do it by:
+> NOTE: The UFF converter library might have dependencies on certain version of tensorflow.  For example, the version number of UFF converter I tested on Jetson Nano was 0.6.3.  When it was executed, it printed out this message: "UFF has been tested with tensorflow 1.12.0. Other versions are not guaranteed to work."  I was actually using tensorflow 1.12.2, and it appeared to work OK.
+
+NVIDIA has provided an executable program for converting a tensorflow pb file to UFF: `/usr/lib/python3.?/dist-packages/uff/bin/convert_to_uff.py` on Jetson Nano/TX2.  For example, referring to [sampleUffSSD/README.md](https://github.com/NVIDIA/TensorRT/tree/release/6.0/samples/opensource/sampleUffSSD), you could do it by:
 
 ```shell
 $ python3 convert-to-uff.py frozen_inference_graph.pb -O NMS -p config.py
 ```
 
-I did not use that program, though.  I followed the 'TRT_object_detection' sample and integrated UFF conversion directly into my [build_engine.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/ssd/build_engine.py).
+I did not use `convert-to-uff.py` though.  I followed the 'TRT_object_detection' sample and integrated UFF conversion directly into my [build_engine.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/ssd/build_engine.py).
 
-The [build_engine.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/ssd/build_engine.py) implemented the following functionalities:
+In short, my [build_engine.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/ssd/build_engine.py) implemented the following functionalities:
 
 * Load the tensorflow frozen inference graph (pb) file with graphsurgeon's `DynamicGraph` API.
 * Replace/merge unsupported layers using TensorRT plugins, by calling graphsurgeon's `creat_plugin()` and `collapse_namespaces()` APIs.  Note that all required TensorRT plugins for SSD models have been provided by NVIDIA.  Most of them, such as 'GridAnchor_TRT' and 'NMS_TRT', are already installed alongside TensorRT 5.x libraries, while 'FlattenConcat_TRT' needs to be explicitly loaded from `libflattenconcat.so` using python 'ctypes'.
 * Save the resulting model as a `tmp_xxx.uff` file.  Also save a `tmp_xxx.pbtxt` file for debugging.
-* Create the TensorRT engine from UFF by calling the `build_cuda_engine()` API.  Note that this call would take a rather long time to finish.  During the process, TensorRT would print a lot of timing related messages.  My guess is that, with user-specified maximum batch size and limit on memory footprint (`max_workspace_size`), TensorRT tries to measure execution time of various CUDA kernels for a given layer in the graph/model and to find the most efficient (or simply, the fastest) one to put into the final engine.
-* Serialize (save) the optimized TensorRT engine/model as a `xxx.bin` file.
+* Create the TensorRT engine from UFF by calling the `build_cuda_engine()` API.  Note that this call would take a rather long time to finish.  During the process, TensorRT would print a lot of timing related messages.  My guess is that, with user-specified maximum batch size and limit on memory footprint (`max_workspace_size`), TensorRT tries out various CUDA kernels and measures execution times for a given layer in the graph/model, and find the most efficient (or simply, the fastest) one to put into the final engine.
+* Serialize (i.e. save) the optimized TensorRT engine/model as a `xxx.bin` file.
 
 # About 'trt_ssd.py'
 
-After the SSD model has been optimized and saved as a serialized TensorRT engine file, `trt_ssd.py` could directly load it into GPU memory for use without going through the optimization/timing step again.
+After an SSD model has been optimized and saved as a serialized TensorRT engine file, `trt_ssd.py` could directly load it into GPU memory for use without going through the optimization/timing step again.
 
-My `trt_ssd.py` implementation mostly just followed what has been done in NVIDIA's TRT_object_detection sample code.  I created a `TrtSSD` class to encapsulate the code that: (1) deserializes/loads the TensorRT engine, (2) manages CUDA memory buffers, (3) pre-processes the input image, runs inference and post-processes the detection output.  In the end, the `TrtSSD` class only needs to expose a `detect()` function, which I think makes the code easy to read and maintain.
+My `trt_ssd.py` implementation mostly just followed what has been done in NVIDIA's TRT_object_detection sample code.  I created a `TrtSSD` class to encapsulate the code that: (1) deserializes/loads the TensorRT engine, (2) manages CUDA memory buffers, (3) pre-processes input image, runs inference and post-processes detection output.  Aside from `__init__()`, the `TrtSSD` class only needs to expose a `detect()` function, which I think makes the code easy to read and maintain.
 
-Same as my previous TensorRT demos, [GoogLeNet](https://jkjung-avt.github.io/tensorrt-googlenet/) and [MTCNN](https://jkjung-avt.github.io/tensorrt-mtcnn/), I hooked up my camera/image input code with the `TrtSSD` inferencing code.  So I can easily test the TensorRT engines with files or camera inputs.  As I already stated in the GitHub README, the optimized 'ssd_mobilenet_v1_coco' (90 classes) model runs at 22.8 FPS on my Jetson Nano, which is really good.  And the optimized 'ssd_mobilenet_v1_egohands' (1 class) model runs even faster, at 27~28 FPS.
+Same as my previous TensorRT demos, [GoogLeNet](https://jkjung-avt.github.io/tensorrt-googlenet/) and [MTCNN](https://jkjung-avt.github.io/tensorrt-mtcnn/), I hooked up my camera/image input code with the `TrtSSD` inferencing code.  So I could easily test the TensorRT engines with files or camera inputs.  As I already stated in the GitHub README, the optimized 'ssd_mobilenet_v1_coco' (90 classes) model runs at 22.8 FPS on my Jetson Nano, which is really good.  And the optimized 'ssd_mobilenet_v1_egohands' (1 class) model runs even faster, at 27~28 FPS.
 
 # Additional Notes
 
@@ -86,7 +88,7 @@ Same as my previous TensorRT demos, [GoogLeNet](https://jkjung-avt.github.io/ten
 
    Then, you should be able to build the engine and do inferencing with `trt_ssd.py` for your own SSD model.
 
-3. When I tested the optimized 'ssd_mobilenet_v1_egohands' model with the 'Nonverbal Communication' YouTube video, the detection results did not look very accurate.  So I tested the same model with a few more images, including the previous photo of my son's hands.  Comparing the test results, the TensorRT optimized model seemed to perform similarly to the original tensorflow SSD model in this regard.  So I'm inclined to think that the bad result on the 'Nonverbal Communication' video was mostly due to *insufficient coverage of hands in different gestures and in different camera angles* of the original 'egohands' training dataset.  I might find time to do a more detailed study on 'how much accuracy (mAP) drop of the SSD model could be caused by the TensorRT's optimization (including FP16 approximation) process' later on.
+3. When I tested the optimized 'ssd_mobilenet_v1_egohands' model with the 'Nonverbal Communication' YouTube video, the detection results did not look very accurate.  So I tested the same model with a few more images, including the previous [photo of my son's hands](https://jkjung-avt.github.io/hand-detection-on-tx2/).  When I compared the test results, the TensorRT optimized model seemed to perform similarly to the original tensorflow SSD model in this regard.  So I'm inclined to think that the bad result on the 'Nonverbal Communication' video was mostly due to *insufficient coverage of hands in different gestures and in different camera angles* of the original 'egohands' training dataset.  I might find time to do a more detailed study on 'how much accuracy (mAP) drop of the SSD model could be caused by the TensorRT's optimization (including FP16 approximation) process' later on.
 
    Here's a screenshot of UFF TensorRT optimized 'ssd_mobilenet_v1_egohands' model running on my Jetson Nano.  The detection result looked good.  And it ran at ~26 FPS, which is significantly faster than [TF-TRT](https://jkjung-avt.github.io/tf-trt-on-nano/)!
 
