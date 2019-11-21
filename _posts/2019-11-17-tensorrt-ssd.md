@@ -61,7 +61,7 @@ In short, my [build_engine.py](https://github.com/jkjung-avt/tensorrt_demos/blob
 
 * Load the tensorflow frozen inference graph (pb) file with graphsurgeon's `DynamicGraph` API.
 * Replace/merge unsupported layers using TensorRT plugins, by calling graphsurgeon's `creat_plugin()` and `collapse_namespaces()` APIs.  Note that all required TensorRT plugins for SSD models have been provided by NVIDIA.  Most of them, such as 'GridAnchor_TRT' and 'NMS_TRT', are already installed alongside TensorRT 5.x libraries, while 'FlattenConcat_TRT' needs to be explicitly loaded from `libflattenconcat.so` using python 'ctypes'.
-* Save the resulting model as a `tmp_xxx.uff` file.  Also save a `tmp_xxx.pbtxt` file for debugging.
+* Save the resulting model as a `tmp_v?_xxxx.uff` file.  Also save a `tmp_v?_xxxx.pbtxt` file for debugging.
 * Create the TensorRT engine from UFF by calling the `build_cuda_engine()` API.  Note that this call would take a rather long time to finish.  During the process, TensorRT would print a lot of timing related messages.  My guess is that, with user-specified maximum batch size and limit on memory footprint (`max_workspace_size`), TensorRT tries out various CUDA kernels and measures execution times for a given layer in the graph/model, and find the most efficient (or simply, the fastest) one to put into the final engine.
 * Serialize (i.e. save) the optimized TensorRT engine/model as a `xxx.bin` file.
 
@@ -81,8 +81,9 @@ Same as my previous TensorRT demos, [GoogLeNet](https://jkjung-avt.github.io/ten
 
    * Export the trained model to a frozen inference graph (pb) file.  You could reference my [hand_detection_tutorial/export.sh](https://github.com/jkjung-avt/hand-detection-tutorial/blob/master/export.sh) for how to do that.
    * Add the new model into `MODEL_SPECS` in [build_engine.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/ssd/build_engine.py).
-   * Pay special attention to `input_order` in the previous step.  You could verify it by checking the `tmp_xxx.pbtxt` debug file.  Look at the 'NMS' node and verify the order of its 3 input tensors.
-   * TensorFlow Object Detection API changes its model namespaces or node names from version to version.  For example, namespace 'MultipleGridAnchorGenerator/Concatenate' in some earlier version has been simplified to just 'Concatenate' in later versions.  If `build_engine.py` (`builder.build_cuda_engine(network)`) throws out some ERROR and fails to generate the TRT engine for your model, I'd also suggest you to check out `tmp_xxx.pbtxt` to see what the error might be.
+   * Note that, when I trained my egohands models, I set `ssd_anchor_generator`'s `min_size` to 0.05 as an attempt to train the model to detect smaller objects (hands).  Refer to [this line in ssd_mobilenet_v2_egohands.config](https://github.com/jkjung-avt/hand-detection-tutorial/blob/master/configs/ssd_mobilenet_v2_egohands.config#L32) as an example.  If you have a different setting of `min_size` in the model config file, be sure to set the correct value in your own `MODEL_SPECS`.
+   * Also pay special attention to `input_order` in the previous 2 steps.  You could run `build_engine.py` once frist, then verify it by checking the generated `tmp_v?_xxxx.pbtxt` debug file.  More specifically, look at the 'NMS' node in the pbtxt file and verify the order of its 3 input tensors.
+   * TensorFlow Object Detection API changes its model namespaces or node names from version to version.  For example, namespace 'MultipleGridAnchorGenerator/Concatenate' in some earlier version has been simplified to just 'Concatenate' in later versions.  If `build_engine.py` (`builder.build_cuda_engine(network)`) throws out some ERROR and fails to generate the TRT engine for your model, I'd also suggest you to check out `tmp_v?_xxxx.pbtxt` to see what the error might be.
    * Add your custom classes list into [utils/ssd_classes.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/utils/ssd_classes.py).
    * Add your TensorRT engine into `SUPPORTED_MODELS` in [trt_ssd.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/trt_ssd.py).
 
