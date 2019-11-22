@@ -99,6 +99,8 @@ As a result of this "async" or video pipelining design, I'm able to bump up FPS 
 
 2. If we seek the highest throughput (FPS) of TRT SSD detection, we might go the extreme and "only do TensorRT engine inferencing in the child thread".  That is, we do all of input image acquisition, pre-processing and detection output post-processing in the main thread, and let the child thread focus on CUDA and TensorRT calls only.  However, I think that will make the code hard to read and maintain.  I choose not to do that.
 
-3. The same "async" or video pipelining trick could also be applied to my earlier TensorRT demo examples: "Demo #1: googlenet" and "Demo #2: mtcnn".  In fact, I've implemented [trt_googlenet_async.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/trt_googlenet_async.py) for Demo #1.  Check it out if you are interested.
+3. NVIDIA's original sample also has this comment in the code: [#TODO using pyCUDA for preprocess](https://github.com/AastaNV/TRT_object_detection/blob/master/main.py#L79).  It hinted that one more way to further optimize the code is to do image preprocessing with GPU/CUDA.  The preprocessing should include resizing (300x300), converting 'uint8' to 'float32', normalization and mean subtraction.
 
-4. Following up fro the previous point, we could actually improve throughput (FPS) of "Demo #2: mtcnn" even more by creating a more granular pipeline such as: input/preprocessing -> PNet -> RNet -> ONet -> output.  More on this later, probably...
+4. The same "async" or video pipelining trick could also be applied to my earlier TensorRT demo examples: "Demo #1: googlenet" and "Demo #2: mtcnn".  In fact, I've implemented [trt_googlenet_async.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/trt_googlenet_async.py) for Demo #1.  Check it out if you are interested.
+
+5. Following up fro the previous point, we could actually improve throughput (FPS) of "Demo #2: mtcnn" even more by creating a more granular pipeline such as: input/preprocessing -> PNet -> RNet -> ONet -> output.  More on that later, probably...
