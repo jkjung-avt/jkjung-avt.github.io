@@ -41,7 +41,7 @@ Installing opencv-3.4.6 on Jetson Nano using my script is straightforward.  But 
 * If you'd like to remove previously built and installed OpenCV libraries, just search all files with names containing 'opencv' or 'cv2' and delete all of them.  You can do such a search by using the `find` command.
 
   ```shell
-  $ find /usr/local -name "*opencv*" -o "*cv2*"
+  $ find /usr/local -name "*opencv*" -o -name "*cv2*"
   ```
 
   This is usually **not** necessary though.  When you re-build opencv and do `sudo make install`, the old files would just be replaced by the newly installed files and things would just work as expected.
