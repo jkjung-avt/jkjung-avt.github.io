@@ -18,6 +18,7 @@ More specifically, I share the code I used to train Keras ImageNet (ILSVRC2012: 
 
 * [Official TensorFlow guide on 'Importing Data'](https://www.tensorflow.org/guide/datasets)
 * [tf.data.TFRecordDataset](https://www.tensorflow.org/api_docs/python/tf/data/TFRecordDataset)
+* [Working with TFRecords and tf.train.Example](https://towardsdatascience.com/working-with-tfrecords-and-tf-train-example-36d111b3ff4d) -> This tutorial explains `tf.train.Example` very well.  I do recommned reading it.
 * [Data Input Pipeline Performance](https://www.tensorflow.org/guide/performance/datasets)
 * [how can I use Dataset to shuffle a large whole dataset?](https://github.com/tensorflow/tensorflow/issues/14857#issuecomment-347261151)
 * [Training and Serving ML models with tf.keras](https://medium.com/tensorflow/training-and-serving-ml-models-with-tf-keras-fd975cc0fa27)
