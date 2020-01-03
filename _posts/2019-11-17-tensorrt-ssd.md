@@ -20,7 +20,7 @@ A few months ago, NVIDIA released this [AastaNV/TRT_object_detection](https://gi
 | ssd_mobilenet_v1_coco        |   300x300  |   36ms   |
 | ssd_mobilenet_v2_coco        |   300x300  |   46ms   |
 
-I really wanted to test this out on my Jetson Nano/TX2 when I saw it at the 1st glance.  About a couple of weeks ago, I finally had the time to adapt the code and add it into my 'tensorrt_demos' repository.  I integrated my camera/video input module with this TRT_object_detection code, and created [Demo #3: ssd](https://github.com/jkjung-avt/tensorrt_demos#ssd).  I'd like to discuss some of the implementation details in this blog post.
+I really wanted to test this out on my Jetson Nano/TX2 when I saw it at the 1st glance.  About a couple of weeks ago, I finally had the time to adapt the code and add it into my 'tensorrt_demos' repository.  I integrated my camera/video input module with this TRT_object_detection code, and created [Demo #3: SSD](https://github.com/jkjung-avt/tensorrt_demos#ssd).  I'd like to discuss some of the implementation details in this blog post.
 
 # Reference
 
@@ -33,7 +33,7 @@ I really wanted to test this out on my Jetson Nano/TX2 when I saw it at the 1st 
 
 # How to Run the Demo
 
-For running the demo on Jetson Nano/TX2, please follow the step-by-step instructions in [Demo #3: ssd](https://github.com/jkjung-avt/tensorrt_demos#ssd).  The steps mainly include: installing requirements, converting trained SSD models to TensorRT engines, and running inference with the converted engines.
+For running the demo on Jetson Nano/TX2, please follow the step-by-step instructions in [Demo #3: SSD](https://github.com/jkjung-avt/tensorrt_demos#ssd).  The steps mainly include: installing requirements, converting trained SSD models to TensorRT engines, and running inference with the converted engines.
 
 Note that this demo relies on TensorRT's Python API, which is only available in TensorRT 5.0.x+ on Jetson Nano/TX2.  So you'll have to set up the Jetson Nano/TX2 with **JetPack-4.2+**.  To re-iterate, JetPack-3.x won't cut it.
 

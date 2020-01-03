@@ -24,7 +24,7 @@ Let me explain my implementation of video pipeline for the TensorRT UFF SSD demo
 
 Please follow my previous blog post, [TensorRT UFF SSD](https://jkjung-avt.github.io/tensorrt-ssd/).  Make sure to install all requirements and build the TensorRT engines for testing.
 
-Then, follow step 4 in [Demo #3: ssd](https://github.com/jkjung-avt/tensorrt_demos#ssd) and run `trt_ssd_async.py`.  For example,
+Then, follow step 4 in [Demo #3: Demo](https://github.com/jkjung-avt/tensorrt_demos#ssd) and run `trt_ssd_async.py`.  For example,
 
 ```shell
 $ cd ${HOME}/project/tensorrt_demos
@@ -101,6 +101,6 @@ As a result of this "async" or video pipelining design, I'm able to bump up FPS 
 
 3. NVIDIA's original sample also has this comment in the code: [#TODO using pyCUDA for preprocess](https://github.com/AastaNV/TRT_object_detection/blob/master/main.py#L79).  It hinted that one more way to further optimize the code is to do image preprocessing with GPU/CUDA.  The preprocessing should include resizing (300x300), converting 'uint8' to 'float32', normalization and mean subtraction.
 
-4. The same "async" or video pipelining trick could also be applied to my earlier TensorRT demo examples: "Demo #1: googlenet" and "Demo #2: mtcnn".  In fact, I've implemented [trt_googlenet_async.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/trt_googlenet_async.py) for Demo #1.  Check it out if you are interested.
+4. The same "async" or video pipelining trick could also be applied to my earlier TensorRT demo examples: "Demo #1: GoogLeNet" and "Demo #2: MTCNN".  In fact, I've implemented [trt_googlenet_async.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/trt_googlenet_async.py) for Demo #1.  Check it out if you are interested.
 
-5. Following up fro the previous point, we could actually improve throughput (FPS) of "Demo #2: mtcnn" even more by creating a more granular pipeline such as: input/preprocessing -> PNet -> RNet -> ONet -> output.  More on that later, probably...
+5. Following up fro the previous point, we could actually improve throughput (FPS) of "Demo #2: MTCNN" even more by creating a more granular pipeline such as: input/preprocessing -> PNet -> RNet -> ONet -> output.  More on that later, probably...
