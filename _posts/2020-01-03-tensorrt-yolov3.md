@@ -12,6 +12,8 @@ Quick link: [jkjung-avt/tensorrt_demos](https://github.com/jkjung-avt/tensorrt_d
 
 **2020-06-12 update:** Added the [TensorRT YOLOv3 For Custom Trained Models](https://jkjung-avt.github.io/trt-yolov3-custom/) post.
 
+**2020-07-18 update:** Added the [TensorRT YOLOv4](https://jkjung-avt.github.io/tensorrt-yolov4/) post.
+
 ![Dog, bicycle and truck detected](https://raw.githubusercontent.com/jkjung-avt/tensorrt_demos/master/doc/dog_trt_yolov3.png)
 
 I wrote a blog post about [YOLOv3 on Jetson TX2](https://jkjung-avt.github.io/yolov3/) quite a while ago.  As of today, YOLOv3 stays one of the most popular object detection model architectures.  Since NVIDIA already provided an [Object Detection With The ONNX TensorRT Backend In Python (YOLOv3)](https://docs.nvidia.com/deeplearning/sdk/tensorrt-sample-support-guide/index.html#yolov3_onnx) sample code, I just adapted the sample with my "tensorrt_demos" camera/video input code and created a real-time TensorRT YOLOv3 object detector demo: [Demo #4: YOLOv3](https://github.com/jkjung-avt/tensorrt_demos#yolov3).
