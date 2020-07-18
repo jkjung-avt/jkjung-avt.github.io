@@ -22,14 +22,14 @@ For example, if your custom trained YOLOv3 model is with only 1 category, you'd 
 
 ```
 ### Installation of "pycuda" and "onnx" (still required) omitted here
-$ cd ${HOME}/project/tensorrt_demos/yolov3_onnx
+$ cd ${HOME}/project/tensorrt_demos/yolo
 $ ./download_yolov3.sh
-$ python3 yolov3_to_onnx.py --model yolov3-416 --category_num 1
+$ python3 yolo_to_onnx.py --model yolov3-416 --category_num 1
 $ python3 onnx_to_tensorrt.py --model yolov3-416
 $ cd ${HOME}/project/tensorrt_demos
-$ python3 trt_yolov3.py --model yolov3-416 \
-                        --category_num 1 \
-                        --image --filename ${HOME}/Pictures/dog.jpg
+$ python3 trt_yolo.py --model yolov3-416 \
+                      --category_num 1 \
+                      --image --filename ${HOME}/Pictures/dog.jpg
 ```
 
 # YOLOv3 output shapes
@@ -40,18 +40,47 @@ First, check out this very nice article which explains the YOLOv3 architecture c
 
 ![YOLOv3 architecture](/assets/2020-06-12-trt-yolov3-custom/yolov3_architecture.jpg)
 
-In short, the YOLOv3 model outputs detection results in 3 scales.  The outputs are at layers #82, #94 and #106, with spatial dimensions of the original image height/width divided by 32, 16 and 8 respectively.  Furthermore, the number of channels in the outputs is (B * (4 + 1 + C)), where B is "number of anchor boxes per grid", 4 is "number of bounding box regression values", 1 is for "confidence score of objectness", and C is the "number of object categories".  For the COCO dataset with C=80 (object categories) and B=3 (anchor boxes per grid), the number of output channels per grid is thus (3 * (4 + 1 + 80)) = 255.
+In short, the YOLOv3 model outputs detection results in 3 scales.  The outputs are at layers #82, #94 and #106, with spatial dimensions of the original image height/width divided by 32, 16 and 8 respectively.  Furthermore, the number of channels in the outputs is (B * (4 + 1 + C)), where B is "number of anchor boxes per grid", 4 is "number of bounding box regression (x, y, w, h) values", 1 is for "confidence score of objectness", and C is the "number of object categories".  For the COCO dataset with C=80 (object categories) and B=3 (anchor boxes per grid), the number of output channels per grid is thus (3 * (4 + 1 + 80)) = 255.
 
 The above mentioned calculations are already implemented in the TensorRT YOLOv3 code, as shown below:
 
 * When building the TensorRT engine:
-    - calculating the number of output channels: [yolov3_onnx/yolov3_to_onnx.py, line #796](https://github.com/jkjung-avt/tensorrt_demos/blob/master/yolov3_onnx/yolov3_to_onnx.py#L796)
-    - applying spatial dimension divisors 32, 16 and 8: [yolov3_onnx/yolov3_to_onnx.py, line #802~804](https://github.com/jkjung-avt/tensorrt_demos/blob/master/yolov3_onnx/yolov3_to_onnx.py#L802)
-    - specifying layer numbers (082, 094, 106) of the outputs: [yolov3_onnx/yolov3_to_onnx.py, line #802~804](https://github.com/jkjung-avt/tensorrt_demos/blob/master/yolov3_onnx/yolov3_to_onnx.py#L802)
+    - calculating the number of output channels: [yolo/yolo_to_onnx.py, line #918](https://github.com/jkjung-avt/tensorrt_demos/blob/3fb15c908b155d5edc1bf098c6b8c31886cd8e8d/yolo/yolo_to_onnx.py#L918)
+    - applying spatial dimension divisors 32, 16 and 8: [yolo/yolo_to_onnx.py, line #928~930](https://github.com/jkjung-avt/tensorrt_demos/blob/3fb15c908b155d5edc1bf098c6b8c31886cd8e8d/yolo/yolo_to_onnx.py#L928)
+    - specifying layer numbers (082, 094, 106) of the outputs: also [yolo/yolo_to_onnx.py, line #928~930](https://github.com/jkjung-avt/tensorrt_demos/blob/3fb15c908b155d5edc1bf098c6b8c31886cd8e8d/yolo/yolo_to_onnx.py#L928)
+
+    ```
+        c = (args.category_num + 5) * 3
+        if 'yolov3' in args.model:
+            if 'tiny' in args.model:
+                output_tensor_dims['016_convolutional'] = [c, h // 32, w // 32]
+                output_tensor_dims['023_convolutional'] = [c, h // 16, w // 16]
+            elif 'spp' in args.model:
+                output_tensor_dims['089_convolutional'] = [c, h // 32, w // 32]
+                output_tensor_dims['101_convolutional'] = [c, h // 16, w // 16]
+                output_tensor_dims['113_convolutional'] = [c, h //  8, w //  8]
+            else:
+                output_tensor_dims['082_convolutional'] = [c, h // 32, w // 32]
+                output_tensor_dims['094_convolutional'] = [c, h // 16, w // 16]
+                output_tensor_dims['106_convolutional'] = [c, h //  8, w //  8]
+    ```
 
 * When doing inference with the TensorRT engine:
-    - calculating the number of output channels: [utils/yolov3.py, line #407](https://github.com/jkjung-avt/tensorrt_demos/blob/master/utils/yolov3.py#L407)
-    - applying spatial dimension divisors 32, 16 and 8: [utils/yolov3.py, line #412~414](https://github.com/jkjung-avt/tensorrt_demos/blob/master/utils/yolov3.py#L412)
+    - calculating the number of output channels: [utils/yolo.py, line #412](https://github.com/jkjung-avt/tensorrt_demos/blob/3fb15c908b155d5edc1bf098c6b8c31886cd8e8d/utils/yolo.py#L412)
+    - applying spatial dimension divisors 32, 16 and 8: [utils/yolov3.py, line #417~419](https://github.com/jkjung-avt/tensorrt_demos/blob/3fb15c908b155d5edc1bf098c6b8c31886cd8e8d/utils/yolo.py#L417)
+
+    ```
+        def _init_yolov3_postprocessor(self):
+            h, w = self.input_shape
+            filters = (self.category_num + 5) * 3
+            if 'tiny' in self.model:
+                self.output_shapes = [(1, filters, h // 32, w // 32),
+                                      (1, filters, h // 16, w // 16)]
+            else:
+                self.output_shapes = [(1, filters, h // 32, w // 32),
+                                      (1, filters, h // 16, w // 16),
+                                      (1, filters, h //  8, w //  8)]
+    ```
 
 # YOLOv3-Tiny models
 
