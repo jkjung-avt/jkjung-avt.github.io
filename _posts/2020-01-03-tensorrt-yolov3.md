@@ -64,7 +64,7 @@ NVIDIA's original sample code builds default (`FP32`) TensorRT engines.  I added
 
 # About "trt_yolo.py"
 
-My [trt_yolo.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/trt_yolo.py) is very similar to my previous TensorRT demo, [trt_ssd.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/trt_ssd.py).  I took the "preprocessing" and "postprocessing" code from NVIDIA's original "yolov3_onnx" sample and encapsulated them into the "TrtYOLOv3" class.  When run, the code would: (1) deserialize/load the TensorRT engine, (2) manage CUDA memory buffers using "pycuda", (3) preprocess input image, run inference and postprocess YOLOv3 detection output.  You could read [source code](https://github.com/jkjung-avt/tensorrt_demos/blob/master/utils/yolov3.py#L370) for details.
+My [trt_yolo.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/trt_yolo.py) is very similar to my previous TensorRT demo, [trt_ssd.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/trt_ssd.py).  I took the "preprocessing" and "postprocessing" code from NVIDIA's original "yolov3_onnx" sample and encapsulated them into the "TrtYOLO" class.  When run, the code would: (1) deserialize/load the TensorRT engine, (2) manage CUDA memory buffers using "pycuda", (3) preprocess input image, run inference and postprocess YOLOv3 detection output.  You could read [source code](https://github.com/jkjung-avt/tensorrt_demos/blob/master/utils/yolov3.py#L370) for details.
 
 I tested the TensorRT optimized "yolov3-416" model with the "dog.jpg" (with a dog, a bicycle and a truck) from the original YOLOv3 web site, and the model successfully detected all 3 target objects as expected.
 
