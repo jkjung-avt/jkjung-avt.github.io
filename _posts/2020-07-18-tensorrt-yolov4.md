@@ -144,8 +144,8 @@ In terms of frames per second (FPS):  Higher is better.  (Tested on my Jetson Na
 
 # Thoughts
 
-Previously, I thought YOLOv3 TensorRT engines does not run fast enough on Jetson Nano for real-time detection applications.  YOLOv4 TensorRT engines do not run any faster than YOLOv3 counterparts.  However, since mAP of YOLOv4 has been largely improved, we could trade off accuracy for inference speed more effectively.  For example, mAP of the "yolov4-288" TensorRT engine is comparable to that of "yolov3-608", while "yolov4-288" could run 3.3 times faster!!
+Previously, I thought YOLOv3 TensorRT engines do not run fast enough on Jetson Nano for real-time object detection applications.  Based on my test results, YOLOv4 TensorRT engines do not run any faster than YOLOv3 counterparts.  However, since mAP of YOLOv4 has been largely improved, we could trade off accuracy for inference speed more effectively.  For example, mAP of the "yolov4-288" TensorRT engine is comparable to that of "yolov3-608", while "yolov4-288" could run 3.3 times faster!!
 
-In addition, the yolov4/yolov3 architecture could support input image dimensions with different width and height.  And my TensorRT implementation also support that.  So, it is easy to customize a YOLOv4 model with, say, 416x288 input, based on the accuracy/speed requirements of the application.  (Note the input width and height of yolov4/yolov3 need to be multiples of 32.)
+In addition, the yolov4/yolov3 architecture could support input image dimensions with different width and height.  And my TensorRT implementation also supports that.  So, it is easy to customize a YOLOv4 model with, say, 416x288 input, based on the accuracy/speed requirements of the application.  (Note the input width and height of yolov4/yolov3 need to be multiples of 32.)
 
 Overall, I think YOLOv4 is a great object detector for edge applications.  I'm very thankful to the [authors](https://arxiv.org/abs/2004.10934): Alexey Bochkovskiy, Chien-Yao Wang, and Hong-Yuan Mark Liao, for their outstanding research work, as well as for sharing source code and trained weights of such a good practical model.
