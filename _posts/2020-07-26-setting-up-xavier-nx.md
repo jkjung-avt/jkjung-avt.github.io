@@ -45,7 +45,9 @@ $ sudo nvpmodel -m 2
 $ sudo jetson_clocks
 ```
 
-By the way, an alternative way to set Xavier NX power mode is to mouse-click power mode options on the top-right corner of the Ubuntu desktop.  (TODO: attaching a figure for reference.)
+By the way, an alternative way to set Xavier NX power mode is to mouse-click power mode options on the top-right corner of the Ubuntu desktop.
+
+![Xavier NX 15W 6CORE mode](/assets/2020-07-26-setting-up-xavier-nx/NX_15W_6CORE.png)
 
 # 2. Making sure python3 "cv2" is working
 
