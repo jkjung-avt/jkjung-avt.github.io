@@ -14,6 +14,23 @@ Quick link: [jkjung-avt/tensorrt_demos](https://github.com/jkjung-avt/tensorrt_d
 
 Ever since I published the [TensorRT ONNX YOLOv3](https://jkjung-avt.github.io/tensorrt-yolov3/) demo, I received quite a few questions regarding how to adapt the code to custom trained YOLOv3 models.  I figured that I'd update the code to make such requests easier.  So I did it.  Let me explain the relevant parts of the TensorRT YOLOv3 code in this post.
 
+# About naming of the custom trained model
+
+My tensorrt_demos code relies on cfg and weights file names (e.g. "yolov3-custom-416x256.cfg" and yolov3-custom-416x256.weights) to determine model type and the input image dimension.  Here are the naming rules:
+
+* Be sure to specify either "yolov3" or "yolov4" in the file names, i.e. model name.
+* Add "-tiny" or "-spp" if the model is one of those types.
+* It is OK to add some additional description in the model name.
+* Be sure to end the model name with an input "dimension".  The "dimension" should be first delineated by "-", followed by either 1 number (same "width" and "height") or 2 numbers separated by "x" ("width" x "height", in the illustrated order).
+
+Here are a few examples of accepted model names:
+
+* "yolov3-custom-416x256"
+* "yolov3-spp-1class-288"
+* "yolov4-tiny-multipersons-384x288"
+* "yolov4-512"
+* ......
+
 # How to run the updated TensorRT YOLOv3 code
 
 The pre-trained (downloaded) YOLOv3 models are for the [COCO dataset](http://cocodataset.org/#home) and would output 80 categories of objects.  However, a YOLOv3 model trained with custom datatset usuaully has a different number of object categories.  To cope with this, I've modified the TensorRT YOLOv3 code to take "--category_num" as a command-line option.
