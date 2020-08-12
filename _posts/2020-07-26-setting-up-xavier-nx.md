@@ -36,7 +36,7 @@ $ ./install_basics.sh
 $ source ${HOME}/.bashrc
 ```
 
-Note that a swap partition was already created by JetPack-4.4 on the Jetson Xavier NX DevKit, so I did not need to manually create another swap file.
+Note that a swap partition of 2GB was already created by JetPack-4.4 on the Jetson Xavier NX DevKit, so I did not need to manually create another swap file.
 
 I'd also set Jetson Xavier NX to "15W 6CORE" power mode with maximum CPU clock speeds, so that the following installation steps could run faster.
 
@@ -60,7 +60,7 @@ $ sudo apt-get install -y build-essential make cmake cmake-curses-gui \
                           git g++ pkg-config curl libfreetype6-dev \
                           libcanberra-gtk-module libcanberra-gtk3-module \
                           python3-dev python3-testresources python3-pip
-$ sudo pip3 install -U pip
+$ sudo pip3 install -U pip Cython
 $ cd ${HOME}/project/jetson_nano
 $ ./install_protobuf-3.8.0.sh
 $ sudo pip3 install numpy matplotlib
