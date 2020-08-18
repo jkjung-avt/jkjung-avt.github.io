@@ -14,7 +14,7 @@ Quick link: [jkjung-avt/tensorrt_demos](https://github.com/jkjung-avt/tensorrt_d
 
 **2020-07-18 update:** Added the [TensorRT YOLOv4](https://jkjung-avt.github.io/tensorrt-yolov4/) post.
 
-![Dog, bicycle and truck detected](https://raw.githubusercontent.com/jkjung-avt/tensorrt_demos/master/doc/dog_trt_yolov3.png)
+![Dog, bicycle and truck detected](https://raw.githubusercontent.com/jkjung-avt/tensorrt_demos/e136d0c8459fe8e94c41cec8d43a7e7499656950/doc/dog_trt_yolov3.png)
 
 I wrote a blog post about [YOLOv3 on Jetson TX2](https://jkjung-avt.github.io/yolov3/) quite a while ago.  As of today, YOLOv3 stays one of the most popular object detection model architectures.  Since NVIDIA already provided an [Object Detection With The ONNX TensorRT Backend In Python (YOLOv3)](https://docs.nvidia.com/deeplearning/sdk/tensorrt-sample-support-guide/index.html#yolov3_onnx) sample code, I just adapted the sample with my "tensorrt_demos" camera/video input code and created a real-time TensorRT YOLOv3 object detector demo: [Demo #4: YOLOv3](https://github.com/jkjung-avt/tensorrt_demos#yolov3).
 
@@ -40,7 +40,7 @@ After downloading darknet YOLOv3 and YOLOv3-Tiny models, you could choose one of
 
 # About "download_yolov3.py"
 
-The [download_yolov3.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/yolo/download_yolov3.sh) script would download trained YOLOv3 and YOLOv3-Tiny models (i.e. configs and weights) from the original [YOLO: Real-Time Object Detection](https://pjreddie.com/darknet/yolo/) site.  These models are in [darknet](https://github.com/pjreddie/darknet) format and provided by the original author of YOLO/YOLOv2/YOLOv3, Joseph Redmon.  Kudos to Jospeh!
+The [download_yolov3.py](https://github.com/jkjung-avt/tensorrt_demos/blob/e136d0c8459fe8e94c41cec8d43a7e7499656950/yolo/download_yolov3.sh) script would download trained YOLOv3 and YOLOv3-Tiny models (i.e. configs and weights) from the original [YOLO: Real-Time Object Detection](https://pjreddie.com/darknet/yolo/) site.  These models are in [darknet](https://github.com/pjreddie/darknet) format and provided by the original author of YOLO/YOLOv2/YOLOv3, Joseph Redmon.  Kudos to Jospeh!
 
 The downloaded YOLOv3 model is for 608x608 image input, while YOLOv3-Tiny for 416x416.  But we could convert them to take different input image sizes by just modifying the `width` and `height` in the .cfg files (NOTE: input image width/height would better be multiples of 32).  I already did that in the "download_yolov3.sh" script.  You could read the script for details.
 
@@ -52,11 +52,11 @@ First note this quote from the [official TensorRT Release Notes](https://docs.nv
 
 So going forward, using ONNX as the intermediate NN model format is definitely the way to go.
 
-My [yolo_to_onnx.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/yolo/yolo_to_onnx.py) is largely based on the original "yolov3_onnx" sample provided by NVIDIA.  NVIDIA's original code needed to be run with "python2".  I made necessary modifications so that it could be run with "python3".  In addition, I added code to handle different input image sizes (288x288, 416x416, or 608x608) as well as support of "yolov3-tiny-xxx" models.
+My [yolo_to_onnx.py](https://github.com/jkjung-avt/tensorrt_demos/blob/e136d0c8459fe8e94c41cec8d43a7e7499656950/yolo/yolo_to_onnx.py) is largely based on the original "yolov3_onnx" sample provided by NVIDIA.  NVIDIA's original code needed to be run with "python2".  I made necessary modifications so that it could be run with "python3".  In addition, I added code to handle different input image sizes (288x288, 416x416, or 608x608) as well as support of "yolov3-tiny-xxx" models.
 
 # About "onnx_to_tensorrt.py"
 
-The [onnx_to_tensorrt.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/yolo/onnx_to_tensorrt.py) is pretty straightforward.  It just calls standard TensorRT APIs to optimize the ONNX model to TensorRT engine and then save it to file.
+The [onnx_to_tensorrt.py](https://github.com/jkjung-avt/tensorrt_demos/blob/e136d0c8459fe8e94c41cec8d43a7e7499656950/yolo/onnx_to_tensorrt.py) is pretty straightforward.  It just calls standard TensorRT APIs to optimize the ONNX model to TensorRT engine and then save it to file.
 
 NVIDIA's original sample code builds default (`FP32`) TensorRT engines.  I added the following line of code so I'd be testing `FP16` (less memory consuming and faster) TensorRT engines instead.
 
@@ -66,7 +66,7 @@ NVIDIA's original sample code builds default (`FP32`) TensorRT engines.  I added
 
 # About "trt_yolo.py"
 
-My [trt_yolo.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/trt_yolo.py) is very similar to my previous TensorRT demo, [trt_ssd.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/trt_ssd.py).  I took the "preprocessing" and "postprocessing" code from NVIDIA's original "yolov3_onnx" sample and encapsulated them into the "TrtYOLO" class.  When run, the code would: (1) deserialize/load the TensorRT engine, (2) manage CUDA memory buffers using "pycuda", (3) preprocess input image, run inference and postprocess YOLOv3 detection output.  You could read [source code](https://github.com/jkjung-avt/tensorrt_demos/blob/master/utils/yolov3.py#L370) for details.
+My [trt_yolo.py](https://github.com/jkjung-avt/tensorrt_demos/blob/e136d0c8459fe8e94c41cec8d43a7e7499656950/trt_yolo.py) is very similar to my previous TensorRT demo, [trt_ssd.py](https://github.com/jkjung-avt/tensorrt_demos/blob/e136d0c8459fe8e94c41cec8d43a7e7499656950/trt_ssd.py).  I took the "preprocessing" and "postprocessing" code from NVIDIA's original "yolov3_onnx" sample and encapsulated them into the "TrtYOLO" class.  When run, the code would: (1) deserialize/load the TensorRT engine, (2) manage CUDA memory buffers using "pycuda", (3) preprocess input image, run inference and postprocess YOLOv3 detection output.  You could read [source code](https://github.com/jkjung-avt/tensorrt_demos/blob/e136d0c8459fe8e94c41cec8d43a7e7499656950/utils/yolo.py#L399) for details.
 
 I tested the TensorRT optimized "yolov3-416" model with the "dog.jpg" (with a dog, a bicycle and a truck) from the original YOLOv3 web site, and the model successfully detected all 3 target objects as expected.
 
