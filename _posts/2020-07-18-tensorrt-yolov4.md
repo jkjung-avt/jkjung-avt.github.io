@@ -28,15 +28,15 @@ Please note that you should use version "1.4.1" (not the latest version!) of pyt
 
 After downloading darknet YOLOv4 models, you could choose either "yolov4-288", "yolov4-416", or "yolov4-608" for testing.  I recommend starting with "yolov4-416".
 
-# About "download_yolov4.py"
+# About "download_yolo.py"
 
-The [download_yolov4.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/yolo/download_yolov4.sh) script would download trained YOLOv4 models (i.e. cfg and weights) from the original [AlexeyAB/darknet](https://github.com/AlexeyAB/darknet) site.  It also takes care of modifications of the `width` and `height` values (288/416/608) in the cfg files.
+The [download_yolo.py](https://github.com/jkjung-avt/tensorrt_demos/blob/master/yolo/download_yolov4.sh) script would download pre-trained yolov3 and yolov4 models (i.e. cfg and weights) from the original [AlexeyAB/darknet](https://github.com/AlexeyAB/darknet) site.  It also takes care of modifications of the `width` and `height` values (288/416/608) in the cfg files.
 
 # About "yolo_to_onnx.py", "onnx_to_tensorrt.py", and "trt_yolo.py"
 
 I modified the code so that it could support both YOLOv3 and YOLOv4 now.
 
-I also verified mean average precision (mAP, i.e. detection accuracy) of the optimized YOLOv4 TensorRT engines.  I summarized the results in the table in step 5 of [Demo #5: YOLOv4](https://github.com/jkjung-avt/tensorrt_demos#yolov4).
+I also verified mean average precision (mAP, i.e. detection accuracy) of the optimized TensorRT yolov4 engines.  I summarized the results in the table in step 5 of [Demo #5: YOLOv4](https://github.com/jkjung-avt/tensorrt_demos#yolov4).
 
 # TensorRT 7 vs. Darknet
 
@@ -44,9 +44,9 @@ Previously, I [tested the "yolov4-416" model with Darknet on Jetson Nano with Je
 
 * Using Darknet compiled with "GPU=1", "CUDNN=1" and "CUDNN_HALF=1", the "yolov4-416" model inference speed is: **1.1 FPS**.
 
-* Using TensorRT 7 optimized FP16 engine with my "tensorrt_demos" python implementation, the "yolov4-416" engine inference speed is: **3.5 FPS**.
+* Using TensorRT 7 optimized FP16 engine with my "tensorrt_demos" python implementation, the "yolov4-416" engine inference speed is: **4.62 FPS**.
 
-So, the TensorRT engine runs at **~3.2 times** the speed of the orignal Darknet model in this case.
+So, the TensorRT engine runs at **~4.2 times** the speed of the orignal Darknet model in this case.
 
 # YOLOv4 vs. YOLOv3
 
@@ -56,17 +56,17 @@ In terms of mAP @ IoU=0.5:0.95:  Higher is better.  (Tested on my x86_64 PC with
 
    | Input Dimension | mAP of YOLOv3 | mAP of YOLOv4 |
    |:---------------:|:-------------:|:-------------:|
-   |     288x288     |     0.331     |     0.372     |
-   |     416x416     |     0.373     |     0.454     |
-   |     608x608     |     0.376     |     0.484     |
+   |     288x288     |     0.331     |     0.371     |
+   |     416x416     |     0.373     |     0.453     |
+   |     608x608     |     0.376     |     0.483     |
 
 In terms of frames per second (FPS):  Higher is better.  (Tested on my Jetson Nano DevKit with JetPack-4.4 and TensorRT 7, in MAXN mode and highest CPU/GPU clock speeds.)
 
    | Input Dimension | FPS of YOLOv3 | FPS of YOLOv4 |
    |:---------------:|:-------------:|:-------------:|
-   |     288x288     |      6.35     |      6.18     |
-   |     416x416     |      3.76     |      3.50     |
-   |     608x608     |      1.89     |      1.77     |
+   |     288x288     |      8.16     |      7.93     |
+   |     416x416     |      4.82     |      4.62     |
+   |     608x608     |      2.49     |      2.35     |
 
 # Major code modifications since YOLOv3
 
