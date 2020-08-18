@@ -30,16 +30,16 @@ Please refer to README.md in my [jkjung-avt/tensorrt_demos](https://github.com/j
 $ cd ${HOME}/project/tensorrt_demos
 #
 ### Using an image file for testing
-$ python3 trt_mtcnn.py --image --filename ${HOME}/Pictures/avengers.jpg
+$ python3 trt_mtcnn.py --image ${HOME}/Pictures/avengers.jpg
 #
 ### Using a video file
-$ python3 trt_mtcnn.py --file --filename test_video.mp4
+$ python3 trt_mtcnn.py --video test_video.mp4
 #
 ### Using a USB webcam
-$ python3 trt_mtcnn.py --usb --vid 0 --width 1280 --height 720
+$ python3 trt_mtcnn.py --usb 0 --width 1280 --height 720
 #
 ### Using an IP CAM (RTSP stream)
-$ python3 trt_mtcnn.py --rtsp --uri rtsp://admin:123456@192.168.1.1/live.sdp
+$ python3 trt_mtcnn.py --rtsp rtsp://admin:123456@192.168.1.64/live.sdp
 ```
 
 # Discussions

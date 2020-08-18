@@ -55,8 +55,8 @@ $ make
 $ ./create_engines
 $ cd ..
 $ make
-$ python3 -m cProfile -s cumtime trt_mtcnn.py \
-          --image --filename ${HOME}/Pictures/avengers.jpg
+$ python3 -m cProfile -s cumtime \
+          trt_mtcnn.py --image ${HOME}/Pictures/avengers.jpg
 ```
 
 I let the program run for about 1 minute and collected the result.
@@ -110,8 +110,8 @@ More specifically, I computed the vertical offsets for stacking all scaled-down 
 I tested the new implementation.  The result was 30~40% improvement.  And I ran the profiler for roughly 1 minute again.
 
 ```shell
-$ python3 -m cProfile -s cumtime trt_mtcnn.py \
-          --image --filename ${HOME}/Pictures/avengers.jpg
+$ python3 -m cProfile -s cumtime \
+          trt_mtcnn.py --image ${HOME}/Pictures/avengers.jpg
 ```
 
 Comparing how much percentage of time the program spent in `TrtPNet.detect()`, I could see that it improved from 65% to 48.3%.  (p.s. 39.749 / 61.164 = 56%, 29.279 / 60.611 = 48.3%)  Although this function still took a lot of time to run, it was indeed much improved.

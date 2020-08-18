@@ -42,17 +42,16 @@ For example, if your custom trained YOLOv3 model is with only 1 category, you'd 
 ```
 ### Installation of "pycuda" and "onnx" (still required) omitted here
 $ cd ${HOME}/project/tensorrt_demos/yolo
-$ python3 yolo_to_onnx.py --model yolov3-custom-416 --category_num 1
-$ python3 onnx_to_tensorrt.py --model yolov3-custom-416
+$ python3 yolo_to_onnx.py -m yolov3-custom-416 --category_num 1
+$ python3 onnx_to_tensorrt.py -m yolov3-custom-416 --category_num 1
 $ cd ${HOME}/project/tensorrt_demos
-$ python3 trt_yolo.py --model yolov3-custom-416 \
-                      --category_num 1 \
-                      --image --filename for_testing.jpg
+$ python3 trt_yolo.py --image for_testing.jpg \
+                      -m yolov3-custom-416 --category_num 1
 ```
 
 # YOLOv3 output shapes
 
-For people who want to learn the underlying details of "--category_num" and the related source code, please read on.
+For those of you who want to learn the underlying details of "--category_num" and the related source code, please read on.
 
 First, check out this very nice article which explains the YOLOv3 architecture clearly: [What’s new in YOLO v3?](https://towardsdatascience.com/yolo-v3-object-detection-53fb7d3bfe6b)  Shown below is the picture from the article, courtesy of the author, Ayoosh Kathuria.
 

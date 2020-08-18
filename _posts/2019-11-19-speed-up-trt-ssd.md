@@ -28,9 +28,8 @@ Then, follow step 4 in [Demo #3: Demo](https://github.com/jkjung-avt/tensorrt_de
 
 ```shell
 $ cd ${HOME}/project/tensorrt_demos
-$ python3 trt_ssd_async.py --model ssd_mobilenet_v1_coco \
-                           --image \
-                           --filename ${HOME}/project/tf_trt_models/examples/detection/data/huskies.jpg
+$ python3 trt_ssd_async.py --image ${HOME}/project/tf_trt_models/examples/detection/data/huskies.jpg \
+                           --model ssd_mobilenet_v1_coco
 ```
 
 Observe that FPS number would hover around 25~26 when the code runs on Jetson Nano.

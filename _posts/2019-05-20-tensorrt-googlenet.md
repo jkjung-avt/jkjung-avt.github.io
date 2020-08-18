@@ -28,7 +28,7 @@ When I tested it with a USB webcam (aiming at a picture shown on my Samsung tabl
 
 ```shell
 $ cd ${HOME}/project/tensorrt_demos
-$ python3 trt_googlenet.py --usb --vid 0 --width 1280 --height 720
+$ python3 trt_googlenet.py --usb 0 --width 1280 --height 720
 ```
 
 ![A golden retriever picture correctly classified by TensorRT GoogLeNet](https://raw.githubusercontent.com/jkjung-avt/tensorrt_demos/master/doc/golden_retriever.png)

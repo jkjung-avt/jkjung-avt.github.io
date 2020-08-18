@@ -119,8 +119,8 @@ Test the TensorRT SSD models.
 
 ```shell
 $ cd ${HOME}/project/tensorrt_demos
-$ python3 trt_ssd_async.py --model ssd_mobilenet_v1_coco --usb --vid 0
-$ python3 trt_ssd_async.py --model ssd_mobilenet_v2_coco --usb --vid 0
+$ python3 trt_ssd_async.py --usb 0 --model ssd_mobilenet_v1_coco
+$ python3 trt_ssd_async.py --usb 0 --model ssd_mobilenet_v2_coco
 ```
 
 # 6. Testing TensorRT YOLOv3 and YOLOv4 models
@@ -132,17 +132,17 @@ Reference: [Demo #4: YOLOv3](https://github.com/jkjung-avt/tensorrt_demos#demo-4
 $ sudo pip3 install onnx==1.4.1
 $ cd ${HOME}/project/tensorrt_demos/yolo_onnx
 $ ./download_yolov3.sh
-$ python3 yolo_to_onnx.py --model yolov3-416
-$ python3 onnx_to_tensorrt.py --model yolov3-416
+$ python3 yolo_to_onnx.py -m yolov3-416
+$ python3 onnx_to_tensorrt.py -m yolov3-416
 $ ./download_yolov4.sh
-$ python3 yolo_to_onnx.py --model yolov4-416
-$ python3 onnx_to_tensorrt.py --model yolov4-416
+$ python3 yolo_to_onnx.py -m yolov4-416
+$ python3 onnx_to_tensorrt.py -m yolov4-416
 ```
 
 Test the TensorRT YOLOv3 (416x416) and YOLOv4 (416x416) models.
 
 ```shell
 $ cd ${HOME}/project/tensorrt_demos
-$ python3 trt_yolo.py --model yolov3-416 --usb --vid 0
-$ python3 trt_yolo.py --model yolov4-416 --usb --vid 0
+$ python3 trt_yolo.py --usb 0 -m yolov3-416
+$ python3 trt_yolo.py --usb 0 -m yolov4-416
 ```
