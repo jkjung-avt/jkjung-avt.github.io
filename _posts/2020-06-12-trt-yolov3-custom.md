@@ -10,7 +10,7 @@ tags: tensorrt
 
 Quick link: [jkjung-avt/tensorrt_demos](https://github.com/jkjung-avt/tensorrt_demos)
 
-**2020-07-18 update:** The descriptions in this post also apply to [TensorRT YOLOv4](https://jkjung-avt.github.io/tensorrt-yolov4/) models.  My latest code on GitHub should support custom "yolov3", "yolov3-spp", "yolov3-tiny", and "yolov4" models which follow the original design of the corresponsing darknet models.
+**2020-07-18 update:** The descriptions in this post also apply to [TensorRT YOLOv4](https://jkjung-avt.github.io/tensorrt-yolov4/) models.  My latest code on GitHub should support custom "yolov3-tiny", "yolov3", "yolov3-spp", "yolov4-tiny", and "yolov4" models which follow the original design of the corresponsing darknet models.
 
 Ever since I published the [TensorRT ONNX YOLOv3](https://jkjung-avt.github.io/tensorrt-yolov3/) demo, I received quite a few questions regarding how to adapt the code to custom trained YOLOv3 models.  I figured that I'd update the code to make such requests easier.  So I did it.  Let me explain the relevant parts of the TensorRT YOLOv3 code in this post.
 
