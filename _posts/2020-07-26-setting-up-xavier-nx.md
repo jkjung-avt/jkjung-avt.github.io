@@ -131,10 +131,9 @@ Reference: [Demo #4: YOLOv3](https://github.com/jkjung-avt/tensorrt_demos#demo-4
 ### Install dependencies and build TensorRT engine
 $ sudo pip3 install onnx==1.4.1
 $ cd ${HOME}/project/tensorrt_demos/yolo_onnx
-$ ./download_yolov3.sh
+$ ./download_yolo.sh
 $ python3 yolo_to_onnx.py -m yolov3-416
 $ python3 onnx_to_tensorrt.py -m yolov3-416
-$ ./download_yolov4.sh
 $ python3 yolo_to_onnx.py -m yolov4-416
 $ python3 onnx_to_tensorrt.py -m yolov4-416
 ```
