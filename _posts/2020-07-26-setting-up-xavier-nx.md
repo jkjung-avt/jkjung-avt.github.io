@@ -63,7 +63,7 @@ $ sudo apt-get install -y build-essential make cmake cmake-curses-gui \
 $ sudo pip3 install -U pip Cython
 $ cd ${HOME}/project/jetson_nano
 $ ./install_protobuf-3.8.0.sh
-$ sudo pip3 install numpy matplotlib
+$ sudo pip3 install numpy matplotlib==3.2.2
 ```
 
 Then I'd test my [tegra-cam.py](https://gist.github.com/jkjung-avt/86b60a7723b97da19f7bfa3cb7d2690e) script with a USB webcam, and make sure the python3 "cv2" module could capture and display images properly.
@@ -133,9 +133,9 @@ $ sudo pip3 install onnx==1.4.1
 $ cd ${HOME}/project/tensorrt_demos/yolo_onnx
 $ ./download_yolo.sh
 $ python3 yolo_to_onnx.py -m yolov3-416
-$ python3 onnx_to_tensorrt.py -m yolov3-416
+$ python3 onnx_to_tensorrt.py -v -m yolov3-416
 $ python3 yolo_to_onnx.py -m yolov4-416
-$ python3 onnx_to_tensorrt.py -m yolov4-416
+$ python3 onnx_to_tensorrt.py -v -m yolov4-416
 ```
 
 Test the TensorRT YOLOv3 (416x416) and YOLOv4 (416x416) models.
