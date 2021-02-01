@@ -55,15 +55,15 @@ I'd just use the built-in OpenCV-4.1.1 in JetPack-4.4 (no need to build from sou
 
 ```shell
 ### Install dependencies for python3 "cv2"
-$ sudo apt-get update
-$ sudo apt-get install -y build-essential make cmake cmake-curses-gui \
-                          git g++ pkg-config curl libfreetype6-dev \
-                          libcanberra-gtk-module libcanberra-gtk3-module \
-                          python3-dev python3-testresources python3-pip
-$ sudo pip3 install -U pip Cython
+$ sudo apt update
+$ sudo apt install -y build-essential make cmake cmake-curses-gui \
+                      git g++ pkg-config curl libfreetype6-dev \
+                      libcanberra-gtk-module libcanberra-gtk3-module \
+                      python3-dev python3-pip
+$ sudo pip3 install -U pip==20.2.1 Cython testresources setuptools
 $ cd ${HOME}/project/jetson_nano
 $ ./install_protobuf-3.8.0.sh
-$ sudo pip3 install numpy matplotlib==3.2.2
+$ sudo pip3 install numpy==1.16.1 matplotlib==3.2.2
 ```
 
 Then I'd test my [tegra-cam.py](https://gist.github.com/jkjung-avt/86b60a7723b97da19f7bfa3cb7d2690e) script with a USB webcam, and make sure the python3 "cv2" module could capture and display images properly.
@@ -84,13 +84,11 @@ At the time of this writing, NVIDIA has provided pip wheel files for both tensor
 To install tensorflow, I just followed instructions on the official documentation, but skipped installation of "protobuf".  (I already built and installed "protobuf-3.8.0" in the opencv section.)  These steps would take roughly 20~30 minutes to finish.
 
 ```shell
-$ sudo apt-get install -y libhdf5-serial-dev hdf5-tools libhdf5-dev \
-                          zlib1g-dev zip libjpeg8-dev liblapack-dev \
-                          libblas-dev gfortran
-$ sudo pip3 install -U pip testresources setuptools
-$ sudo pip3 install -U numpy==1.16.1 future mock h5py \
-                       keras_preprocessing keras_applications \
-                       gast futures pybind11
+$ sudo apt install -y libhdf5-serial-dev hdf5-tools libhdf5-dev zlib1g-dev \
+                      zip libjpeg8-dev liblapack-dev libblas-dev gfortran
+$ sudo pip3 install -U numpy==1.16.1 future==0.18.2 mock==3.0.5 h5py==2.10.0 \
+                       keras_preprocessing==1.1.1 keras_applications==1.0.8 \
+                       gast==0.2.2 protobuf pybind11
 $ sudo pip3 install --pre --extra-index-url \
                     https://developer.download.nvidia.com/compute/redist/jp/v44 \
                     tensorflow==1.15.2
