@@ -8,7 +8,7 @@ category: "mining"
 tags: mining gpu
 ---
 
-![Ethereum price in the past 6 months](/asset/2021-05-14-mining-eth/eth-price-2021-05-14.png)
+![Ethereum price in the past 6 months](/assets/2021-05-14-mining-eth/eth-price-2021-05-14.jpg)
 
 I have a couple of deep learning PCs at home, and they get idle (when I'm not training deep learning models) from time to time.  Meanwhile, valuation of cryptocurrencies has appreciated a lot in the past year.  It has become pretty profitable to do cryto mining with GPUs recently.  So I decide to do some mining with my spare PCs (with NVIDIA GPUs).  In this post, I'm sharing how you could set up your deep learning PCs to mine [Ethereum](https://en.wikipedia.org/wiki/Ethereum) (ETH).
 
@@ -54,7 +54,7 @@ And yet one additional note.  It is essential to fine-tune "overclocking" settin
    * [PhoenixMiner](https://bitcointalk.org/index.php?topic=2647654.0)
    * [downloads page](https://phoenixminer.info/downloads/)
 
-   Just untar the file, and then you are ready to use it.  There is documentation in the "doc/" subdirectory.  Otherwise, you could also refer to [online documentation](https://phoenixminer.org/documentation/Introduction/) or this YouTube video: [How To Use Phoenixminer | Step-by-step Guide](https://youtu.be/6K0tgwEuMYI).
+   Just untar the file, and then you are ready to use it.  There is documentation in the "doc/" subdirectory.  Otherwise, you could also refer to [online documentation](https://phoenixminer.org/documentation/Introduction/) or this YouTube video: [How To Use Phoenixminer : Step-by-step Guide](https://youtu.be/6K0tgwEuMYI).
 
 5. Create the script for mining.
 
@@ -97,13 +97,15 @@ And yet one additional note.  It is essential to fine-tune "overclocking" settin
 
    It would take a couple of minutes for PhoenixMiner to find the best mining algorithm/strategy.  After that, you should see stable mining outputs from the miner.  I get 56~57 MH/s for RTX 2080 Ti with the mentioned set-up.
 
-6. Mining progress could be monitored from ethermine.org web page (or whatever mining pool you are using).  Just enter your ETH wallet address in the "Miner Address" field on the page.
+6. GPU status could be monitored with either `nvidia-smi` or `nvtop`.  You should pay attention to power consumption and temperature of the GPU.
+
+7. Mining progress could be monitored from ethermine.org web page (or whatever mining pool you are using).  Just enter your ETH wallet address in the "Miner Address" field on the page.
 
    **TO-DO:  Add a screenshot here.**
 
    In addition to miner status, you should be able to check "Payout" schedule as well.  Take my set-up as an example, if I have only 1 RTX 2080 Ti PC mining 24-hour non-stop, it would take ~16 days for me to get a payout of roughly 0.05 Ethereum (fees would be deducted).  You could check out ethermine.org's Payout Policy [here](https://ethpool.freshdesk.com/support/solutions/articles/8000060967-ethermine-org-payout-policy).
 
-7. To stop mining, I'd just hit Ctrl-C to quit PhoenixMiner and reboot the PC to restore GPU to default clock settings.  Then I could use the PC to train deep learning models as usual.
+8. To stop mining, I'd just hit Ctrl-C to quit PhoenixMiner and reboot the PC to restore GPU to default clock settings.  Then I could use the PC to train deep learning models as usual.
 
 # Reference
 
