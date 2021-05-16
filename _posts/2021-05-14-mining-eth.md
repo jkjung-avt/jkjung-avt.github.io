@@ -108,11 +108,13 @@ And here's yet one additional note.  It is essential to fine-tune "overclocking"
 
    ![nvtop and PhoenixMiner logs](/assets/2021-05-14-mining-eth/nvtop.jpg)
 
-7. Mining progress could be monitored from [ethermine.org](https://ethermine.org/) web page (or whatever mining pool you are using).  Just enter your ETH wallet address in the "Miner Address" field on the page.
+7. Your actual mining progress could be monitored on [ethermine.org](https://ethermine.org/) web page (or whatever mining pool you are using).  Just enter your ETH wallet address in the "Miner Address" field on the page.  You should see something like the following after you've mined for a while.
 
-   **TO-DO:  Add a screenshot of ethermine.org mining status here.**
+   Below is an example snapshot of my ethermine.org dashboard.  I have set up 2 workers (2 PCs), "home0" and "home1", to do ETH mining.  The "home0" worker is the RTX 2080 Ti PC.  It reports a hashrate of 56.9 MH/s, while ethermine.org observes 62.0 MH/s from it.
 
-   In addition to miner status, you should be able to check "Payout" schedule as well.  Take my set-up as an example, if I have only 1 RTX 2080 Ti PC mining 24-hour non-stop, it would take ~16 days for me to get a payout of roughly 0.05 Ethereum (with fees deducted).  You could check out ethermine.org's Payout Policy [here](https://ethpool.freshdesk.com/support/solutions/articles/8000060967-ethermine-org-payout-policy).
+   ![ethermine.org dashboard](/assets/2021-05-14-mining-eth/ethermine-dashboard.jpg)
+
+   In addition to miner status, you should be able to check "Payout" schedule as well.  Take my set-up as an example, if I have only 1 RTX 2080 Ti PC mining 24-hour non-stop, it would take ~16 days for me to get a payout of roughly 0.05 Ethereum coin (with fees deducted).  You could check out ethermine.org's Payout Policy [here](https://ethpool.freshdesk.com/support/solutions/articles/8000060967-ethermine-org-payout-policy).
 
 8. To stop mining, I'd just hit Ctrl-C to quit PhoenixMiner and reboot the PC to restore GPU to default clock settings.  Then I could use the PC to train deep learning models as usual.
 
