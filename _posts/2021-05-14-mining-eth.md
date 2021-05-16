@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Mining Ethereum on My Deep Learning PC"
+title: "Mining Ethereum on A Deep Learning PC"
 excerpt: "This is an easy and concise guide about how to mine Ethereum on a deep learning PC."
 date: 2021-05-14
 category: "mining"
@@ -10,7 +10,7 @@ tags: mining gpu
 
 ![Ethereum price in the past 6 months](/assets/2021-05-14-mining-eth/eth-price-2021-05-14.jpg)
 
-I have a couple of deep learning PCs at home, and they get idle (when I'm not training deep learning models) from time to time.  Meanwhile, valuation of cryptocurrencies has appreciated a lot in the past year.  It has become pretty profitable to do cryto mining with GPUs recently.  So I decide to do some mining with my spare PCs (with NVIDIA GPUs).  In this post, I'm sharing how you could set up your deep learning PCs to mine [Ethereum](https://en.wikipedia.org/wiki/Ethereum) (ETH).
+I have a couple of deep learning PCs at home, and they get idle (when I'm not training deep learning models) from time to time.  Meanwhile, valuation of cryptocurrencies has appreciated a lot in the past year.  It has become pretty profitable to do cryto mining with GPUs recently.  So I decide to do some mining with my spare PCs (with NVIDIA GPUs).  In this post, I'm sharing how you could also set up your deep learning PCs to mine [Ethereum](https://en.wikipedia.org/wiki/Ethereum) (ETH).
 
 > Disclaimer:  Although I've researched this topic quite a bit, I don't consider myself an expert of GPU mining at all.  I try my best to provide accurate information in this post, but I cannot guarantee 100% correctness of the content.  If you have a PC and a modern NVIDIA GPU similar to mine, most likely you should be able to follow my step-by-step guide and start mining in very little time.  In all cases, please do your own homework too.  As always, I welcome questions or feedbacks, so feel free to leave a comment below.
 
@@ -24,8 +24,8 @@ So let's answer this question before diving into the step-by-step guide.  How pr
 
 * "Ethereum", being the 2nd most popular cryptocurrency in the world behind "Bitcoin" today, is the best cryto for mining using GPUs.  ("Bitcoin" mining absolutely requires ASICs.)  At the time of this writing, 1 Ethereum is at around USD 4,000.
 * Referring to [The Best GPUs for Mining](https://www.kryptex.org/en/best-gpus-for-mining) on Kryptex, NVIDIA RTX 2080 Ti could handle ~55.5 MH/s for ETH mining.  That equates to ~USD 8.03 per day currently.  Note that this number depends not only on the price of Ethereum but also on "difficulty" of mining Ethereum coins.  So this number fluctuates quite a lot over time.
-* Electricity cost of my home in Taiwan (during summer which is the more expensive time of the year) is around USD 0.1 per kWh.  And my PC probably consumes 0.25 kW per hour while mining.  As a result, I need to pay ~USD 0.6 per day for electricity.
-* So I'm generating **~USD 7.43 per day (or ~USD 222.9 per month)** of profit mining with the RTX 2080 Ti PC right now.  Note again **this profitability number fluctuates a lot, especially depending on the price of Ethereum and the cost of electricity**.
+* Electricity cost of my home in Taiwan (during summer which is the more expensive time of the year) is around USD 0.1 per kWh.  And my PC probably consumes 0.25 kW per hour while mining ETH.  As a result, I need to pay ~USD 0.6 per day for electricity.
+* So I'm generating **~USD 7.43 per day (or ~USD 222.9 per month) of profit** mining ETH with the RTX 2080 Ti PC right now.  Note again **this profitability number could vary quite a lot for you, especially depending on the price of Ethereum and the cost of electricity**.
 
 And here's yet one additional note.  It is essential to fine-tune "overclocking" settings of the GPU so that the GPU runs at an ideal power consumption and efficiency.  When doing overclocking properly, you not only avoid overheating the GPU (thus extending its life) but also reduce the electricity cost.  I will demonstrate how to achieve this in the steps below.
 
@@ -99,11 +99,14 @@ And here's yet one additional note.  It is essential to fine-tune "overclocking"
 
    It would take a couple of minutes for PhoenixMiner to try out and find the best mining algorithm/strategy.  After that, you should see stable mining outputs from the miner.  I get 56~57 MH/s for RTX 2080 Ti with the mentioned set-up.
 
-   **TO-DO:  Add a screenshot of PhoenixMiner logs here.**
-
 6. GPU status could be monitored with either `nvidia-smi` or `nvtop`.  You should pay attention to power consumption and temperature of the GPU.
 
-   **TO-DO:  Add a screenshot of nvtop here.**
+   Here's a screenshot of my deep learning PC's terminal, with `nvtop` on the top and PhoenixMiner running at the bottom.  From the screenshot, it could seen that:
+
+   * My RTX 2080 Ti GPU is consuming ~160 W of power.  The GPU fan is running at 80% rate.  And GPU temperature is at 61 degree Celsius.
+   * PhoenixMiner reports that the ETH mining rate of my GPU is ~56.45 MH/s.
+
+   ![nvtop and PhoenixMiner logs](/assets/2021-05-14-mining-eth/nvtop.jpg)
 
 7. Mining progress could be monitored from [ethermine.org](https://ethermine.org/) web page (or whatever mining pool you are using).  Just enter your ETH wallet address in the "Miner Address" field on the page.
 
