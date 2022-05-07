@@ -22,9 +22,7 @@ So, I put in the effort to extend my previous [TensorRT ONNX YOLOv3](https://git
 
 # How to Run the Demo
 
-Please just follow the step-by-step instructions in [Demo #5: YOLOv4](https://github.com/jkjung-avt/tensorrt_demos#yolov4).  The steps include: installing requirements ("pycuda" and "onnx==1.4.1"), downloading trained YOLOv4 models, converting the downloaded models to ONNX then to TensorRT engines, and running inference with the TensorRT engines.
-
-Please note that you should use version "1.4.1" (not the latest version!) of python3 "onnx" module.  Otherwise, you'll likely encounter this error: `onnx.onnx_cpp2py_export.checker.ValidationError: Op registered for Upsample is depracted in domain_version of 10`.
+Please just follow the step-by-step instructions in [Demo #5: YOLOv4](https://github.com/jkjung-avt/tensorrt_demos#yolov4).  The steps include: installing requirements ("pycuda" and "onnx==1.9.0), downloading trained YOLOv4 models, converting the downloaded models to ONNX then to TensorRT engines, and running inference with the TensorRT engines.
 
 After downloading darknet YOLOv4 models, you could choose either "yolov4-288", "yolov4-416", or "yolov4-608" for testing.  I recommend starting with "yolov4-416".
 

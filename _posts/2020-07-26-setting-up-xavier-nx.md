@@ -127,7 +127,7 @@ Reference: [Demo #4: YOLOv3](https://github.com/jkjung-avt/tensorrt_demos#demo-4
 
 ```shell
 ### Install dependencies and build TensorRT engine
-$ sudo pip3 install onnx==1.4.1
+$ sudo pip3 install onnx==1.9.0
 $ cd ${HOME}/project/tensorrt_demos/plugins
 $ make
 $ cd ${HOME}/project/tensorrt_demos/yolo

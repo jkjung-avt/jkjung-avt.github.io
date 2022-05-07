@@ -32,8 +32,6 @@ For running the demo on Jetson Nano/TX2, please follow the step-by-step instruct
 
 Note that this demo relies on TensorRT's Python API, which is only available in TensorRT 5.0.x+ on Jetson Nano/TX2.  So you'll have to set up the Jetson Nano/TX2 with **JetPack-4.2+**.  To re-iterate, JetPack-3.x won't cut it.
 
-As already stated in the [README.md](https://github.com/jkjung-avt/tensorrt_demos#yolov3) on my GitHub repo, you'll have to install version "1.4.1" of python3 "onnx" module instead of the latest version.  Otherwise, you'll likely encounter this error: `onnx.onnx_cpp2py_export.checker.ValidationError: Op registered for Upsample is depracted in domain_version of 10`.
-
 In addition, the "trt_yolo.py" demo requires the python3 "pycuda" package.  Since `sudo pip3 install pycuda` always failed on my Jetson's, I created this [install_pycuda.sh](https://github.com/jkjung-avt/tensorrt_demos/blob/master/ssd/install_pycuda.sh) to install it from source.
 
 After downloading darknet YOLOv3 and YOLOv3-Tiny models, you could choose one of the 5 supported models for testing: "yolov3-tiny-288", "yolov3-tiny-416", "yolov3-288", "yolov3-416", and "yolov3-608".  I recommend starting with **"yolov3-416"** since it produces roughly the same detection accuracy as the larger "yolov3-608" but runs faster.
